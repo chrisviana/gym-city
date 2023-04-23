@@ -21,7 +21,6 @@
         "react/react-in-jsx-scope": "off",
         "space-before-function-paren": "off",
         "no-console": "warn",
-        "comma-dangle": "off",
-        "jsx-quotes": ["error", "prefer-single"]
+        "comma-dangle": "off"
     }
 }
