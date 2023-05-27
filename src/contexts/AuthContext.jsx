@@ -1,9 +1,5 @@
 import React, { createContext, useState } from "react";
-import {
-  createUserWithEmailAndPassword,
-  getAuth,
-  signInWithEmailAndPassword,
-} from "firebase/auth";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import app from "../service/firabase";
 import { setCookie } from "nookies";
 import { useNavigate } from "react-router-dom";
@@ -59,7 +55,7 @@ const AuthProvider = ({ children }) => {
         toast.success("Logado com sucesso");
         navigate("/app");
       } else {
-        toast.error("Email ou Senha invalidos");
+        toast.error("E-mail ou Senha inválidos");
       }
     } catch (err) {
       toast.error("Erro ao acessar", err);
