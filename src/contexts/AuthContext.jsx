@@ -27,7 +27,11 @@ const AuthProvider = ({ children }) => {
     try {
       const auth = getAuth(app);
 
-      const response = await signInWithEmailAndPassword(auth, email, password)
+      const response = await signInWithEmailAndPassword(
+        auth,
+        email,
+        btoa(password)
+      )
         .then((userCredential) => {
           return userCredential.user;
         })
