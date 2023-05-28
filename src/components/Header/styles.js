@@ -18,6 +18,7 @@ export const Nav = styled.nav`
   ul {
     display: flex;
     gap: 2rem;
+
     li {
       display: flex;
       align-items: center;
@@ -25,11 +26,44 @@ export const Nav = styled.nav`
       list-style: none;
 
       a {
+        display: flex;
+        align-items: center;
+        gap: 9px;
         color: #fff;
         font-size: 16px;
         font-weight: bold;
         text-decoration: none;
+
+        &.active {
+          border-bottom: 4px solid #00b37e;
+        }
       }
     }
   }
+`;
+
+export const InfoUsuario = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+`;
+
+export const NameUsuario = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 100%;
+  max-width: 214px;
+  font-size: 16px;
+
+  span {
+    font-weight: bold;
+  }
+`;
+
+export const Button = styled.button`
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
 `;
