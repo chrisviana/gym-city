@@ -17,9 +17,10 @@ const AuthProvider = ({ children }) => {
   const signOut = () => {
     try {
       destroyCookie(undefined, "@gymcityauth.token");
+      sessionStorage.removeItem("@gymcityauth.token");
       navigate("/");
     } catch {
-      console.log("erro ao deslogar");
+      toast.error("Erro ao deslogar");
     }
   };
 
@@ -46,6 +47,8 @@ const AuthProvider = ({ children }) => {
           maxAge: 60 * 60 * 24 * 30,
           path: "/",
         });
+
+        sessionStorage.setItem("@gymcityauth.token", accessToken);
 
         setUser({
           uid,
