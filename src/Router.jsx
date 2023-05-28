@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import { DefaultLayout } from "./layout/default";
 import { Aluno } from "./page/Aluno";
 import { Login } from "./page/Login";
@@ -7,10 +7,22 @@ import { Exercicio } from "./page/Exercicio";
 import { Treino } from "./page/Treino";
 
 export function Router() {
+  function PrivateRoute({ children }) {
+    const token = sessionStorage.getItem("@gymcityauth.token");
+    return token ? <>{children}</> : <Navigate to="/" />;
+  }
+
   return (
     <Routes>
       <Route path="/" element={<Login />} />
-      <Route path="/app" element={<DefaultLayout />}>
+      <Route
+        path="/app"
+        element={
+          <PrivateRoute>
+            <DefaultLayout />
+          </PrivateRoute>
+        }
+      >
         <Route path="/app/aluno" element={<Aluno />} />
         <Route path="/app/grupo" element={<Grupo />} />
         <Route path="/app/exercicio" element={<Exercicio />} />
