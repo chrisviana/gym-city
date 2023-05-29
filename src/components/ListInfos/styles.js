@@ -63,6 +63,18 @@ export const Head = styled.div`
     font-size: 16px;
     font-weight: 700;
 
+    &::before {
+      content: url(../../assets/IconeBuscar.svg);
+      display: block;
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 16px; /* ajuste o tamanho da imagem conforme necessário */
+      height: 16px; /* ajuste o tamanho da imagem conforme necessário */
+      margin-right: 8px; /* ajuste o espaçamento entre a imagem e o texto conforme necessário */
+    }
+
     &:hover {
       background-color: #00875f;
       border: 1px solid #00875f;

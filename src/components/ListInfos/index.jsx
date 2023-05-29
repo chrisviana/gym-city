@@ -10,10 +10,7 @@ export function ListInfos() {
         </ContentButton>
         <Head>
           <input type="text" placeholder="Busque por aluno" />
-          <button>
-            <img src={IconeBuscar} alt="Icone Buscar" />
-            Buscar
-          </button>
+          <button>Buscar</button>
         </Head>
         <div className="lista-nomes">
           <ul>
