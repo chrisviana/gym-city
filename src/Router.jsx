@@ -8,7 +8,7 @@ import { Treino } from "./page/Treino";
 
 export function Router() {
   function PrivateRoute({ children }) {
-    const token = sessionStorage.getItem("@gymcityauth.token");
+    const token = localStorage.getItem("@gymcityauth.token");
     return token ? <>{children}</> : <Navigate to="/" />;
   }
 
