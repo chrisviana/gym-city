@@ -1,3 +1,5 @@
+import { ListInfos } from "../../components/ListInfos";
+
 export function Aluno() {
-  return <div>Search Student</div>;
+  return <ListInfos />;
 }
