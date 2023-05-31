@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import IconeBuscar from "../../assets/IconeBuscar.svg";
+import IconeBuscarHover from "../../assets/IconeBuscarHover.svg";
 
 export const Container = styled.div`
   display: flex;
@@ -46,6 +48,7 @@ export const Head = styled.div`
     border: none;
     border-radius: 6px;
     padding: 2rem;
+    color: #fff;
   }
 
   button {
@@ -64,25 +67,83 @@ export const Head = styled.div`
     font-weight: 700;
 
     &::before {
-      content: url(../../assets/IconeBuscar.svg);
-      display: block;
-      position: absolute;
-      left: 0;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 16px; /* ajuste o tamanho da imagem conforme necessário */
-      height: 16px; /* ajuste o tamanho da imagem conforme necessário */
-      margin-right: 8px; /* ajuste o espaçamento entre a imagem e o texto conforme necessário */
+      content: url(${IconeBuscar});
+      margin-top: 8px;
     }
 
     &:hover {
       background-color: #00875f;
       border: 1px solid #00875f;
       color: #fff;
+      transition: background-color 0.5s;
+
+      &::before {
+        content: url(${IconeBuscarHover});
+        margin-top: 8px;
+      }
     }
 
     img {
       margin-top: 6px;
+    }
+  }
+`;
+
+export const List = styled.div`
+  margin-top: 21px;
+
+  overflow-y: scroll;
+  overflow-x: hidden;
+  white-space: nowrap;
+  max-height: 588px;
+
+  @media (min-width: 1366px) {
+    max-height: 300px;
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  /* Estilo para a área de fundo do scroll */
+  ::-webkit-scrollbar-track {
+    background-color: #f1f1f1;
+  }
+
+  /* Estilo para o polegar do scroll */
+  ::-webkit-scrollbar-thumb {
+    background-color: #00875f;
+  }
+
+  ul {
+    display: flex;
+    flex-direction: column;
+    gap: 21px;
+
+    li {
+      width: 1121px;
+      height: 66px;
+      background-color: #29292e;
+      border-radius: 5px;
+      list-style: none;
+      display: flex;
+      align-items: center;
+      padding-left: 42px;
+      color: #c4c4cc;
+      font-size: 16px;
+      justify-content: space-between;
+      padding-right: 32px;
+
+      div {
+        display: flex;
+        gap: 14px;
+      }
+
+      button {
+        border: none;
+        background: transparent;
+        cursor: pointer;
+      }
     }
   }
 `;

@@ -1,25 +1,311 @@
-import { Container, Content, ContentButton, Head } from "./styles";
-import IconeBuscar from "../../assets/IconeBuscar.svg";
+import { Container, Content, ContentButton, Head, List } from "./styles";
+import IconeEditar from "../../assets/IconeEditar.svg";
+import IconeExcluir from "../../assets/IconeExcluir.svg";
 
-export function ListInfos() {
+export function ListInfos(props) {
+  const { nameButton, abrirModal } = props;
+
   return (
     <Container>
       <Content>
         <ContentButton>
-          <button>Cadastrar</button>
+          <button onClick={abrirModal}>Cadastrar {nameButton} </button>
         </ContentButton>
         <Head>
           <input type="text" placeholder="Busque por aluno" />
           <button>Buscar</button>
         </Head>
-        <div className="lista-nomes">
+        <List>
           <ul>
-            <li>Nome 1</li>
-            <li>Nome 2</li>
-            <li>Nome 3</li>
-            <li>Nome 4</li>
+            <li>
+              Christian Viana
+              <div>
+                <button>
+                  <img src={IconeEditar} alt="Icone Editar" />
+                </button>
+                <button>
+                  <img src={IconeExcluir} alt="Icone Excluir" />
+                </button>
+              </div>
+            </li>
+            <li>
+              Christian Viana
+              <div>
+                <button>
+                  <img src={IconeEditar} alt="Icone Editar" />
+                </button>
+                <button>
+                  <img src={IconeExcluir} alt="Icone Excluir" />
+                </button>
+              </div>
+            </li>
+            <li>
+              Christian Viana
+              <div>
+                <button>
+                  <img src={IconeEditar} alt="Icone Editar" />
+                </button>
+                <button>
+                  <img src={IconeExcluir} alt="Icone Excluir" />
+                </button>
+              </div>
+            </li>
+            <li>
+              Christian Viana
+              <div>
+                <button>
+                  <img src={IconeEditar} alt="Icone Editar" />
+                </button>
+                <button>
+                  <img src={IconeExcluir} alt="Icone Excluir" />
+                </button>
+              </div>
+            </li>
+            <li>
+              Christian Viana
+              <div>
+                <button>
+                  <img src={IconeEditar} alt="Icone Editar" />
+                </button>
+                <button>
+                  <img src={IconeExcluir} alt="Icone Excluir" />
+                </button>
+              </div>
+            </li>
+            <li>
+              Christian Viana
+              <div>
+                <button>
+                  <img src={IconeEditar} alt="Icone Editar" />
+                </button>
+                <button>
+                  <img src={IconeExcluir} alt="Icone Excluir" />
+                </button>
+              </div>
+            </li>
+            <li>
+              Christian Viana
+              <div>
+                <button>
+                  <img src={IconeEditar} alt="Icone Editar" />
+                </button>
+                <button>
+                  <img src={IconeExcluir} alt="Icone Excluir" />
+                </button>
+              </div>
+            </li>
+            <li>
+              Christian Viana
+              <div>
+                <button>
+                  <img src={IconeEditar} alt="Icone Editar" />
+                </button>
+                <button>
+                  <img src={IconeExcluir} alt="Icone Excluir" />
+                </button>
+              </div>
+            </li>
+            <li>
+              Christian Viana
+              <div>
+                <button>
+                  <img src={IconeEditar} alt="Icone Editar" />
+                </button>
+                <button>
+                  <img src={IconeExcluir} alt="Icone Excluir" />
+                </button>
+              </div>
+            </li>
+            <li>
+              Christian Viana
+              <div>
+                <button>
+                  <img src={IconeEditar} alt="Icone Editar" />
+                </button>
+                <button>
+                  <img src={IconeExcluir} alt="Icone Excluir" />
+                </button>
+              </div>
+            </li>
+            <li>
+              Christian Viana
+              <div>
+                <button>
+                  <img src={IconeEditar} alt="Icone Editar" />
+                </button>
+                <button>
+                  <img src={IconeExcluir} alt="Icone Excluir" />
+                </button>
+              </div>
+            </li>
+            <li>
+              Christian Viana
+              <div>
+                <button>
+                  <img src={IconeEditar} alt="Icone Editar" />
+                </button>
+                <button>
+                  <img src={IconeExcluir} alt="Icone Excluir" />
+                </button>
+              </div>
+            </li>
+            <li>
+              Christian Viana
+              <div>
+                <button>
+                  <img src={IconeEditar} alt="Icone Editar" />
+                </button>
+                <button>
+                  <img src={IconeExcluir} alt="Icone Excluir" />
+                </button>
+              </div>
+            </li>
+            <li>
+              Christian Viana
+              <div>
+                <button>
+                  <img src={IconeEditar} alt="Icone Editar" />
+                </button>
+                <button>
+                  <img src={IconeExcluir} alt="Icone Excluir" />
+                </button>
+              </div>
+            </li>
+            <li>
+              Christian Viana
+              <div>
+                <button>
+                  <img src={IconeEditar} alt="Icone Editar" />
+                </button>
+                <button>
+                  <img src={IconeExcluir} alt="Icone Excluir" />
+                </button>
+              </div>
+            </li>
+            <li>
+              Christian Viana
+              <div>
+                <button>
+                  <img src={IconeEditar} alt="Icone Editar" />
+                </button>
+                <button>
+                  <img src={IconeExcluir} alt="Icone Excluir" />
+                </button>
+              </div>
+            </li>
+            <li>
+              Christian Viana
+              <div>
+                <button>
+                  <img src={IconeEditar} alt="Icone Editar" />
+                </button>
+                <button>
+                  <img src={IconeExcluir} alt="Icone Excluir" />
+                </button>
+              </div>
+            </li>
+            <li>
+              Christian Viana
+              <div>
+                <button>
+                  <img src={IconeEditar} alt="Icone Editar" />
+                </button>
+                <button>
+                  <img src={IconeExcluir} alt="Icone Excluir" />
+                </button>
+              </div>
+            </li>
+            <li>
+              Christian Viana
+              <div>
+                <button>
+                  <img src={IconeEditar} alt="Icone Editar" />
+                </button>
+                <button>
+                  <img src={IconeExcluir} alt="Icone Excluir" />
+                </button>
+              </div>
+            </li>
+            <li>
+              Christian Viana
+              <div>
+                <button>
+                  <img src={IconeEditar} alt="Icone Editar" />
+                </button>
+                <button>
+                  <img src={IconeExcluir} alt="Icone Excluir" />
+                </button>
+              </div>
+            </li>
+            <li>
+              Christian Viana
+              <div>
+                <button>
+                  <img src={IconeEditar} alt="Icone Editar" />
+                </button>
+                <button>
+                  <img src={IconeExcluir} alt="Icone Excluir" />
+                </button>
+              </div>
+            </li>
+            <li>
+              Christian Viana
+              <div>
+                <button>
+                  <img src={IconeEditar} alt="Icone Editar" />
+                </button>
+                <button>
+                  <img src={IconeExcluir} alt="Icone Excluir" />
+                </button>
+              </div>
+            </li>
+            <li>
+              Christian Viana
+              <div>
+                <button>
+                  <img src={IconeEditar} alt="Icone Editar" />
+                </button>
+                <button>
+                  <img src={IconeExcluir} alt="Icone Excluir" />
+                </button>
+              </div>
+            </li>
+            <li>
+              Christian Viana
+              <div>
+                <button>
+                  <img src={IconeEditar} alt="Icone Editar" />
+                </button>
+                <button>
+                  <img src={IconeExcluir} alt="Icone Excluir" />
+                </button>
+              </div>
+            </li>
+            <li>
+              Christian Viana
+              <div>
+                <button>
+                  <img src={IconeEditar} alt="Icone Editar" />
+                </button>
+                <button>
+                  <img src={IconeExcluir} alt="Icone Excluir" />
+                </button>
+              </div>
+            </li>
+
+            <li>
+              Christian Viana
+              <div>
+                <button>
+                  <img src={IconeEditar} alt="Icone Editar" />
+                </button>
+                <button>
+                  <img src={IconeExcluir} alt="Icone Excluir" />
+                </button>
+              </div>
+            </li>
           </ul>
-        </div>
+        </List>
       </Content>
     </Container>
   );
