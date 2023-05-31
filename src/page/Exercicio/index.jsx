@@ -1,3 +1,5 @@
+import { ListInfos } from "../../components/ListInfos";
+
 export function Exercicio() {
-  return <h1>Exercicio</h1>;
+  return <ListInfos nameButton="Exercicio" />;
 }
