@@ -56,7 +56,7 @@ const AuthProvider = ({ children }) => {
         });
 
         toast.success("Logado com sucesso");
-        navigate("/app");
+        navigate("/app/aluno");
       } else {
         toast.error("E-mail ou Senha inválidos");
       }

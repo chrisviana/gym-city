@@ -1,3 +1,6 @@
+import { ListInfos } from "../../components/ListInfos";
+import { CadastroGrupo } from "../../components/CadastroGrupo";
+
 export function Grupo() {
-  return <h1>Grupo</h1>;
+  return <ListInfos nameButton="Grupo" Modal={CadastroGrupo} />;
 }

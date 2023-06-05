@@ -42,50 +42,13 @@ export const Head = styled.div`
   margin-top: 30px;
 
   input {
-    width: 957px;
+    width: 100%;
     height: 54px;
     background-color: #121214;
     border: none;
     border-radius: 6px;
     padding: 2rem;
     color: #fff;
-  }
-
-  button {
-    width: 147px;
-    height: 64px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 1px solid #00b37e;
-    border-radius: 6px;
-    background-color: transparent;
-    color: #00b37e;
-    padding: 14px 32px;
-    cursor: pointer;
-    font-size: 16px;
-    font-weight: 700;
-
-    &::before {
-      content: url(${IconeBuscar});
-      margin-top: 8px;
-    }
-
-    &:hover {
-      background-color: #00875f;
-      border: 1px solid #00875f;
-      color: #fff;
-      transition: background-color 0.5s;
-
-      &::before {
-        content: url(${IconeBuscarHover});
-        margin-top: 8px;
-      }
-    }
-
-    img {
-      margin-top: 6px;
-    }
   }
 `;
 

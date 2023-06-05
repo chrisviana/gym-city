@@ -5,6 +5,9 @@
     font-family: 'Roboto', sans-serif;
 }
 
+body {
+    background-color: #202024;
+}
 :root {
     --white: #E1E1E6;
     --input-color: #121214;
