@@ -1,11 +1,17 @@
 import { Container, Content, ContentButton, Head, List } from "./styles";
-import IconeEditar from "../../assets/IconeEditar.svg";
-import IconeExcluir from "../../assets/IconeExcluir.svg";
+import IconeEditar from "../../../assets/IconeEditar.svg";
+import IconeExcluir from "../../../assets/IconeExcluir.svg";
 import * as Dialog from "@radix-ui/react-dialog";
-import { ModalDelete } from "../ModalDelete";
+import { ModalDelete } from "../../ModalDelete";
 import { useState } from "react";
 
-export function ListInfos({ nameButton, Modal, dados, handleDeleteAluno }) {
+export function ListInfos({
+  Modal,
+  dados,
+  handleDelete,
+  handleCadastroAluno,
+  handleEditarAluno,
+}) {
   const [searchValue, setSearchValue] = useState("");
   const handleSearchInputChange = (event) => {
     setSearchValue(event.target.value);
@@ -21,9 +27,12 @@ export function ListInfos({ nameButton, Modal, dados, handleDeleteAluno }) {
         <ContentButton>
           <Dialog.Root>
             <Dialog.Trigger asChild>
-              <button>Cadastrar {nameButton} </button>
+              <button>Cadastrar Aluno </button>
             </Dialog.Trigger>
-            <Modal />
+            <Modal
+              handleCadastroAluno={handleCadastroAluno}
+              isEditing={false}
+            />
           </Dialog.Root>
         </ContentButton>
         <Head>
@@ -47,6 +56,11 @@ export function ListInfos({ nameButton, Modal, dados, handleDeleteAluno }) {
                           <img src={IconeEditar} alt="Icone Editar" />
                         </button>
                       </Dialog.Trigger>
+                      <Modal
+                        infoEdit={info}
+                        isEditing={true}
+                        handleEditarAluno={handleEditarAluno}
+                      />
                     </Dialog.Root>
 
                     <Dialog.Root>
@@ -58,7 +72,7 @@ export function ListInfos({ nameButton, Modal, dados, handleDeleteAluno }) {
                       <ModalDelete
                         nome={info.nome}
                         id={info.id}
-                        handleDeleteAluno={handleDeleteAluno}
+                        handleDelete={handleDelete}
                       />
                     </Dialog.Root>
                   </div>

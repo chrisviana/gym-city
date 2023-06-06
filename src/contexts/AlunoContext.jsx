@@ -9,6 +9,7 @@ import {
   doc,
   getDocs,
   deleteDoc,
+  updateDoc,
 } from "firebase/firestore";
 
 const AlunoContext = createContext({});
@@ -54,10 +55,22 @@ const AlunoProvider = ({ children }) => {
     }
   };
 
+  const editarAluno = async (id, infoAluno) => {
+    const alunoRef = doc(firestore, "alunos", id);
+    try {
+      await updateDoc(alunoRef, infoAluno);
+      toast.success("Aluno atualizado com sucesso!");
+      document.getElementById("closeModal").click();
+    } catch (error) {
+      toast.error("Erro ao editar aluno:", error);
+    }
+  };
+
   const authContextData = {
     saveAluno,
     getAluno,
     deleteAluno,
+    editarAluno,
   };
 
   return (

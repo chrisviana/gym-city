@@ -1,11 +1,12 @@
-import { ListInfos } from "../../components/ListInfos";
-import { CadastroAluno } from "../../components/CadastroAluno";
+import { ListInfos } from "../../components/Aluno/ListAluno";
+import { ModalAluno } from "../../components/Aluno/ModalCadastro";
 import { useState, useContext } from "react";
 import { AlunoContext } from "../../contexts/AlunoContext";
 import { useEffect } from "react";
 
 export function Aluno() {
-  const { getAluno, deleteAluno, saveAluno } = useContext(AlunoContext);
+  const { getAluno, deleteAluno, saveAluno, editarAluno } =
+    useContext(AlunoContext);
   const [alunos, setAlunos] = useState([]);
 
   useEffect(() => {
@@ -26,12 +27,19 @@ export function Aluno() {
     setAlunos(alunosList);
   };
 
+  const handleEditarAluno = async (id, aluno) => {
+    await editarAluno(id, aluno);
+    const alunosList = await getAluno();
+    setAlunos(alunosList);
+  };
+
   return (
     <ListInfos
-      nameButton="Aluno"
-      Modal={() => <CadastroAluno handleCadastroAluno={handleCadastroAluno} />}
+      Modal={ModalAluno}
       dados={alunos}
-      handleDeleteAluno={handleDeleteAluno}
+      handleDelete={handleDeleteAluno}
+      handleCadastroAluno={handleCadastroAluno}
+      handleEditarAluno={handleEditarAluno}
     />
   );
 }

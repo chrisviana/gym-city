@@ -1,9 +1,14 @@
 import * as Dialog from "@radix-ui/react-dialog";
 import { Button, Close, Content, Overlay, Title } from "./styles";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
-export function CadastroAluno({ handleCadastroAluno }) {
+export function ModalAluno({
+  handleCadastroAluno,
+  infoEdit,
+  isEditing,
+  handleEditarAluno,
+}) {
   const [infoAluno, setInfoAluno] = useState({});
 
   const handleChange = (event) => {
@@ -14,28 +19,30 @@ export function CadastroAluno({ handleCadastroAluno }) {
     }));
   };
 
+  useEffect(() => {
+    setInfoAluno(infoEdit);
+  }, [infoEdit]);
+
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    if (
-      (infoAluno.nome &&
-        infoAluno.idade &&
-        infoAluno.peso &&
-        infoAluno.altura &&
-        infoAluno.usuario &&
-        infoAluno.data &&
-        infoAluno.instrutor &&
-        infoAluno.imc &&
-        infoAluno.percentMusculo &&
-        infoAluno.gorduraVisceral &&
-        infoAluno.gordura) === undefined
-    ) {
-      toast.warning("Preencha todos os campos");
-      return;
-    }
+    if (!isEditing) {
+      if (
+        (infoAluno.nome &&
+          infoAluno.idade &&
+          infoAluno.peso &&
+          infoAluno.altura &&
+          infoAluno.usuario) === undefined
+      ) {
+        toast.warning("Preencha todos os campos");
+        return;
+      }
 
-    handleCadastroAluno(infoAluno);
-    setInfoAluno({});
+      handleCadastroAluno(infoAluno);
+      setInfoAluno({});
+    } else {
+      handleEditarAluno(infoAluno.id, infoAluno);
+    }
   };
 
   return (
@@ -44,42 +51,42 @@ export function CadastroAluno({ handleCadastroAluno }) {
       <Content>
         <Close id="closeModal"> X </Close>
         <form onSubmit={handleSubmit}>
-          <Title>Cadastro de aluno</Title>
+          <Title>{isEditing ? "Editar aluno" : "Cadastro de aluno"}</Title>
           <div>
             <input
               type="text"
               name="nome"
               placeholder="Nome"
               onChange={handleChange}
-              value={infoAluno.nome || ""}
+              value={infoAluno?.nome || ""}
             />
             <input
               type="text"
               name="idade"
               placeholder="Idade"
               onChange={handleChange}
-              value={infoAluno.idade || ""}
+              value={infoAluno?.idade || ""}
             />
             <input
               type="text"
               name="peso"
               placeholder="Peso"
               onChange={handleChange}
-              value={infoAluno.peso || ""}
+              value={infoAluno?.peso || ""}
             />
             <input
               type="text"
               name="altura"
               placeholder="Altura"
               onChange={handleChange}
-              value={infoAluno.altura || ""}
+              value={infoAluno?.altura || ""}
             />
             <input
               type="text"
               name="usuario"
               placeholder="Usuário"
               onChange={handleChange}
-              value={infoAluno.usuario || ""}
+              value={infoAluno?.usuario || ""}
             />
           </div>
           <Title>Bioimpedância</Title>
@@ -89,7 +96,7 @@ export function CadastroAluno({ handleCadastroAluno }) {
               style={{ width: 135 }}
               name="data"
               onChange={handleChange}
-              value={infoAluno.data || ""}
+              value={infoAluno?.data || ""}
             />
             <input
               type="text"
@@ -97,14 +104,14 @@ export function CadastroAluno({ handleCadastroAluno }) {
               placeholder="Instrutor"
               style={{ width: 262 }}
               onChange={handleChange}
-              value={infoAluno.instrutor || ""}
+              value={infoAluno?.instrutor || ""}
             />
             <input
               type="text"
               name="imc"
               placeholder="IMC"
               onChange={handleChange}
-              value={infoAluno.imc || ""}
+              value={infoAluno?.imc || ""}
             />
             <input
               type="text"
@@ -112,7 +119,7 @@ export function CadastroAluno({ handleCadastroAluno }) {
               placeholder="% Gordura"
               style={{ width: 189 }}
               onChange={handleChange}
-              value={infoAluno.gordura || ""}
+              value={infoAluno?.gordura || ""}
             />
             <input
               type="text"
@@ -120,7 +127,7 @@ export function CadastroAluno({ handleCadastroAluno }) {
               placeholder="Idade muscular"
               style={{ width: 154 }}
               onChange={handleChange}
-              value={infoAluno.idadeMuscular || ""}
+              value={infoAluno?.idadeMuscular || ""}
             />
             <input
               type="text"
@@ -128,7 +135,7 @@ export function CadastroAluno({ handleCadastroAluno }) {
               placeholder="Gordura visceral"
               style={{ width: 154 }}
               onChange={handleChange}
-              value={infoAluno.gorduraVisceral || ""}
+              value={infoAluno?.gorduraVisceral || ""}
             />
             <input
               type="text"
@@ -136,10 +143,10 @@ export function CadastroAluno({ handleCadastroAluno }) {
               placeholder="% De musculo"
               style={{ width: 154 }}
               onChange={handleChange}
-              value={infoAluno.percentMusculo || ""}
+              value={infoAluno?.percentMusculo || ""}
             />
           </div>
-          <Button type="submit">Cadastrar</Button>
+          <Button type="submit">{isEditing ? "Salvar" : "Cadastrar"}</Button>
         </form>
       </Content>
     </Dialog.Portal>

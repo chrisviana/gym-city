@@ -1,6 +1,4 @@
 import styled from "styled-components";
-import IconeBuscar from "../../assets/IconeBuscar.svg";
-import IconeBuscarHover from "../../assets/IconeBuscarHover.svg";
 
 export const Container = styled.div`
   display: flex;
