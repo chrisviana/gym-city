@@ -1,3 +1,1 @@
-export function Grupo() {
-  return <h1>Grupo</h1>;
-}
+export function Grupo() {}
