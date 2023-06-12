@@ -55,6 +55,11 @@ export const Content = styled(Dialog.Content)`
     flex-wrap: wrap;
     gap: 8px;
 
+    label {
+      color: #fff;
+      font-size: 14px;
+    }
+
     input {
       background: #121214;
       height: 54px;
@@ -63,16 +68,19 @@ export const Content = styled(Dialog.Content)`
       width: 87px;
       padding: 16px;
       color: #fff;
+    }
 
-      &:first-child {
-        width: 403px;
-      }
-
-      &:last-child {
-        width: 187px;
-      }
+    input[type="date"]::-webkit-calendar-picker-indicator {
+      filter: invert(1);
     }
   }
+`;
+
+export const ContentForm = styled.div`
+  color: #fff;
+  font-size: 14px;
+  display: flex;
+  flex-direction: column !important;
 `;
 
 export const Button = styled.button`
