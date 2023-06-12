@@ -10,6 +10,10 @@ export const Content = styled.div`
   max-width: 1125px;
   width: 100%;
   margin-top: 86px;
+
+  @media (min-width: 1366px) {
+    margin-top: 50px;
+  }
 `;
 
 export const ContentButton = styled.div`
@@ -59,7 +63,7 @@ export const List = styled.div`
   max-height: 588px;
 
   @media (min-width: 1366px) {
-    max-height: 300px;
+    max-height: 330px;
   }
 
   ::-webkit-scrollbar {
