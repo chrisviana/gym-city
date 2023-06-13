@@ -25,16 +25,7 @@ export function ModalAluno({
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
-    if (
-      !(
-        infoAluno.nome &&
-        infoAluno.idade &&
-        infoAluno.peso &&
-        infoAluno.altura &&
-        infoAluno.usuario
-      )
-    ) {
+    if (infoAluno === undefined || !(infoAluno.nome && infoAluno.usuario)) {
       toast.warning("Preencha os campos obrigatórios");
       return;
     }
@@ -69,11 +60,12 @@ export function ModalAluno({
             </ContentForm>
 
             <ContentForm>
-              <label>Idade*</label>
+              <label>Idade</label>
               <input
                 type="number"
                 name="idade"
                 placeholder="Idade"
+                min="0"
                 onChange={handleChange}
                 value={infoAluno?.idade || ""}
                 autoComplete="off"
@@ -81,7 +73,7 @@ export function ModalAluno({
             </ContentForm>
 
             <ContentForm>
-              <label>Peso*</label>
+              <label>Peso</label>
               <input
                 type="text"
                 name="peso"
@@ -92,7 +84,7 @@ export function ModalAluno({
               />
             </ContentForm>
             <ContentForm>
-              <label>Altura*</label>
+              <label>Altura</label>
               <input
                 type="text"
                 name="altura"
@@ -173,6 +165,7 @@ export function ModalAluno({
                 onChange={handleChange}
                 value={infoAluno?.idadeMuscular || ""}
                 autoComplete="off"
+                min="0"
               />
             </ContentForm>
             <ContentForm>
