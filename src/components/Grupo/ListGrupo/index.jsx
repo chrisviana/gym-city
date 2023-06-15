@@ -73,6 +73,7 @@ export function ListGrupo({
                         nome={grupo.descricao}
                         id={grupo.id}
                         handleDelete={handleDeleteGrupo}
+                        title="grupo"
                       />
                     </Dialog.Root>
                   </div>
