@@ -58,7 +58,7 @@ export function ModalExercicio({
       <Content>
         <Close id="closeModal"> X </Close>
         <form onSubmit={handleSubmit}>
-          <Title>{isEditing ? "Editar grupo" : "Cadastro de grupo"}</Title>
+          <Title>{isEditing ? "Editar exercício" : "Cadastro de exercício"}</Title>
           <div>
             <label>Grupo*</label>
             <Select
