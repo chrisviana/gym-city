@@ -13,7 +13,8 @@ export const Overlay = styled(Dialog.Overlay)`
 export const Title = styled(Dialog.Title)`
   color: #fff;
   font-size: 20px;
-  width: 631px;
+  max-width: 454px;
+  width: 100%;
   float: left !important;
   div + & {
     margin-top: 16px;
