@@ -25,7 +25,7 @@ export function ModalAluno({
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    if (infoAluno === undefined || !(infoAluno.nome && infoAluno.usuario)) {
+    if (infoAluno === undefined || !(infoAluno.nome && infoAluno.usuario && infoAluno.titulo)) {
       toast.warning("Preencha os campos obrigatórios");
       return;
     }
@@ -102,6 +102,18 @@ export function ModalAluno({
                 placeholder="Usuário"
                 onChange={handleChange}
                 value={infoAluno?.usuario || ""}
+                style={{ width: 183 }}
+                autoComplete="off"
+              />
+            </ContentForm>
+            <ContentForm>
+              <label>Nº titulo*</label>
+              <input
+                type="text"
+                name="titulo"
+                placeholder="Nº Titulo"
+                onChange={handleChange}
+                value={infoAluno?.titulo || ""}
                 style={{ width: 183 }}
                 autoComplete="off"
               />

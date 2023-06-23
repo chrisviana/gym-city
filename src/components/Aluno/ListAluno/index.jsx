@@ -1,4 +1,4 @@
-import { Container, Content, ContentButton, Head, List } from "./styles";
+import { Container, Content, ContentButton, Head, InfoAluno, List, NumeroTitulo } from "./styles";
 import IconeEditar from "../../../assets/IconeEditar.svg";
 import IconeExcluir from "../../../assets/IconeExcluir.svg";
 import * as Dialog from "@radix-ui/react-dialog";
@@ -18,7 +18,8 @@ export function ListInfos({
   };
 
   const filteredDados = dados.filter((info) =>
-    info.nome.toLowerCase().includes(searchValue.toLowerCase())
+    info?.nome?.toLowerCase().includes(searchValue.toLowerCase()) ||
+    info?.titulo?.toLowerCase().includes(searchValue.toLowerCase())
   );
 
   return (
@@ -48,7 +49,13 @@ export function ListInfos({
             {filteredDados &&
               filteredDados.map((info) => (
                 <li key={info.id}>
-                  {info.nome}
+                  <InfoAluno>
+                    <NumeroTitulo>{`Nº título: ${info.titulo}`}</NumeroTitulo>
+                    {info.nome}
+                  </InfoAluno>
+                  
+                  
+                  
                   <div>
                     <Dialog.Root>
                       <Dialog.Trigger asChild>
