@@ -10,6 +10,8 @@ import {
   getDocs,
   deleteDoc,
   updateDoc,
+  query,
+  where,
 } from "firebase/firestore";
 
 const GrupoContext = createContext({});
@@ -44,16 +46,37 @@ const GrupoProvaider = ({ children }) => {
     return gruposList;
   };
 
-  const deleteGrupo = async (id) => {
-    const grupoRef = doc(firestore, "grupos", id);
-    try {
-      await deleteDoc(grupoRef);
-      toast.success("Grupo excluído com sucesso!");
-      document.getElementById("closeModal").click();
-    } catch (error) {
-      toast.error("Erro ao excluir grupo:", error);
-    }
+  const deleteGrupo = (id) => {
+    verificarRelacionamentoGrupoExercicio(id)
+        .then(async (relacionamento) => {
+          console.log(relacionamento)
+          if (relacionamento) {
+            toast.warning('Não é possível excluir o grupo, pois está relacionado a um ou mais exercícios.');
+            document.getElementById("closeModal").click();
+          } else {
+            const grupoRef = doc(firestore, "grupos", id);
+    
+            try {
+              await deleteDoc(grupoRef);
+              toast.success("Grupo excluído com sucesso!");
+            } catch (error) {
+              toast.error("Erro ao excluir grupo:", error);
+            }
+          }
+        })
   };
+
+  const verificarRelacionamentoGrupoExercicio = async (grupoId) => {
+    const exerciciosRef = collection(firestore, 'exercicios');
+    const q = query(exerciciosRef, where('grupoId', '==', grupoId));
+    const snapshot = await getDocs(q);
+    
+    if (!snapshot.empty) {
+      return true;
+    } else {
+      return false
+    }
+  }
 
   const editarGrupo = async (id, infoAluno) => {
     const grupoRef = doc(firestore, "grupos", id);

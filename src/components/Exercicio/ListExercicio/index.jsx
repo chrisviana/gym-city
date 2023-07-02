@@ -1,24 +1,25 @@
-import { Container, Content, ContentButton, Head, List } from "./styles";
+import * as Dialog from "@radix-ui/react-dialog";
 import IconeEditar from "../../../assets/IconeEditar.svg";
 import IconeExcluir from "../../../assets/IconeExcluir.svg";
-import * as Dialog from "@radix-ui/react-dialog";
-import { ModalDelete } from "../../ModalDelete";
+import { Container, Content, ContentButton, Head, List } from "./styles";
+import { ModalExercicio } from "../ModalExercicio";
 import { useState } from "react";
+import { ModalDelete } from "../../ModalDelete";
 
-export function ListInfos({
-  Modal,
+export function ListExercicio({
   dados,
-  handleDelete,
-  handleCadastroAluno,
-  handleEditarAluno,
+  handleCadastroExercicio,
+  handleDeleteExercicio,
+  handleEditarExercicio,
+  getGrupo,
 }) {
   const [searchValue, setSearchValue] = useState("");
   const handleSearchInputChange = (event) => {
     setSearchValue(event.target.value);
   };
 
-  const filteredDados = dados.filter((info) =>
-    info.nome.toLowerCase().includes(searchValue.toLowerCase())
+  const filteredDados = dados.filter((grupo) =>
+    grupo.descricao.toLowerCase().includes(searchValue.toLowerCase())
   );
 
   return (
@@ -27,28 +28,29 @@ export function ListInfos({
         <ContentButton>
           <Dialog.Root>
             <Dialog.Trigger asChild>
-              <button>Cadastrar Aluno </button>
+              <button>Cadastrar Exercício </button>
             </Dialog.Trigger>
-            <Modal
-              handleCadastroAluno={handleCadastroAluno}
+            <ModalExercicio
               isEditing={false}
+              handleCadastroExercicio={handleCadastroExercicio}
+              getGrupo={getGrupo}
             />
           </Dialog.Root>
         </ContentButton>
         <Head>
           <input
             type="text"
-            placeholder="Busque por aluno"
-            value={searchValue}
+            placeholder="Busque por um exercício"
             onChange={handleSearchInputChange}
+            value={searchValue}
           />
         </Head>
         <List>
           <ul>
             {filteredDados &&
-              filteredDados.map((info) => (
-                <li key={info.id}>
-                  {info.nome}
+              filteredDados.map((grupo) => (
+                <li key={grupo.id}>
+                  {grupo.descricao}
                   <div>
                     <Dialog.Root>
                       <Dialog.Trigger asChild>
@@ -56,10 +58,11 @@ export function ListInfos({
                           <img src={IconeEditar} alt="Icone Editar" />
                         </button>
                       </Dialog.Trigger>
-                      <Modal
-                        infoEdit={info}
+                      <ModalExercicio
+                        infoEdit={grupo}
                         isEditing={true}
-                        handleEditarAluno={handleEditarAluno}
+                        handleEditarExercicio={handleEditarExercicio}
+                        getGrupo={getGrupo}
                       />
                     </Dialog.Root>
 
@@ -70,10 +73,10 @@ export function ListInfos({
                         </button>
                       </Dialog.Trigger>
                       <ModalDelete
-                        nome={info.nome}
-                        id={info.id}
-                        handleDelete={handleDelete}
-                        title="aluno"
+                        nome={grupo.descricao}
+                        id={grupo.id}
+                        handleDelete={handleDeleteExercicio}
+                        title="exercício"
                       />
                     </Dialog.Root>
                   </div>
