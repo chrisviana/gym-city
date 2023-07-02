@@ -95,11 +95,11 @@ export function ModalAluno({
               />
             </ContentForm>
             <ContentForm>
-              <label>Usuário*</label>
+              <label>Nº título*</label>
               <input
                 type="text"
                 name="usuario"
-                placeholder="Usuário"
+                placeholder="Nº título"
                 onChange={handleChange}
                 value={infoAluno?.usuario || ""}
                 style={{ width: 183 }}
