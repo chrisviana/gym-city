@@ -12,7 +12,7 @@ export function ModalDelete({ nome, id, handleDelete, title }) {
       <Content>
         <Close id="closeModal">X</Close>
         <Title>
-          Deseja realmente excluir o {title} {nome}
+          Deseja realmente excluir o {title} {nome} ?
         </Title>
         <Options>
           <ButtonYes yes onClick={() => handleDelete(id)}>
