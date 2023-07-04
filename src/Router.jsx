@@ -8,6 +8,8 @@ import { Treino } from "./page/Treino";
 import { AlunoProvider } from "./contexts/AlunoContext";
 import { GrupoProvaider } from "./contexts/GrupoContext";
 import { ExercicioProvaider } from "./contexts/ExercicioContext";
+import { TreinoProvaider } from "./contexts/TreinoContext";
+import { CadastroTreino } from "./page/CadastroTreino";
 
 export function Router() {
   function PrivateRoute({ children }) {
@@ -50,7 +52,21 @@ export function Router() {
             </ExercicioProvaider>
           }
         />
-        <Route path="/app/treino" element={<Treino />} />
+        <Route 
+          path="/app/treino" 
+          element={
+            <TreinoProvaider>
+              <Treino />
+            </TreinoProvaider>} 
+          />
+
+        <Route 
+          path="/app/treino/cadastro" 
+          element={
+            <TreinoProvaider>
+              <CadastroTreino />
+            </TreinoProvaider>} 
+          />
       </Route>
     </Routes>
   );
