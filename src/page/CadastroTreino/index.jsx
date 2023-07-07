@@ -21,15 +21,20 @@ import {
   Title,
 } from "./style";
 import { TreinoContext } from "../../contexts/TreinoContext";
-import * as Tabs from "@radix-ui/react-tabs";
+import { ButtonCadastroTreino } from "../../components/Treino/ButtonCadastro";
 
 export function CadastroTreino() {
   const { getAlunoTreino } = useContext(TreinoContext);
 
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
-  const [suggestions, setSuggestions] = useState([]);
   const [alunos, setAlunos] = useState({});
+  const [treino, setTreino] = useState()
+  const [treinoA, setTreinoA] = useState({
+    nome: '',
+    data: '',
+    treinos: [],
+  });
 
   useEffect(() => {
     const fetchAlunos = async () => {
@@ -47,10 +52,8 @@ export function CadastroTreino() {
   const handleSearch = async (event) => {
     const searchTerm = event.target.value;
     setSearchTerm(searchTerm);
-    console.log(searchTerm);
     if (searchTerm === "") {
-      console.log("entreui aqui");
-      setSearchResults([]); // Limpa as sugestões quando o input estiver vazio
+      setSearchResults([]); 
     } else {
       const filteredAlunos = alunos.filter(
         (aluno) =>
@@ -58,15 +61,42 @@ export function CadastroTreino() {
           aluno.usuario.toLowerCase().includes(searchTerm.toLowerCase())
       );
       setSearchResults(filteredAlunos);
-      setSuggestions(filteredAlunos);
     }
   };
 
-  console.log("searchResults", searchResults);
   const handleSelectSuggestion = (suggestion) => {
     setSearchTerm(suggestion.nome);
     setSearchResults([]);
   };
+
+  const adicionarTreino = (event) => {
+    event.preventDefault();
+    const novoTreino = {
+      grupo: treino.grupo,
+      exercicio: treino.exercicio,
+      series: treino.series,
+      reptemp: treino.reptemp,
+      carga: treino.carga,
+      descanso: treino.descanso
+    };
+
+    setTreinoA((prevTreinoA) => ({
+      ...prevTreinoA,
+      nome: searchTerm,
+      data: treino.data,
+      treinos: [...prevTreinoA.treinos, novoTreino],
+    }));
+  };
+
+  const handleDataChange = (event) => {
+    const data = event.target.value;
+    setTreino((prevTreino) => ({
+      ...prevTreino,
+      data: data,
+    }));
+  };
+
+  console.log(treinoA)
 
   return (
     <Container>
@@ -79,12 +109,14 @@ export function CadastroTreino() {
               placeholder="Busque por um aluno ou título"
               onChange={handleSearch}
               value={searchTerm}
+              name="nome"
             />
             <input
               type="date"
               style={{ width: 210 }}
               name="data"
               autoComplete="off"
+              onChange={handleDataChange}
             />
           </Consulta>
           <Resultado vazio={searchResults.length === 0}>
@@ -139,24 +171,8 @@ export function CadastroTreino() {
                 <li>10kg</li>
                 <li>45s</li>
               </ul>
-              <ul>
-                <li>Supino reto com barra</li>
-                <li>3</li>
-                <li>12</li>
-                <li>10kg</li>
-                <li>45s</li>
-              </ul>
-              <ul>
-                <li>Supino reto com barra</li>
-                <li>3</li>
-                <li>12</li>
-                <li>10kg</li>
-                <li>45s</li>
-              </ul>
             </ListExercicio>
-            <ButtonExercicio>
-              Adicionar Exercício
-            </ButtonExercicio>
+            <ButtonCadastroTreino setTreino={setTreino} adicionarTreino={adicionarTreino}/>
           </ContentTabs>
           <ContentTabs value="tab2">2</ContentTabs>
           <ContentTabs value="tab3">3</ContentTabs>

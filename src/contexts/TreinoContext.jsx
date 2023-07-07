@@ -81,12 +81,40 @@ const TreinoProvaider = ({ children }) => {
     return results;
   };
 
+  const getGrupoTreino = async () => {
+    const gruposCollection = collection(firestore, "grupos");
+    const gruposSnapshot = await getDocs(gruposCollection);
+    const gruposList = gruposSnapshot.docs.map((doc) => doc.data());
+    return gruposList;
+  };
+
+  const getExercicioPorGrupo = async (idGrupo) => {
+
+    try {
+      const exerciciosRef = collection(firestore, 'exercicios');
+      const q = query(exerciciosRef, where('grupoId', '==', idGrupo));
+      const querySnapshot = await getDocs(q);
+  
+      const exercicios = [];
+      querySnapshot.forEach((doc) => {
+        exercicios.push(doc.data());
+      });
+  
+      return exercicios;
+    } catch (error) {
+      console.error('Erro ao buscar exercícios por grupo:', error);
+      throw error;
+    }
+  }
+
   const authContextData = {
     saveTreino,
     getTreino,
     deleteExercicio,
     editarExercicio,
     getAlunoTreino,
+    getGrupoTreino,
+    getExercicioPorGrupo,
   };
 
   return (
