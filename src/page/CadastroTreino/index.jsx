@@ -1,10 +1,8 @@
 import { useContext, useEffect, useState } from "react";
 import {
   ButtonCadastrar,
-  ButtonExercicio,
   ButtonImprimir,
   ButtonTabs,
-  Cabecalho,
   Consulta,
   Container,
   Content,
@@ -13,7 +11,6 @@ import {
   ContentTabs,
   Head,
   Input,
-  ListExercicio,
   ListTabs,
   Resultado,
   RootTabs,
@@ -22,6 +19,7 @@ import {
 } from "./style";
 import { TreinoContext } from "../../contexts/TreinoContext";
 import { ButtonCadastroTreino } from "../../components/Treino/ButtonCadastro";
+import { LisTreino } from "../../components/Treino/ListTreino";
 
 export function CadastroTreino() {
   const { getAlunoTreino } = useContext(TreinoContext);
@@ -29,12 +27,27 @@ export function CadastroTreino() {
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [alunos, setAlunos] = useState({});
+
   const [treino, setTreino] = useState()
   const [treinoA, setTreinoA] = useState({
+    exercicios: [],
+  });
+  const [treinoB, setTreinoB] = useState({
+    exercicios: [],
+  });
+  
+  const [treinoGlobal, setTreinoGlobal] = useState({
     nome: '',
     data: '',
-    treinos: [],
-  });
+    treinos: {
+      treinoA: {
+        exercicios: [],
+      },
+      treinoB: {
+        exercicios: [],
+      },
+    },
+  })
 
   useEffect(() => {
     const fetchAlunos = async () => {
@@ -71,7 +84,8 @@ export function CadastroTreino() {
 
   const adicionarTreino = (event) => {
     event.preventDefault();
-    const novoTreino = {
+
+    const novoExercicio = {
       grupo: treino.grupo,
       exercicio: treino.exercicio,
       series: treino.series,
@@ -82,9 +96,48 @@ export function CadastroTreino() {
 
     setTreinoA((prevTreinoA) => ({
       ...prevTreinoA,
+      exercicios: [...prevTreinoA.exercicios, novoExercicio],
+    }));
+
+    setTreinoGlobal((prevTreinoGlobal) => ({
+      ...prevTreinoGlobal,
       nome: searchTerm,
       data: treino.data,
-      treinos: [...prevTreinoA.treinos, novoTreino],
+      treinos: {
+        ...prevTreinoGlobal.treinos,
+        treinoA: {
+          exercicios: [...prevTreinoGlobal.treinos.treinoA.exercicios, novoExercicio],
+        },
+      },
+    }));
+  };
+
+  const adicionarTreinoB = (event) => {
+    event.preventDefault();
+    const novoExercicio = {
+      grupo: treino.grupo,
+      exercicio: treino.exercicio,
+      series: treino.series,
+      reptemp: treino.reptemp,
+      carga: treino.carga,
+      descanso: treino.descanso
+    };
+
+    setTreinoB((prevTreinoB) => ({
+      ...prevTreinoB,
+      exercicios: [...prevTreinoB.exercicios, novoExercicio],
+    }));
+  
+    setTreinoGlobal((prevTreinoGlobal) => ({
+      ...prevTreinoGlobal,
+      nome: searchTerm,
+      data: treino.data,
+      treinos: {
+        ...prevTreinoGlobal.treinos,
+        treinoB: {
+          exercicios: [...prevTreinoGlobal.treinos.treinoB.exercicios, novoExercicio],
+        },
+      },
     }));
   };
 
@@ -95,8 +148,6 @@ export function CadastroTreino() {
       data: data,
     }));
   };
-
-  console.log(treinoA)
 
   return (
     <Container>
@@ -154,30 +205,25 @@ export function CadastroTreino() {
             </ButtonTabs>
           </ListTabs>
           <ContentTabs value="tab1">
-            <Cabecalho>
-              <ul>
-                <li>Execício</li>
-                <li>Séries</li>
-                <li>Repetição</li>
-                <li>Carga</li>
-                <li>Descanso</li>
-              </ul>
-            </Cabecalho>
-            <ListExercicio>
-              <ul>
-                <li>Supino reto com barra</li>
-                <li>3</li>
-                <li>12</li>
-                <li>10kg</li>
-                <li>45s</li>
-              </ul>
-            </ListExercicio>
+            <LisTreino treino={treinoA}/>
             <ButtonCadastroTreino setTreino={setTreino} adicionarTreino={adicionarTreino}/>
           </ContentTabs>
-          <ContentTabs value="tab2">2</ContentTabs>
-          <ContentTabs value="tab3">3</ContentTabs>
-          <ContentTabs value="tab4">4</ContentTabs>
-          <ContentTabs value="tab5">5</ContentTabs>
+          <ContentTabs value="tab2">
+            <LisTreino treino={treinoB}/>
+            <ButtonCadastroTreino setTreino={setTreino} adicionarTreino={adicionarTreinoB}/>
+          </ContentTabs>
+          <ContentTabs value="tab3">            
+            <LisTreino treino={treinoB}/>
+            <ButtonCadastroTreino setTreino={setTreino} adicionarTreino={adicionarTreinoB}/>
+          </ContentTabs>
+          <ContentTabs value="tab4">
+            <LisTreino treino={treinoB}/>
+            <ButtonCadastroTreino setTreino={setTreino} adicionarTreino={adicionarTreinoB}/>
+          </ContentTabs>
+          <ContentTabs value="tab5">
+            <LisTreino treino={treinoB}/>
+            <ButtonCadastroTreino setTreino={setTreino} adicionarTreino={adicionarTreinoB}/>
+          </ContentTabs>
         </RootTabs>
         <ContentForm>
           <label>Instrutor*</label>

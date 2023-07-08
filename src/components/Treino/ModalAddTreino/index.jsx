@@ -82,7 +82,7 @@ export function ModalAddTreino({ setTreino, adicionarTreino}) {
                 </option>
                 {exercicios &&
                   exercicios.map((exercicio) => (
-                    <option key={exercicio.id} value={exercicio.id}>
+                    <option key={exercicio.id} value={exercicio.descricao}>
                       {exercicio.descricao}
                     </option>
                   ))}
