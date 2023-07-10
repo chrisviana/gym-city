@@ -57,32 +57,6 @@ export const Head = styled.div`
   }
 `;
 
-export const Consulta = styled.div`
-  display: flex;
-  gap: 2rem;
-`;
-
-export const Resultado = styled.div`
-  background-color: rgb(18, 18, 20);
-  padding: 2rem;
-  line-height: 2rem;
-  color: #fff;
-  display: ${(props) => (props.vazio ? "none" : "block")};
-  font-size: 1rem;
-  font-family: Roboto;
-  font-style: normal;
-
-  li {
-    list-style: none;
-    cursor: pointer;
-
-    &:hover {
-      color: #00875f;
-      transition: color 0.5;
-    }
-  }
-`;
-
 export const RootTabs = styled(Tabs.Root)`
   background-color: #29292e;
   border-radius: 6px;
@@ -116,7 +90,6 @@ export const ButtonTabs = styled(Tabs.Trigger)`
 `;
 
 export const ContentTabs = styled(Tabs.Content)`
-  margin-top: 2rem;
   display: flex;
   flex-direction: column;
   align-items: center;
