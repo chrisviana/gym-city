@@ -3,15 +3,16 @@ import React, { useContext, useState, useEffect } from "react";
 import { TreinoContext } from "../../../contexts/TreinoContext";
 import { Consulta, Resultado } from "./style";
 
-export function AlunoSearch({ setData, setSearchTerm, searchTerm }) {
+export function AlunoSearch({ setData, setUsuario, setNomeAluno }) {
   const { getAlunoTreino } = useContext(TreinoContext);
-
+  const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [alunos, setAlunos] = useState({});
 
   const handleSearch = async (event) => {
     const searchTerm = event.target.value;
     setSearchTerm(searchTerm);
+
     if (searchTerm === "") {
       setSearchResults([]);
     } else {
@@ -26,6 +27,8 @@ export function AlunoSearch({ setData, setSearchTerm, searchTerm }) {
 
   const handleSelectSuggestion = (suggestion) => {
     setSearchTerm(suggestion.nome);
+    setUsuario(suggestion.usuario);
+    setNomeAluno(suggestion.nome)
     setSearchResults([]);
   };
 

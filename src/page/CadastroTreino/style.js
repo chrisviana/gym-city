@@ -26,6 +26,8 @@ export const Title = styled.p`
   line-height: 140%;
 `;
 
+export const ButtonLimparDados = styled.button``;
+
 export const Head = styled.div`
   display: flex;
   flex-direction: column;
@@ -177,5 +179,10 @@ export const ButtonImprimir = styled.button`
     background-color: #a06c00;
     color: #fff;
     transition: background 0.5s;
+  }
+
+  &[disabled] {
+    opacity: 0.5;
+    cursor: not-allowed;
   }
 `;

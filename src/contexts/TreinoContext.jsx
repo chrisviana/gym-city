@@ -20,6 +20,8 @@ const TreinoProvaider = ({ children }) => {
   const firestore = getFirestore(app);
 
   const saveTreino = async (infoTreino) => {
+    console.log(infoTreino)
+    
     try {
       const docRef = await addDoc(
         collection(firestore, "treinos"),

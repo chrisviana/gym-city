@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import {
   ButtonCadastrar,
   ButtonImprimir,
+  ButtonLimparDados,
   Container,
   Content,
   ContentButton,
@@ -13,20 +14,28 @@ import {
 } from "./style";
 import { AlunoSearch } from "../../components/Treino/AlunoSearch";
 import { TreinoTabs } from "../../components/Treino/TreinoTabs";
+import { TreinoContext } from "../../contexts/TreinoContext";
 
 export function CadastroTreino() {
-  const [searchTerm, setSearchTerm] = useState("");
+  const { saveTreino } = useContext(TreinoContext)
+  const [usuario, setUsuario] = useState("");
+  const [nomeAluno, setNomeAluno] = useState("")
   const [data, setData] = useState("");
-
+  const [instrutor, setInstrutor] = useState("");
+  const [obervacoes, setobervacoes] = useState("");
   const [treino, setTreino] = useState({});
+  const [treinoCadastrado, setTreinoCadastrado] = useState(true)
   const [treinos, setTreinos] = useState({
-    aluno: "",
+    usuario: "",
     data: "",
     treinoA: { exercicios: [] },
     treinoB: { exercicios: [] },
     treinoC: { exercicios: [] },
     treinoD: { exercicios: [] },
     treinoE: { exercicios: [] },
+    instrutor: "",
+    obervacoes: "",
+    nomeAluno: ""
   });
 
   const adicionarTreino = (event, treinoKey) => {
@@ -42,25 +51,42 @@ export function CadastroTreino() {
     };
 
     setTreinos((prevTreinos) => ({
-      ...prevTreinos,
-      aluno: searchTerm,
-      data: data,
+      ...prevTreinos,  
       [treinoKey]: {
         exercicios: [...prevTreinos[treinoKey].exercicios, novoExercicio],
       },
     }));
+
+    document.getElementById("closeModal").click();
+  };
+
+  
+
+  const cadastrarTreino =  () => {
+    setTreinos((prevTreinos) => ({
+      ...prevTreinos,
+      data: data,
+      usuario: usuario,
+      instrutor: instrutor,
+      obervacoes: obervacoes,
+      nomeAluno: nomeAluno
+    }));
+
+    saveTreino(treinos);
+    setTreinoCadastrado(false)
   };
 
   return (
     <Container>
       <Content>
         <Title>Cadastro de treino</Title>
+        <ButtonLimparDados>Limpar dados</ButtonLimparDados>
         <Head>
           <AlunoSearch
             setTreino={setTreino}
-            setSearchTerm={setSearchTerm}
-            searchTerm={searchTerm}
             setData={setData}
+            setUsuario={setUsuario}
+            setNomeAluno={setNomeAluno}
           />
         </Head>
         <TreinoTabs
@@ -70,15 +96,21 @@ export function CadastroTreino() {
         />
         <ContentForm>
           <label>Instrutor*</label>
-          <Input placeholder="Instrutor" />
+          <Input
+            placeholder="Instrutor"
+            onChange={(e) => setInstrutor(e.target.value)}
+          />
         </ContentForm>
         <ContentForm>
           <label>Observações*</label>
-          <TextArea placeholder="Observações" />
+          <TextArea
+            placeholder="Observações"
+            onChange={(e) => setobervacoes(e.target.value)}
+          />
         </ContentForm>
         <ContentButton>
-          <ButtonCadastrar>Cadastrar</ButtonCadastrar>
-          <ButtonImprimir>Imprimir</ButtonImprimir>
+          <ButtonCadastrar onClick={cadastrarTreino}>Cadastrar</ButtonCadastrar>
+          <ButtonImprimir disabled={treinoCadastrado}>Imprimir</ButtonImprimir>
         </ContentButton>
       </Content>
     </Container>

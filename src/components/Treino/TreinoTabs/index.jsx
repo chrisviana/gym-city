@@ -25,10 +25,11 @@ export function TreinoTabs( {adicionarTreino, treinos, setTreino }) {
         </ButtonTabs>
       </ListTabs>
       <ContentTabs value="tab1">
-        <LisTreino treino={treinos.treinoA} />
+        <LisTreino treino={treinos.treinoA}  setTreino={setTreino}/>
         <ButtonCadastroTreino
           setTreino={setTreino}
           adicionarTreino={(event) => adicionarTreino(event, "treinoA")}
+          isEditing={false}
         />
       </ContentTabs>
       <ContentTabs value="tab2">

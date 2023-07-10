@@ -18,6 +18,8 @@ export function Treino() {
     });
   }, []);
 
+  console.log(exercicios)
+
   const handleCadastroExercicio = async (exercicio) => {
     await saveExercicio(exercicio);
     const exercicioList = await getTreino();

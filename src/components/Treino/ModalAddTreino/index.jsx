@@ -10,12 +10,10 @@ import {
   Title,
 } from "./styles";
 import { useContext, useEffect, useState } from "react";
-import { toast } from "react-toastify";
 import { TreinoContext } from "../../../contexts/TreinoContext";
 
-export function ModalAddTreino({ setTreino, adicionarTreino}) {
+export function ModalAddTreino({ setTreino, adicionarTreino, infoEdit, isEditing}) {
   const { getGrupoTreino, getExercicioPorGrupo } = useContext(TreinoContext);
-
   const [grupos, setGrupos] = useState();
   const [exercicios, setExercicios] = useState();
   const [grupoSelecionado, setGrupoSelecionado] = useState("");
@@ -96,6 +94,7 @@ export function ModalAddTreino({ setTreino, adicionarTreino}) {
                   placeholder="Séries"
                   name="series"
                   onChange={handleChange}
+
                 />
               </ContentForm>
               <ContentForm>

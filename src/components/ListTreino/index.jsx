@@ -18,9 +18,9 @@ export function ListTreino({
     setSearchValue(event.target.value);
   };
 
-  const filteredDados = dados.filter((grupo) =>
-    grupo.descricao.toLowerCase().includes(searchValue.toLowerCase())
-  );
+  // const filteredDados = dados.filter((grupo) =>
+  //   //grupo.descricao.toLowerCase().includes(searchValue.toLowerCase())
+  // );
 
   return (
     <Container>
@@ -40,7 +40,7 @@ export function ListTreino({
         </Head>
         <List>
           <ul>
-            {filteredDados &&
+            {/* {filteredDados &&
               filteredDados.map((grupo) => (
                 <li key={grupo.id}>
                   {grupo.descricao}
@@ -63,7 +63,7 @@ export function ListTreino({
                     </Dialog.Root>
                   </div>
                 </li>
-              ))}
+              ))} */}
           </ul>
         </List>
       </Content>
