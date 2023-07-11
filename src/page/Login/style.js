@@ -1,14 +1,15 @@
-import styled from 'styled-components'
-import imgBackground from '../../assets/backgroud.png'
+import styled from "styled-components";
+import imgBackground from "../../assets/backgroud.png";
 
 export const Container = styled.div`
   width: 100%;
   height: 100vh;
   background-image: url(${imgBackground});
+  background-size: cover;
   display: flex;
   align-items: center;
   justify-content: center;
-`
+`;
 
 export const Content = styled.div`
   display: flex;
@@ -17,7 +18,7 @@ export const Content = styled.div`
   width: 100%;
   max-width: 552px;
   height: 561px;
-`
+`;
 export const FormLogin = styled.form`
   margin-top: 5.125rem;
   display: flex;
@@ -41,7 +42,7 @@ export const FormLogin = styled.form`
     border: none;
     padding: 2rem;
   }
-`
+`;
 
 export const ButtonContainer = styled.button`
   width: 509px;
@@ -58,4 +59,4 @@ export const ButtonContainer = styled.button`
   &:hover {
     background-color: #00b37e;
   }
-`
+`;

@@ -52,6 +52,7 @@ export const Content = styled(Dialog.Content)`
     display: flex;
     flex-direction: column;
     gap: 16px;
+    margin-top: 1rem;
 
     label {
       color: #fff;
@@ -68,6 +69,16 @@ export const Content = styled(Dialog.Content)`
       color: #fff;
     }
   }
+`;
+
+export const Select = styled.select`
+  background: #121214;
+  height: 54px;
+  border-radius: 6px;
+  border: none;
+  width: 403px;
+  padding: 16px;
+  color: #fff;
 `;
 
 export const Button = styled.button`

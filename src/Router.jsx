@@ -7,6 +7,7 @@ import { Exercicio } from "./page/Exercicio";
 import { Treino } from "./page/Treino";
 import { AlunoProvider } from "./contexts/AlunoContext";
 import { GrupoProvaider } from "./contexts/GrupoContext";
+import { ExercicioProvaider } from "./contexts/ExercicioContext";
 
 export function Router() {
   function PrivateRoute({ children }) {
@@ -41,7 +42,14 @@ export function Router() {
             </GrupoProvaider>
           }
         />
-        <Route path="/app/exercicio" element={<Exercicio />} />
+        <Route
+          path="/app/exercicio"
+          element={
+            <ExercicioProvaider>
+              <Exercicio />
+            </ExercicioProvaider>
+          }
+        />
         <Route path="/app/treino" element={<Treino />} />
       </Route>
     </Routes>

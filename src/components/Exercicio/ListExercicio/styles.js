@@ -112,15 +112,3 @@ export const List = styled.div`
     }
   }
 `;
-
-export const NumeroTitulo = styled.span`
-  max-width: 150px;
-  width: 100%;
-`;
-
-export const InfoAluno = styled.span`
-  max-width: 300px;
-  width: 100%;
-  display: flex;
-  gap: 16px;
-`;
