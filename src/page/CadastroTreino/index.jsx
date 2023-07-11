@@ -14,9 +14,10 @@ import {
 import { AlunoSearch } from "../../components/Treino/AlunoSearch";
 import { TreinoTabs } from "../../components/Treino/TreinoTabs";
 import { TreinoContext } from "../../contexts/TreinoContext";
+import { useParams } from "react-router-dom";
 
 export function CadastroTreino() {
-  const { saveTreino } = useContext(TreinoContext)
+  const { saveTreino, getTreinoById } = useContext(TreinoContext)
 
   const [searchTerm, setSearchTerm] = useState("");
   const [data, setData] = useState("");
@@ -38,6 +39,20 @@ export function CadastroTreino() {
     observacoes: "",
     usuario: "",
   });
+
+  const { id } = useParams();
+  
+  useEffect(() => {
+    if (id) {
+      const fetchData = async () => {
+        const response = await getTreinoById(id);
+        console.log("response", response);
+        setTreinos(response)
+      };
+  
+      fetchData();
+    }
+  }, [id]);
 
   const adicionarTreino = (event, treinoKey) => {
   
@@ -63,6 +78,8 @@ export function CadastroTreino() {
     setTreino({})
   };
 
+  console.log("Treino: " + treino)
+
   useEffect(() => {
     if (!treinoCadastrado) {
       saveTreino(treinos);
@@ -83,8 +100,6 @@ export function CadastroTreino() {
     setTreinoCadastrado(false);
   };
 
-  console.log(treinos)
-
   return (
     <Container>
       <Content>
@@ -96,6 +111,7 @@ export function CadastroTreino() {
             searchTerm={searchTerm}
             setData={setData}
             setUsuario={setUsuario}
+            treinos={treinos}
           />
         </Head>
         <TreinoTabs
@@ -110,6 +126,7 @@ export function CadastroTreino() {
             placeholder="Instrutor"
             type="text"
             onChange={(e) => setInstrutor(e.target.value)}
+            value={"" || treinos.instrutor}
           />
         </ContentForm>
         <ContentForm>
@@ -118,6 +135,7 @@ export function CadastroTreino() {
             placeholder="Observações"
             type="text"
             onChange={(e) => setObservacoes(e.target.value)}
+            value={"" || treinos.observacoes}
           />
         </ContentForm>
         <ContentButton>

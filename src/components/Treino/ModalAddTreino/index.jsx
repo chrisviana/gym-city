@@ -10,8 +10,9 @@ import {
   Title,
 } from "./styles";
 import { useContext, useEffect, useState } from "react";
-import { TreinoContext } from "../../../contexts/TreinoContext";
+
 import { toast } from "react-toastify";
+import { TreinoContext } from "../../../contexts/TreinoContext";
 
 export function ModalAddTreino({ setTreino, adicionarTreino, treino }) {
   const { getGrupoTreino, getExercicioPorGrupo } = useContext(TreinoContext);
@@ -35,12 +36,8 @@ export function ModalAddTreino({ setTreino, adicionarTreino, treino }) {
 
   const handleAdicionarClick = (event) => {
     event.preventDefault();
-    console.log(treino)
-    if (treino.grupo && treino.exercicio && treino.series&& treino.reptemp && treino.carga && treino.descanso)  {
       adicionarTreino();
-    } else {
-      toast.warning("Preencha todos os campos.");
-    }
+    
   };
 
 
@@ -67,7 +64,7 @@ export function ModalAddTreino({ setTreino, adicionarTreino, treino }) {
       <Overlay />
       <Content>
         <Close id="closeModal"> X </Close>
-        <form onSubmit={handleAdicionarClick}>
+        <form onSubmit={adicionarTreino}>
           <Title>Adicionar exercício</Title>
           <div>
             <ContentForm>

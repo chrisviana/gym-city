@@ -3,7 +3,8 @@ import React, { useContext, useState, useEffect } from "react";
 import { TreinoContext } from "../../../contexts/TreinoContext";
 import { Consulta, Resultado } from "./style";
 
-export function AlunoSearch({ setData, setSearchTerm, searchTerm, setUsuario }) {
+export function AlunoSearch({ setData, setSearchTerm, searchTerm, setUsuario, treinos }) {
+
   const { getAlunoTreino } = useContext(TreinoContext);
 
   const [searchResults, setSearchResults] = useState([]);
@@ -55,7 +56,7 @@ export function AlunoSearch({ setData, setSearchTerm, searchTerm, setUsuario }) 
           type="text"
           placeholder="Busque por um aluno ou título"
           onChange={handleSearch}
-          value={searchTerm}
+          value={searchTerm || treinos?.aluno}
           name="nome"
         />
         <input
@@ -64,6 +65,7 @@ export function AlunoSearch({ setData, setSearchTerm, searchTerm, setUsuario }) 
           name="data"
           autoComplete="off"
           onChange={handleDataChange}
+          value={treinos?.data || ""}
         />
       </Consulta>
       <Resultado vazio={searchResults.length === 0}>

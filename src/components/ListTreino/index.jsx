@@ -1,6 +1,9 @@
-import { Container, Content, ContentButton, Head, List } from "./styles";
+import { Container, Content, ContentButton, Head, InfoAluno, List, NumeroTitulo } from "./styles";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import IconeEditar from '../../assets/IconeEditar.svg'
+import IconeExcluir from '../../assets/IconeExcluir.svg'
+import * as Dialog from "@radix-ui/react-dialog";
 
 export function ListTreino({
   dados,
@@ -14,9 +17,15 @@ export function ListTreino({
     setSearchValue(event.target.value);
   };
 
-  // const filteredDados = dados.filter((grupo) =>
-  //   grupo.descricao.toLowerCase().includes(searchValue.toLowerCase())
-  // );
+  const filteredDados = dados.filter((treino) =>
+    treino.aluno.toLowerCase().includes(searchValue.toLowerCase()) ||
+    treino.usuario.toLowerCase().includes(searchValue.toLowerCase()) 
+  );
+
+  const handleEditarClick = (treino) => {
+    // Chamar a página de edição com o treino
+    // Você pode fazer isso usando o componente Link do React Router DOM
+  };
 
   return (
     <Container>
@@ -36,30 +45,35 @@ export function ListTreino({
         </Head>
         <List>
           <ul>
-            {/* {filteredDados &&
-              filteredDados.map((grupo) => (
-                <li key={grupo.id}>
-                  {grupo.descricao}
+            {filteredDados &&
+              filteredDados.map((treino) => (
+                <li key={treino.id}>
+                   <InfoAluno>
+                    <NumeroTitulo>{`Nº título: ${treino.usuario}`}</NumeroTitulo>
+                    {treino.aluno}
+                  </InfoAluno>
                   <div>
-                    <button>
-                      <img src={IconeEditar} alt="Icone Editar" />
-                    </button>
+                  <Link to={`/app/treino/cadastro/${treino.id}`}>
+                      <button onClick={() => handleEditarClick(treino)}>
+                        <img src={IconeEditar} alt="Ícone Editar" />
+                      </button>
+                    </Link>
                     <Dialog.Root>
                       <Dialog.Trigger asChild>
                         <button>
                           <img src={IconeExcluir} alt="Icone Excluir" />
                         </button>
                       </Dialog.Trigger>
-                      <ModalDelete
-                        nome={grupo.descricao}
-                        id={grupo.id}
+                      {/* <ModalDelete
+                        nome={treino.aluno}
+                        id={treino.id}
                         handleDelete={handleDeleteExercicio}
                         title="exercício"
-                      />
+                      /> */}
                     </Dialog.Root>
                   </div>
                 </li>
-              ))} */}
+              ))}
           </ul>
         </List>
       </Content>

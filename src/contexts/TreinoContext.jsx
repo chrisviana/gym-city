@@ -12,6 +12,7 @@ import {
   updateDoc,
   query,
   where,
+  getDoc,
 } from "firebase/firestore";
 
 const TreinoContext = createContext({});
@@ -20,7 +21,6 @@ const TreinoProvaider = ({ children }) => {
   const firestore = getFirestore(app);
 
   const saveTreino = async (infoTreino) => {
-    console.log("infoTreino", infoTreino);
     try {
       const docRef = await addDoc(
         collection(firestore, "treinos"),
@@ -38,7 +38,6 @@ const TreinoProvaider = ({ children }) => {
       toast.success("Treino cadastrado com sucesso");
       getTreino();
     } catch (error) {
-      console.log(error);
       toast.error("Erro ao salvar o treino:", error);
     }
   };
@@ -109,6 +108,20 @@ const TreinoProvaider = ({ children }) => {
     }
   }
 
+
+  const getTreinoById = async (id) => {
+    const treinoRef = doc(firestore, "treinos", id);
+    const treinoDoc = await getDoc(treinoRef);
+  
+    if (treinoDoc.exists()) {
+      const treinoData = treinoDoc.data();;
+      return treinoData;
+    } else {
+      // O documento com o ID fornecido não existe
+      console.log("Treino não encontrado");
+      return null;
+    }
+  };
   const authContextData = {
     saveTreino,
     getTreino,
@@ -117,6 +130,7 @@ const TreinoProvaider = ({ children }) => {
     getAlunoTreino,
     getGrupoTreino,
     getExercicioPorGrupo,
+    getTreinoById
   };
 
   return (

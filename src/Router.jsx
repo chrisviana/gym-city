@@ -52,21 +52,32 @@ export function Router() {
             </ExercicioProvaider>
           }
         />
-        <Route 
-          path="/app/treino" 
+        <Route
+          path="/app/treino"
           element={
             <TreinoProvaider>
               <Treino />
-            </TreinoProvaider>} 
-          />
+            </TreinoProvaider>
+          }
+        />
 
-        <Route 
-          path="/app/treino/cadastro" 
+        <Route
+          path="/app/treino/cadastro"
           element={
             <TreinoProvaider>
               <CadastroTreino />
-            </TreinoProvaider>} 
-          />
+            </TreinoProvaider>
+          }
+        />
+
+        <Route
+          path="/app/treino/cadastro/:id"
+          element={
+            <TreinoProvaider>
+              <CadastroTreino />
+            </TreinoProvaider>
+          }
+        />
       </Route>
     </Routes>
   );
