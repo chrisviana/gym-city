@@ -2,7 +2,7 @@ import { ButtonTabs, ContentTabs, ListTabs, RootTabs } from "./style";
 import { ButtonCadastroTreino } from "../ButtonCadastro";
 import { LisTreino } from "../ListTreino";
 
-export function TreinoTabs( {adicionarTreino, treinos, setTreino }) {
+export function TreinoTabs( {adicionarTreino, treinos, setTreino, treino }) {
 
 
   return (
@@ -29,6 +29,7 @@ export function TreinoTabs( {adicionarTreino, treinos, setTreino }) {
         <ButtonCadastroTreino
           setTreino={setTreino}
           adicionarTreino={(event) => adicionarTreino(event, "treinoA")}
+          treino={treino}
         />
       </ContentTabs>
       <ContentTabs value="tab2">

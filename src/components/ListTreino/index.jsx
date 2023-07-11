@@ -1,9 +1,5 @@
-import * as Dialog from "@radix-ui/react-dialog";
-import IconeEditar from "../../assets/IconeEditar.svg";
-import IconeExcluir from "../../assets/IconeExcluir.svg";
 import { Container, Content, ContentButton, Head, List } from "./styles";
 import { useState } from "react";
-import { ModalDelete } from "../ModalDelete";
 import { Link } from "react-router-dom";
 
 export function ListTreino({
@@ -18,9 +14,9 @@ export function ListTreino({
     setSearchValue(event.target.value);
   };
 
-  const filteredDados = dados.filter((grupo) =>
-    grupo.descricao.toLowerCase().includes(searchValue.toLowerCase())
-  );
+  // const filteredDados = dados.filter((grupo) =>
+  //   grupo.descricao.toLowerCase().includes(searchValue.toLowerCase())
+  // );
 
   return (
     <Container>
@@ -40,7 +36,7 @@ export function ListTreino({
         </Head>
         <List>
           <ul>
-            {filteredDados &&
+            {/* {filteredDados &&
               filteredDados.map((grupo) => (
                 <li key={grupo.id}>
                   {grupo.descricao}
@@ -63,7 +59,7 @@ export function ListTreino({
                     </Dialog.Root>
                   </div>
                 </li>
-              ))}
+              ))} */}
           </ul>
         </List>
       </Content>

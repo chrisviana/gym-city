@@ -178,4 +178,9 @@ export const ButtonImprimir = styled.button`
     color: #fff;
     transition: background 0.5s;
   }
+
+  &[disabled] {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
 `;

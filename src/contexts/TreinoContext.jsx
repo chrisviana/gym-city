@@ -20,6 +20,7 @@ const TreinoProvaider = ({ children }) => {
   const firestore = getFirestore(app);
 
   const saveTreino = async (infoTreino) => {
+    console.log("infoTreino", infoTreino);
     try {
       const docRef = await addDoc(
         collection(firestore, "treinos"),
@@ -37,6 +38,7 @@ const TreinoProvaider = ({ children }) => {
       toast.success("Treino cadastrado com sucesso");
       getTreino();
     } catch (error) {
+      console.log(error);
       toast.error("Erro ao salvar o treino:", error);
     }
   };

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import {
   ButtonCadastrar,
   ButtonImprimir,
@@ -13,10 +13,17 @@ import {
 } from "./style";
 import { AlunoSearch } from "../../components/Treino/AlunoSearch";
 import { TreinoTabs } from "../../components/Treino/TreinoTabs";
+import { TreinoContext } from "../../contexts/TreinoContext";
 
 export function CadastroTreino() {
+  const { saveTreino } = useContext(TreinoContext)
+
   const [searchTerm, setSearchTerm] = useState("");
   const [data, setData] = useState("");
+  const [instrutor, setInstrutor] = useState("");
+  const [observacoes, setObservacoes] = useState("");
+  const [treinoCadastrado, setTreinoCadastrado] = useState(true);
+  const [usuario, setUsuario] = useState("");
 
   const [treino, setTreino] = useState({});
   const [treinos, setTreinos] = useState({
@@ -27,11 +34,13 @@ export function CadastroTreino() {
     treinoC: { exercicios: [] },
     treinoD: { exercicios: [] },
     treinoE: { exercicios: [] },
+    instrutor: "",
+    observacoes: "",
+    usuario: "",
   });
 
   const adicionarTreino = (event, treinoKey) => {
-    event.preventDefault();
-
+  
     const novoExercicio = {
       grupo: treino.grupo,
       exercicio: treino.exercicio,
@@ -43,13 +52,38 @@ export function CadastroTreino() {
 
     setTreinos((prevTreinos) => ({
       ...prevTreinos,
-      aluno: searchTerm,
-      data: data,
+
       [treinoKey]: {
         exercicios: [...prevTreinos[treinoKey].exercicios, novoExercicio],
       },
     }));
+
+
+    document.getElementById("closeModal").click();
+    setTreino({})
   };
+
+  useEffect(() => {
+    if (!treinoCadastrado) {
+      saveTreino(treinos);
+    }
+  }, [treinos, saveTreino, treinoCadastrado]);
+
+  const cadastrarTreino = () => {
+  
+    setTreinos((prevTreinos) => ({
+      ...prevTreinos,
+      instrutor: instrutor,
+      aluno: searchTerm,
+      data: data,
+      observacoes: observacoes,
+      usuario: usuario,
+    }));
+  
+    setTreinoCadastrado(false);
+  };
+
+  console.log(treinos)
 
   return (
     <Container>
@@ -61,24 +95,34 @@ export function CadastroTreino() {
             setSearchTerm={setSearchTerm}
             searchTerm={searchTerm}
             setData={setData}
+            setUsuario={setUsuario}
           />
         </Head>
         <TreinoTabs
           adicionarTreino={adicionarTreino}
           treinos={treinos}
           setTreino={setTreino}
+          treino={treino}
         />
         <ContentForm>
           <label>Instrutor*</label>
-          <Input placeholder="Instrutor" />
+          <Input
+            placeholder="Instrutor"
+            type="text"
+            onChange={(e) => setInstrutor(e.target.value)}
+          />
         </ContentForm>
         <ContentForm>
           <label>Observações*</label>
-          <TextArea placeholder="Observações" />
+          <TextArea
+            placeholder="Observações"
+            type="text"
+            onChange={(e) => setObservacoes(e.target.value)}
+          />
         </ContentForm>
         <ContentButton>
-          <ButtonCadastrar>Cadastrar</ButtonCadastrar>
-          <ButtonImprimir>Imprimir</ButtonImprimir>
+          <ButtonCadastrar onClick={cadastrarTreino}>Cadastrar</ButtonCadastrar>
+          <ButtonImprimir disabled={treinoCadastrado}>Imprimir</ButtonImprimir>
         </ContentButton>
       </Content>
     </Container>

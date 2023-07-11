@@ -3,7 +3,7 @@ import React, { useContext, useState, useEffect } from "react";
 import { TreinoContext } from "../../../contexts/TreinoContext";
 import { Consulta, Resultado } from "./style";
 
-export function AlunoSearch({ setData, setSearchTerm, searchTerm }) {
+export function AlunoSearch({ setData, setSearchTerm, searchTerm, setUsuario }) {
   const { getAlunoTreino } = useContext(TreinoContext);
 
   const [searchResults, setSearchResults] = useState([]);
@@ -26,6 +26,7 @@ export function AlunoSearch({ setData, setSearchTerm, searchTerm }) {
 
   const handleSelectSuggestion = (suggestion) => {
     setSearchTerm(suggestion.nome);
+    setUsuario(suggestion.usuario);
     setSearchResults([]);
   };
 
