@@ -18,7 +18,7 @@ import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 
 export function CadastroTreino() {
-  const { saveTreino, getTreinoById } = useContext(TreinoContext)
+  const { saveTreino, getTreinoById, editarTreino } = useContext(TreinoContext)
 
   const [searchTerm, setSearchTerm] = useState("");
   const [data, setData] = useState("");
@@ -93,10 +93,14 @@ export function CadastroTreino() {
   };
 
   useEffect(() => {
-    if (!treinoCadastrado) {
+    if (!treinoCadastrado && !id)  {
       saveTreino(treinos);
+    } 
+    if (id && isEditing) {
+      editarTreino(id, treinos)
     }
-  }, [treinos, saveTreino, treinoCadastrado]);
+
+  }, [treinoCadastrado]);
 
   const isObjectEmpty = (obj) => {
     return Object.keys(obj).length === 0;

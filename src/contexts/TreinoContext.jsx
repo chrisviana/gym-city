@@ -60,14 +60,14 @@ const TreinoProvaider = ({ children }) => {
     }
   };
 
-  const editarExercicio = async (id, infoAluno) => {
-    const grupoRef = doc(firestore, "exercicios", id);
+  const editarTreino = async (id, infoTreno) => {
+    const grupoRef = doc(firestore, "treinos", id);
     try {
-      await updateDoc(grupoRef, infoAluno);
-      toast.success("Exercício atualizado com sucesso!");
-      document.getElementById("closeModal").click();
+      await updateDoc(grupoRef, infoTreno);
+      toast.success("Treino atualizado com sucesso!");
     } catch (error) {
-      toast.error("Erro ao editar grupo:", error);
+      console.log(error)
+      toast.error("Erro ao atualizar exercício:", error);
     }
   };
 
@@ -125,7 +125,7 @@ const TreinoProvaider = ({ children }) => {
     saveTreino,
     getTreino,
     deleteTreino,
-    editarExercicio,
+    editarTreino,
     getAlunoTreino,
     getGrupoTreino,
     getExercicioPorGrupo,

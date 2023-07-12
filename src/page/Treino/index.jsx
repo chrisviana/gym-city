@@ -30,18 +30,11 @@ export function Treino() {
     setTreinos(treinoList);
   };
 
-  const handleEditarExercicio = async (id, aluno) => {
-    await editarExercicio(id, aluno);
-    const exercicioList = await getTreino();
-    setTreinos(exercicioList);
-  };
-
   return (
     <ListTreino
       dados={treinos}
       handleCadastroExercicio={handleCadastroExercicio}
       handleDeleteTreino={handleDeleteTreino}
-      handleEditarExercicio={handleEditarExercicio}
       getGrupo={getGrupo}
     />
   );

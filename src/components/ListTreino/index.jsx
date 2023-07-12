@@ -10,7 +10,6 @@ export function ListTreino({
   dados,
   handleCadastroExercicio,
   handleDeleteTreino,
-  handleEditarExercicio,
   getGrupo,
 }) {
   const [searchValue, setSearchValue] = useState("");
@@ -22,11 +21,6 @@ export function ListTreino({
     treino.aluno.toLowerCase().includes(searchValue.toLowerCase()) ||
     treino.usuario.toLowerCase().includes(searchValue.toLowerCase()) 
   );
-
-  const handleEditarClick = (treino) => {
-    // Chamar a página de edição com o treino
-    // Você pode fazer isso usando o componente Link do React Router DOM
-  };
 
   return (
     <Container>
@@ -55,7 +49,7 @@ export function ListTreino({
                   </InfoAluno>
                   <div>
                   <Link to={`/app/treino/cadastro/${treino.id}`}>
-                      <button onClick={() => handleEditarClick(treino)}>
+                      <button>
                         <img src={IconeEditar} alt="Ícone Editar" />
                       </button>
                     </Link>
