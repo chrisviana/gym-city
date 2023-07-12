@@ -49,14 +49,14 @@ const TreinoProvaider = ({ children }) => {
     return treinosList;
   };
 
-  const deleteExercicio = async (id) => {
-    const exercicioRef = doc(firestore, "exercicios", id);
+  const deleteTreino = async (id) => {
+    const exercicioRef = doc(firestore, "treinos", id);
     try {
       await deleteDoc(exercicioRef);
-      toast.success("Exercício excluído com sucesso!");
+      toast.success("Treino excluído com sucesso!");
       document.getElementById("closeModal").click();
     } catch (error) {
-      toast.error("Erro ao excluir grupo:", error);
+      toast.error("Erro ao excluir o treino:", error);
     }
   };
 
@@ -118,14 +118,13 @@ const TreinoProvaider = ({ children }) => {
       return treinoData;
     } else {
       // O documento com o ID fornecido não existe
-      console.log("Treino não encontrado");
       return null;
     }
   };
   const authContextData = {
     saveTreino,
     getTreino,
-    deleteExercicio,
+    deleteTreino,
     editarExercicio,
     getAlunoTreino,
     getGrupoTreino,

@@ -1,14 +1,14 @@
 import styled from "styled-components";
 
-export const Cabecalho = styled.div`
-  min-width: 58rem;
+export const Cabecalho = styled.thead`
+  min-width: 60rem;
 
-  ul {
+  tr {
     display: flex;
     align-items: center;
     justify-content: space-between;
 
-    li {
+    th {
       list-style: none;
       color: #7c7c8a;
       font-size: 1rem;
@@ -16,18 +16,20 @@ export const Cabecalho = styled.div`
       font-style: normal;
       font-weight: 400;
       line-height: 140%;
+      text-align: center;
 
       &:first-child {
         width: 300px;
+        text-align: left;
       }
     }
   }
 `;
 
-export const ListExercicio = styled.div`
-  min-width: 58rem;
+export const ListExercicio = styled.tbody`
+  min-width: 60rem;
 
-  ul {
+  tr {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -37,7 +39,7 @@ export const ListExercicio = styled.div`
     height: 4.125rem;
     margin-top: 1rem;
 
-    li {
+    td {
       list-style: none;
       color: #fff;
       font-size: 1rem;
@@ -45,9 +47,24 @@ export const ListExercicio = styled.div`
       font-style: normal;
       font-weight: 700;
       line-height: 140%;
+      text-align: center;
+      width: 71px;
 
       &:first-child {
-        width: 275px;
+        width: 300px;
+        text-align: left;
+      }
+
+      &:last-child {
+        display: flex;
+        align-items: center;
+        gap: 0.5em;
+      }
+
+      button {
+        border: none;
+        background: transparent;
+        cursor: pointer;
       }
     }
   }

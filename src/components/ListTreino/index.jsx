@@ -4,11 +4,12 @@ import { Link } from "react-router-dom";
 import IconeEditar from '../../assets/IconeEditar.svg'
 import IconeExcluir from '../../assets/IconeExcluir.svg'
 import * as Dialog from "@radix-ui/react-dialog";
+import { ModalDelete } from "../ModalDelete";
 
 export function ListTreino({
   dados,
   handleCadastroExercicio,
-  handleDeleteExercicio,
+  handleDeleteTreino,
   handleEditarExercicio,
   getGrupo,
 }) {
@@ -64,12 +65,12 @@ export function ListTreino({
                           <img src={IconeExcluir} alt="Icone Excluir" />
                         </button>
                       </Dialog.Trigger>
-                      {/* <ModalDelete
+                      <ModalDelete
                         nome={treino.aluno}
                         id={treino.id}
-                        handleDelete={handleDeleteExercicio}
-                        title="exercício"
-                      /> */}
+                        handleDelete={handleDeleteTreino}
+                        title="treino do "
+                      />
                     </Dialog.Root>
                   </div>
                 </li>

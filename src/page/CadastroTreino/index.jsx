@@ -22,8 +22,8 @@ export function CadastroTreino() {
 
   const [searchTerm, setSearchTerm] = useState("");
   const [data, setData] = useState("");
-  const [instrutor, setInstrutor] = useState("");
-  const [observacoes, setObservacoes] = useState("");
+ 
+
   const [treinoCadastrado, setTreinoCadastrado] = useState(true);
   const [usuario, setUsuario] = useState("");
 
@@ -40,6 +40,9 @@ export function CadastroTreino() {
     observacoes: "",
     usuario: "",
   });
+  const [instrutor, setInstrutor] = useState(treinos.instrutor || "");
+  const [observacoes, setObservacoes] = useState(treinos.observacoes || "");
+  const [isEditing, setIsEditing] = useState(false)
 
   const { id } = useParams();
   
@@ -47,7 +50,7 @@ export function CadastroTreino() {
     if (id) {
       const fetchData = async () => {
         const response = await getTreinoById(id);
-        console.log("response", response);
+        setIsEditing(true)
         setTreinos(response)
       };
   
@@ -58,6 +61,7 @@ export function CadastroTreino() {
   const adicionarTreino = (event, treinoKey) => {
 
     event.preventDefault();
+
     if (
       treino.grupo &&
       treino.exercicio &&
@@ -99,7 +103,8 @@ export function CadastroTreino() {
   };
 
   const cadastrarTreino = () => {
-    if (searchTerm && data && isObjectEmpty(treino) && instrutor) {
+    
+    if (searchTerm && data && !isObjectEmpty(treino) && instrutor) {
       setTreinos((prevTreinos) => ({
         ...prevTreinos,
         instrutor: instrutor,
@@ -129,6 +134,7 @@ export function CadastroTreino() {
             setUsuario={setUsuario}
             treinos={treinos}
             data={data}
+            isEditing={isEditing}
           />
         </Head>
         <TreinoTabs
@@ -143,7 +149,7 @@ export function CadastroTreino() {
             placeholder="Instrutor"
             type="text"
             onChange={(e) => setInstrutor(e.target.value)}
-            value={instrutor || treinos.instrutor}
+            value={instrutor}
           />
         </ContentForm>
         <ContentForm>
@@ -156,7 +162,7 @@ export function CadastroTreino() {
           />
         </ContentForm>
         <ContentButton>
-          <ButtonCadastrar onClick={cadastrarTreino}>Cadastrar</ButtonCadastrar>
+          <ButtonCadastrar onClick={cadastrarTreino}>{isEditing ? "Salvar" : "Cadastrar"} </ButtonCadastrar>
           <ButtonImprimir disabled={treinoCadastrado}>Imprimir</ButtonImprimir>
         </ContentButton>
       </Content>

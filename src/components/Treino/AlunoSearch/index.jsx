@@ -3,7 +3,7 @@ import React, { useContext, useState, useEffect } from "react";
 import { TreinoContext } from "../../../contexts/TreinoContext";
 import { Consulta, Resultado } from "./style";
 
-export function AlunoSearch({ setData, setSearchTerm, searchTerm, setUsuario, treinos, data }) {
+export function AlunoSearch({ setData, setSearchTerm, searchTerm, setUsuario, treinos, data, isEditing }) {
 
   const { getAlunoTreino } = useContext(TreinoContext);
 
@@ -24,6 +24,15 @@ export function AlunoSearch({ setData, setSearchTerm, searchTerm, setUsuario, tr
       setSearchResults(filteredAlunos);
     }
   };
+
+  useEffect(() => {
+    if (isEditing) {
+      setSearchTerm(treinos?.aluno)
+      setUsuario(treinos?.usuario)
+      
+    }
+  },[isEditing])
+
 
   const handleSelectSuggestion = (suggestion) => {
     setSearchTerm(suggestion.nome);
@@ -56,7 +65,7 @@ export function AlunoSearch({ setData, setSearchTerm, searchTerm, setUsuario, tr
           type="text"
           placeholder="Busque por um aluno ou título"
           onChange={handleSearch}
-          value={searchTerm || treinos?.aluno}
+          value={searchTerm}
           name="nome"
         />
         <input
@@ -65,7 +74,7 @@ export function AlunoSearch({ setData, setSearchTerm, searchTerm, setUsuario, tr
           name="data"
           autoComplete="off"
           onChange={handleDataChange}
-          value={treinos?.data || data}
+          value={data}
         />
       </Consulta>
       <Resultado vazio={searchResults.length === 0}>

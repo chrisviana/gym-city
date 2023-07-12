@@ -5,42 +5,42 @@ import { ListTreino } from "../../components/ListTreino";
 export function Treino() {
   const {
     getTreino,
-    deleteExercicio,
+    deleteTreino,
     saveExercicio,
     editarExercicio,
     getGrupo,
   } = useContext(TreinoContext);
-  const [exercicios, setExercicios] = useState([]);
+  const [treinos, setTreinos] = useState([]);
 
   useEffect(() => {
     getTreino().then((exercicioList) => {
-      setExercicios(exercicioList);
+      setTreinos(exercicioList);
     });
   }, []);
 
   const handleCadastroExercicio = async (exercicio) => {
     await saveExercicio(exercicio);
     const exercicioList = await getTreino();
-    setExercicios(exercicioList);
+    setTreinos(exercicioList);
   };
 
-  const handleDeleteExercicio = async (id) => {
-    await deleteExercicio(id);
-    const exercicioList = await getTreino();
-    setExercicios(exercicioList);
+  const handleDeleteTreino = async (id) => {
+    await deleteTreino(id);
+    const treinoList = await getTreino();
+    setTreinos(treinoList);
   };
 
   const handleEditarExercicio = async (id, aluno) => {
     await editarExercicio(id, aluno);
     const exercicioList = await getTreino();
-    setExercicios(exercicioList);
+    setTreinos(exercicioList);
   };
 
   return (
     <ListTreino
-      dados={exercicios}
+      dados={treinos}
       handleCadastroExercicio={handleCadastroExercicio}
-      handleDeleteExercicio={handleDeleteExercicio}
+      handleDeleteTreino={handleDeleteTreino}
       handleEditarExercicio={handleEditarExercicio}
       getGrupo={getGrupo}
     />

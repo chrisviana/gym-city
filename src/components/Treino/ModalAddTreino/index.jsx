@@ -11,10 +11,9 @@ import {
 } from "./styles";
 import { useContext, useEffect, useState } from "react";
 
-import { toast } from "react-toastify";
 import { TreinoContext } from "../../../contexts/TreinoContext";
 
-export function ModalAddTreino({ setTreino, adicionarTreino, treino }) {
+export function ModalAddTreino({ setTreino, adicionarTreino, treino, isEditig, treinoEditado }) {
   const { getGrupoTreino, getExercicioPorGrupo } = useContext(TreinoContext);
   const [grupos, setGrupos] = useState();
   const [exercicios, setExercicios] = useState();
@@ -27,18 +26,31 @@ export function ModalAddTreino({ setTreino, adicionarTreino, treino }) {
   }, []);
 
   useEffect(() => {
+    if (isEditig) {
+
+      if (treinoEditado.exercicios) {
+        const exericioEditado = treinoEditado.exercicios[0];
+
+        setTreino((prevInfoTreino) => ({
+          ...prevInfoTreino,
+          grupo: exericioEditado.grupo,
+          exercicio: exericioEditado.exercicio,
+          series: exericioEditado.series,
+          reptemp: exericioEditado.reptemp,
+          carga: exericioEditado.carga || "",
+          descanso: exericioEditado.descanso,
+        }));
+      }
+    }
+  },[])
+
+  useEffect(() => {
     if (grupoSelecionado) {
       getExercicioPorGrupo(grupoSelecionado).then((exercicioList) => {
         setExercicios(exercicioList);
       });
     }
   }, [grupoSelecionado]);
-
-  const handleAdicionarClick = (event) => {
-    event.preventDefault();
-      adicionarTreino();
-  };
-
 
   const handleChange = (event) => {
     const { name, value } = event.target;
