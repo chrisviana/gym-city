@@ -18,8 +18,6 @@ export function ModalExercicio({
     if (infoEdit) {
       setDescricao(infoEdit.descricao || "");
       setGrupoId(infoEdit.grupoId || "");
-
-      console.log(infoEdit);
     }
   }, [infoEdit]);
 
@@ -32,7 +30,6 @@ export function ModalExercicio({
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    console.log(descricao, grupoId);
     if (!descricao || !grupoId) {
       toast.warning("Preencha os campos obrigatórios");
       return;

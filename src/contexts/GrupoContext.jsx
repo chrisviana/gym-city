@@ -49,7 +49,6 @@ const GrupoProvaider = ({ children }) => {
   const deleteGrupo = (id) => {
     verificarRelacionamentoGrupoExercicio(id)
         .then(async (relacionamento) => {
-          console.log(relacionamento)
           if (relacionamento) {
             toast.warning('Não é possível excluir o grupo, pois está relacionado a um ou mais exercícios.');
             document.getElementById("closeModal").click();
