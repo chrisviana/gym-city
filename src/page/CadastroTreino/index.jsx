@@ -15,6 +15,7 @@ import { AlunoSearch } from "../../components/Treino/AlunoSearch";
 import { TreinoTabs } from "../../components/Treino/TreinoTabs";
 import { TreinoContext } from "../../contexts/TreinoContext";
 import { useParams } from "react-router-dom";
+import { toast } from "react-toastify";
 
 export function CadastroTreino() {
   const { saveTreino, getTreinoById } = useContext(TreinoContext)
@@ -55,30 +56,37 @@ export function CadastroTreino() {
   }, [id]);
 
   const adicionarTreino = (event, treinoKey) => {
+
+    event.preventDefault();
+    if (
+      treino.grupo &&
+      treino.exercicio &&
+      treino.series &&
+      treino.reptemp &&
+      treino.descanso
+    ) {
+      const novoExercicio = {
+        grupo: treino.grupo,
+        exercicio: treino.exercicio,
+        series: treino.series,
+        reptemp: treino.reptemp,
+        carga: treino.carga || "",
+        descanso: treino.descanso,
+      };
   
-    const novoExercicio = {
-      grupo: treino.grupo,
-      exercicio: treino.exercicio,
-      series: treino.series,
-      reptemp: treino.reptemp,
-      carga: treino.carga,
-      descanso: treino.descanso,
-    };
-
-    setTreinos((prevTreinos) => ({
-      ...prevTreinos,
-
-      [treinoKey]: {
-        exercicios: [...prevTreinos[treinoKey].exercicios, novoExercicio],
-      },
-    }));
-
-
-    document.getElementById("closeModal").click();
-    setTreino({})
+      setTreinos((prevTreinos) => ({
+        ...prevTreinos,
+        [treinoKey]: {
+          exercicios: [...prevTreinos[treinoKey].exercicios, novoExercicio],
+        },
+      }));
+  
+      document.getElementById("closeModal").click();
+      setTreino({});
+    } else {
+      toast.warning('Preencha os campos obrigatórios.');
+    }
   };
-
-  console.log("Treino: " + treino)
 
   useEffect(() => {
     if (!treinoCadastrado) {
@@ -86,18 +94,26 @@ export function CadastroTreino() {
     }
   }, [treinos, saveTreino, treinoCadastrado]);
 
+  const isObjectEmpty = (obj) => {
+    return Object.keys(obj).length === 0;
+  };
+
   const cadastrarTreino = () => {
+    if (searchTerm && data && isObjectEmpty(treino) && instrutor) {
+      setTreinos((prevTreinos) => ({
+        ...prevTreinos,
+        instrutor: instrutor,
+        aluno: searchTerm,
+        data: data,
+        observacoes: observacoes,
+        usuario: usuario,
+      }));
+      setTreinoCadastrado(false);
+    } else {
+      toast.warning("Preencha os campos obrigatórios")
+    }
+   
   
-    setTreinos((prevTreinos) => ({
-      ...prevTreinos,
-      instrutor: instrutor,
-      aluno: searchTerm,
-      data: data,
-      observacoes: observacoes,
-      usuario: usuario,
-    }));
-  
-    setTreinoCadastrado(false);
   };
 
   return (
@@ -112,6 +128,7 @@ export function CadastroTreino() {
             setData={setData}
             setUsuario={setUsuario}
             treinos={treinos}
+            data={data}
           />
         </Head>
         <TreinoTabs
@@ -126,16 +143,16 @@ export function CadastroTreino() {
             placeholder="Instrutor"
             type="text"
             onChange={(e) => setInstrutor(e.target.value)}
-            value={"" || treinos.instrutor}
+            value={instrutor || treinos.instrutor}
           />
         </ContentForm>
         <ContentForm>
-          <label>Observações*</label>
+          <label>Observações</label>
           <TextArea
             placeholder="Observações"
             type="text"
             onChange={(e) => setObservacoes(e.target.value)}
-            value={"" || treinos.observacoes}
+            value={observacoes || treinos.observacoes}
           />
         </ContentForm>
         <ContentButton>

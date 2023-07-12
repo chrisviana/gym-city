@@ -19,7 +19,7 @@ const TreinoContext = createContext({});
 
 const TreinoProvaider = ({ children }) => {
   const firestore = getFirestore(app);
-
+  
   const saveTreino = async (infoTreino) => {
     try {
       const docRef = await addDoc(

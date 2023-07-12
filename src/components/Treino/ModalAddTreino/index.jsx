@@ -37,12 +37,12 @@ export function ModalAddTreino({ setTreino, adicionarTreino, treino }) {
   const handleAdicionarClick = (event) => {
     event.preventDefault();
       adicionarTreino();
-    
   };
 
 
   const handleChange = (event) => {
     const { name, value } = event.target;
+    
     setTreino((prevInfoTreino) => ({
       ...prevInfoTreino,
       [name]: value,
@@ -117,7 +117,7 @@ export function ModalAddTreino({ setTreino, adicionarTreino, treino }) {
                 />
               </ContentForm>
               <ContentForm>
-                <label>Carga*</label>
+                <label>Carga</label>
                 <input
                   type="text"
                   placeholder="Carga"
