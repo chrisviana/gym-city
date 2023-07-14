@@ -2,7 +2,7 @@ import * as Dialog from "@radix-ui/react-dialog";
 import { ModalAddTreino } from "../ModalAddTreino";
 import { ButtonExercicio } from "./style";
 
-export function ButtonCadastroTreino({ setTreino, adicionarTreino }) {
+export function ButtonCadastroTreino() {
   return (
     <div>
       <Dialog.Root>
@@ -10,9 +10,6 @@ export function ButtonCadastroTreino({ setTreino, adicionarTreino }) {
           <ButtonExercicio>Adicionar Exercício</ButtonExercicio>
         </Dialog.Trigger>
         <ModalAddTreino
-          setTreino={setTreino}
-          adicionarTreino={adicionarTreino}
-          isEditing={false}
         />
       </Dialog.Root>
     </div>
