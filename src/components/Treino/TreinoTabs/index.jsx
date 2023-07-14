@@ -2,7 +2,7 @@ import { ButtonTabs, ContentTabs, ListTabs, RootTabs } from "./style";
 import { ButtonCadastroTreino } from "../ButtonCadastro";
 import { LisTreino } from "../ListTreino";
 
-export function TreinoTabs({ adicionarTreino, treinos, setTreino, treino }) {
+export function TreinoTabs({ adicionarTreino, treinos, setTreino, treino, removerExercicio }) {
   return (
     <RootTabs className="TabsRoot" defaultValue="tab1">
       <ListTabs className="TabsList" aria-label="Manage your account">
@@ -27,6 +27,7 @@ export function TreinoTabs({ adicionarTreino, treinos, setTreino, treino }) {
           treino={treinos.treinoA}
           setTreino={setTreino}
           adicionarTreino={(event) => adicionarTreino(event, "treinoA")}
+          removerExercicio={removerExercicio}
         />
         <ButtonCadastroTreino
           setTreino={setTreino}

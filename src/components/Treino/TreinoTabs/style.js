@@ -12,6 +12,7 @@ export const ListTabs = styled(Tabs.List)`
   display: flex;
   gap: 2rem;
   border-bottom: 1px solid #d9d9d9;
+  margin-bottom: 22px;
 `;
 
 export const ButtonTabs = styled(Tabs.Trigger)`

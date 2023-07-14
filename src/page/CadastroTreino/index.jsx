@@ -108,7 +108,12 @@ export function CadastroTreino() {
 
   const cadastrarTreino = () => {
     
-    if (searchTerm && data && !isObjectEmpty(treino) && instrutor) {
+    if (!usuario) {
+      toast.warning("Informe um aluno valido.")
+      return 
+    }
+
+    if (searchTerm && data && !isObjectEmpty(treino) && instrutor && usuario) {
       setTreinos((prevTreinos) => ({
         ...prevTreinos,
         instrutor: instrutor,

@@ -66,7 +66,6 @@ const TreinoProvaider = ({ children }) => {
       await updateDoc(grupoRef, infoTreno);
       toast.success("Treino atualizado com sucesso!");
     } catch (error) {
-      console.log(error)
       toast.error("Erro ao atualizar exercício:", error);
     }
   };

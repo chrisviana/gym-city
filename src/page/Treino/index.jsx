@@ -6,8 +6,6 @@ export function Treino() {
   const {
     getTreino,
     deleteTreino,
-    saveExercicio,
-    editarExercicio,
     getGrupo,
   } = useContext(TreinoContext);
   const [treinos, setTreinos] = useState([]);
@@ -18,12 +16,6 @@ export function Treino() {
     });
   }, []);
 
-  const handleCadastroExercicio = async (exercicio) => {
-    await saveExercicio(exercicio);
-    const exercicioList = await getTreino();
-    setTreinos(exercicioList);
-  };
-
   const handleDeleteTreino = async (id) => {
     await deleteTreino(id);
     const treinoList = await getTreino();
@@ -33,7 +25,6 @@ export function Treino() {
   return (
     <ListTreino
       dados={treinos}
-      handleCadastroExercicio={handleCadastroExercicio}
       handleDeleteTreino={handleDeleteTreino}
       getGrupo={getGrupo}
     />
