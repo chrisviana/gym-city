@@ -1,4 +1,4 @@
-import { Cabecalho, ListExercicio } from "./style";
+import { Cabecalho, ListExercicio, Table } from "./style";
 import IconeEditar from "../../../assets/IconeEditar.svg";
 import IconeExcluir from "../../../assets/IconeExcluir.svg";
 import * as Dialog from "@radix-ui/react-dialog";
@@ -6,7 +6,7 @@ import { ModalAddTreino } from "../ModalAddTreino";
 
 export function LisTreino() {
   return (
-    <>
+    <Table>
       <Cabecalho>
         <tr>
           <th>Execício</th>
@@ -20,6 +20,6 @@ export function LisTreino() {
       </Cabecalho>
       <ListExercicio>
       </ListExercicio>
-    </>
+    </Table>
   );
 }

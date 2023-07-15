@@ -1,5 +1,8 @@
 import styled from "styled-components";
 
+export const Table = styled.table`
+  width: 68rem;
+`;
 export const Cabecalho = styled.thead`
   min-width: 60rem;
 
