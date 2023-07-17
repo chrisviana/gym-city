@@ -13,12 +13,27 @@ import { useContext, useEffect, useState } from "react";
 
 import { TreinoContext } from "../../../contexts/TreinoContext";
 
-export function ModalAddTreino({ setExercicioAluno, adicionarExercicio }) {
+export function ModalEditTreino({ exercicio, atualizarLista }) {
 
-  const { saveExercicioTreino, getGrupoTreino, getExercicioPorGrupo } = useContext(TreinoContext)
+  const { getGrupoTreino, getExercicioPorGrupo, editarExericioTreino } = useContext(TreinoContext)
   const [grupos, setGrupos] = useState();
   const [exercicios, setExercicios] = useState();
-  const [grupoSelecionado, setGrupoSelecionado] = useState("");
+ 
+  const [grupoSelecionado, setGrupoSelecionado] = useState(exercicio.grupo);
+  const [exercicioEditado, setExercicioEditado] = useState(exercicio);
+
+  useEffect(() => {
+    setExercicioEditado(exercicio);
+  }, [exercicio])
+
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setExercicioEditado((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
 
   useEffect(() => {
     getGrupoTreino().then((grupoList) => {
@@ -32,7 +47,7 @@ export function ModalAddTreino({ setExercicioAluno, adicionarExercicio }) {
         setExercicios(exercicioList);
       });
     }
-  }, [grupoSelecionado]);
+  }, [grupoSelecionado, setExercicioEditado]);
 
   const handleGrupoChange = (event) => {
     const selectedGrupo = event.target.value;
@@ -44,25 +59,25 @@ export function ModalAddTreino({ setExercicioAluno, adicionarExercicio }) {
     handleChange(event);
   };
 
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-    setExercicioAluno((prevExercicioAluno) => ({
-      ...prevExercicioAluno,
-      [name]: value,
-    }));
-  };
+  const editarTreino = (event) => {
+    event.preventDefault();
+    editarExericioTreino(exercicio.id, exercicioEditado)
+    atualizarLista()
+    document.getElementById("closeModal").click();
+  }
+
 
   return (
     <Dialog.Portal>
       <Overlay />
       <Content>
         <Close id="closeModal"> X </Close>
-        <form onSubmit={adicionarExercicio}>
+        <form onSubmit={editarTreino}>
           <Title>Adicionar exercício</Title>
           <div>
             <ContentForm>
               <label>Grupo*</label>
-              <Select name="grupo" onChange={handleSelectChange}>
+              <Select name="grupo" onChange={handleSelectChange} value={exercicioEditado.grupo}>
                 <option value="" disabled selected>
                   Selecione
                 </option>
@@ -76,7 +91,7 @@ export function ModalAddTreino({ setExercicioAluno, adicionarExercicio }) {
             </ContentForm>
             <ContentForm>
               <label>Exercício*</label>
-              <Select name="exercicio" onChange={handleChange}>
+              <Select name="exercicio" onChange={handleChange} value={exercicioEditado.exercicio}>
                 <option value="" disabled selected>
                   Selecione
                 </option>
@@ -95,6 +110,7 @@ export function ModalAddTreino({ setExercicioAluno, adicionarExercicio }) {
                   type="text"
                   placeholder="Séries"
                   name="series"
+                  value={exercicioEditado.series}
                   onChange={handleChange}
                 />
               </ContentForm>
@@ -106,6 +122,7 @@ export function ModalAddTreino({ setExercicioAluno, adicionarExercicio }) {
                   style={{ width: 155 }}
                   name="reptemp"
                   onChange={handleChange}
+                  value={exercicioEditado.reptemp}
                 />
               </ContentForm>
               <ContentForm>
@@ -115,6 +132,7 @@ export function ModalAddTreino({ setExercicioAluno, adicionarExercicio }) {
                   placeholder="Carga"
                   name="carga"
                   onChange={handleChange}
+                  value={exercicioEditado.carga}
                 />
               </ContentForm>
               <ContentForm>
@@ -125,11 +143,12 @@ export function ModalAddTreino({ setExercicioAluno, adicionarExercicio }) {
                   style={{ width: 100 }}
                   name="descanso"
                   onChange={handleChange}
+                  value={exercicioEditado.descanso}
                 />
               </ContentForm>
             </InfoTreino>
           </div>
-          <Button type="submit">Adicionar</Button>
+          <Button type="submit">Salvar</Button>
         </form>
       </Content>
     </Dialog.Portal>

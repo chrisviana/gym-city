@@ -42,6 +42,33 @@ const TreinoProvaider = ({ children }) => {
     }
   };
 
+  const saveExercicioTreino = async (infoExercicio) => {
+    try {
+      const docRef = await addDoc(
+        collection(firestore, "exercicioTreino"),
+        infoExercicio
+      );
+      const treinoId = docRef.id;
+  
+      const treinoComId = {
+        ...infoExercicio,
+        id: treinoId,
+      };
+  
+      await setDoc(doc(firestore, "exercicioTreino", treinoId), treinoComId);
+  
+      toast.success("Exercício adicionado com sucesso!");
+      getTreino();
+  
+      return treinoId; // Retorna o ID do treino
+  
+    } catch (error) {
+      toast.error("Erro ao salvar o treino:", error);
+      return null; // Retorna null em caso de erro
+    }
+  };
+  
+
   const getTreino = async () => {
     const treinoCollection = collection(firestore, "treinos");
     const treinosSnapshot = await getDocs(treinoCollection);
@@ -66,7 +93,8 @@ const TreinoProvaider = ({ children }) => {
       await updateDoc(grupoRef, infoTreno);
       toast.success("Treino atualizado com sucesso!");
     } catch (error) {
-      toast.error("Erro ao atualizar exercício:", error);
+      console.log("Error:::: ", error);
+      toast.error("Erro ao atualizar treino:", error);
     }
   };
 
@@ -120,6 +148,33 @@ const TreinoProvaider = ({ children }) => {
       return null;
     }
   };
+
+  const getExercicioTreinoById = async (id) => {
+    const treinoRef = doc(firestore, "exercicioTreino", id);
+    const treinoDoc = await getDoc(treinoRef);
+  
+    if (treinoDoc.exists()) {
+      const treinoData = treinoDoc.data();;
+      return treinoData;
+    } else {
+      // O documento com o ID fornecido não existe
+      return null;
+    }
+  };
+
+  const editarExericioTreino = async (id, infoTreno) => {
+    const grupoRef = doc(firestore, "exercicioTreino", id);
+    try {
+      await updateDoc(grupoRef, infoTreno);
+      toast.success("Exercício atualizado com sucesso!");
+    } catch (error) {
+      console.log("Error: ", error)
+      toast.error("Erro ao atualizar exercício", error);
+    }
+  };
+
+
+
   const authContextData = {
     saveTreino,
     getTreino,
@@ -128,7 +183,10 @@ const TreinoProvaider = ({ children }) => {
     getAlunoTreino,
     getGrupoTreino,
     getExercicioPorGrupo,
-    getTreinoById
+    getTreinoById,
+    saveExercicioTreino,
+    getExercicioTreinoById,
+    editarExericioTreino
   };
 
   return (

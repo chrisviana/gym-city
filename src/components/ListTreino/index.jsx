@@ -16,8 +16,9 @@ export function ListTreino({
   const handleSearchInputChange = (event) => {
     setSearchValue(event.target.value);
   };
-
+  
   const filteredDados = dados.filter((treino) =>
+
     treino.aluno.toLowerCase().includes(searchValue.toLowerCase()) ||
     treino.usuario.toLowerCase().includes(searchValue.toLowerCase()) 
   );

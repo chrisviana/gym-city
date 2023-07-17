@@ -2,9 +2,10 @@ import { Cabecalho, ListExercicio, Table } from "./style";
 import IconeEditar from "../../../assets/IconeEditar.svg";
 import IconeExcluir from "../../../assets/IconeExcluir.svg";
 import * as Dialog from "@radix-ui/react-dialog";
-import { ModalAddTreino } from "../ModalAddTreino";
+import { ModalEditTreino } from "../ModalEditTreino";
 
-export function LisTreino() {
+export function LisTreino({ exercicioAluno, atualizarListaTreinos  }) {
+
   return (
     <Table>
       <Cabecalho>
@@ -19,6 +20,32 @@ export function LisTreino() {
         </tr>
       </Cabecalho>
       <ListExercicio>
+      {exercicioAluno &&
+          exercicioAluno.map((exercicio, index) => {
+            return (
+              <tr key={index}>
+                <td>{exercicio.exercicio}</td>
+                <td>{exercicio.series}</td>
+                <td>{exercicio.reptemp}</td>
+                <td>{exercicio.carga}kg</td>
+                <td>{exercicio.descanso}s</td>
+                <td>
+                  <Dialog.Root>
+                    <Dialog.Trigger asChild>
+                      <button>
+                        <img src={IconeEditar} alt="Ícone Editar" />
+                      </button>
+                    </Dialog.Trigger>
+                    <ModalEditTreino exercicio={exercicio} atualizarLista={atualizarListaTreinos} />
+                  </Dialog.Root>
+
+                  <button>
+                    <img src={IconeExcluir} alt="Ícone Excluir" />
+                  </button>
+                </td>
+              </tr>
+            );
+          })}
       </ListExercicio>
     </Table>
   );
