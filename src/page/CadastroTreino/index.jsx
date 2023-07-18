@@ -16,10 +16,11 @@
   import { TreinoContext } from "../../contexts/TreinoContext";
   import { useParams } from "react-router-dom";
   import { toast } from "react-toastify";
+  import { useNavigate } from 'react-router-dom';
 
   export function CadastroTreino() {
 
-    const { saveExercicioTreino, saveTreino, getTreinoById, editarTreino } = useContext(TreinoContext)
+    const { saveExercicioTreino, saveTreino, getTreinoById, editarTreino, deleteExercicioTreino, getTreinoByUsuario, getExercioTreinoByUsuario } = useContext(TreinoContext)
 
     const [aluno, setAluno] = useState("")
     const [alunoUsuario, setAlunoUsuario] = useState("")
@@ -34,6 +35,7 @@
     const [isEditing, setIsEditing] = useState(false)
 
     const { id } = useParams();
+    const navigate = useNavigate();
 
     function adicionarExercicio(event) {
       event.preventDefault();
@@ -101,19 +103,48 @@
 
     const atualizarListaTreinos = () => {
       if (id) {
+        console.log('aqui')
         getTreinoById(id)
           .then((response) => {
-            console.log(response)
             setTreino(response);
             setExercicios(response.exercicios);
           })
           .catch((error) => {
             console.error("Erro ao obter treino:", error);
           });
+      } else {
+        getExercioTreinoByUsuario(alunoUsuario)
+          .then((response) => {
+            console.log(response)
+          })
+        
       }
     };
 
-    console.log("alunoUsuario", alunoUsuario)
+    const deleteExercicioTreinoId = async (idExericio) => {
+      await deleteExercicioTreino(idExericio);
+      atualizarListaTreinos(id)
+    };
+
+
+    useEffect(() => {
+      if(!id && alunoUsuario) {
+        const checkTreinoExistence = async () => {
+          try {
+            const response = await getTreinoByUsuario(alunoUsuario);
+            if (response && response.length > 0) {
+              toast.warning('Já existe um treino para este aluno.');
+                navigate('/app/treino/');
+            }
+          } catch (error) {
+            console.error(error);
+          }
+        };
+
+         checkTreinoExistence();    
+      }
+    }, [alunoUsuario]);
+  
     
     return (
       <Container>
@@ -136,6 +167,7 @@
             exercicios={exercicios}
             setSelectTab={setSelectTab}
             atualizarListaTreinos={atualizarListaTreinos}
+            deleteExercicioTreinoId={deleteExercicioTreinoId}
             
           />
           <ContentForm>

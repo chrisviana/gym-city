@@ -4,7 +4,7 @@ import { LisTreino } from "../ListTreino";
 import { useContext, useEffect, useState } from "react";
 import { TreinoContext } from "../../../contexts/TreinoContext";
 
-export function TreinoTabs({alunoUsuario, setExercicioAluno, adicionarExercicio, exercicios, setSelectTab, atualizarListaTreinos}) {
+export function TreinoTabs({alunoUsuario, setExercicioAluno, adicionarExercicio, exercicios, setSelectTab, atualizarListaTreinos, deleteExercicioTreinoId}) {
 
   
   const { getExercicioTreinoById } = useContext(TreinoContext)
@@ -42,23 +42,23 @@ export function TreinoTabs({alunoUsuario, setExercicioAluno, adicionarExercicio,
       setTreinoD([]);
       setTreinoE([]);
       exerciciosCadastrados.map((exercicio) => {
-        if (exercicio.selectTab === 'treinoA'){
+        if (exercicio?.selectTab === 'treinoA'){
           setTreinoA((prevTreinoA) => [...prevTreinoA, exercicio]);
         }
 
-        if (exercicio.selectTab === 'treinoB'){
+        if (exercicio?.selectTab === 'treinoB'){
           setTreinoB((prevTreinoB) => [...prevTreinoB, exercicio]);
         }
 
-        if (exercicio.selectTab === 'treinoC'){
+        if (exercicio?.selectTab === 'treinoC'){
           setTreinoC((prevTreinoC) => [...prevTreinoC, exercicio]);
         }
 
-        if (exercicio.selectTab === 'treinoD'){
+        if (exercicio?.selectTab === 'treinoD'){
           setTreinoD((prevTreinoD) => [...prevTreinoD, exercicio]);
         }
 
-        if (exercicio.selectTab === 'treinoE'){
+        if (exercicio?.selectTab === 'treinoE'){
           setTreinoE((prevTreinoE) => [...prevTreinoE, exercicio]);
         }
       })
@@ -89,28 +89,33 @@ export function TreinoTabs({alunoUsuario, setExercicioAluno, adicionarExercicio,
         <LisTreino
           atualizarListaTreinos={atualizarListaTreinos}
           exercicioAluno={treinoA}
+          deleteExercicioTreinoId={deleteExercicioTreinoId}
         />
         <ButtonCadastroTreino
             alunoUsuario={alunoUsuario}
             setExercicioAluno={setExercicioAluno}
             adicionarExercicio={adicionarExercicio}
+            atualizarLista={atualizarListaTreinos}
         />
       </ContentTabs>
       <ContentTabs value="tab2">
         <LisTreino
           exercicioAluno={treinoB}
           atualizarListaTreinos={atualizarListaTreinos}
+          deleteExercicioTreinoId={deleteExercicioTreinoId}
         />
         <ButtonCadastroTreino
           alunoUsuario={alunoUsuario}
           setExercicioAluno={setExercicioAluno}
           adicionarExercicio={adicionarExercicio}
+          
         />
       </ContentTabs>
       <ContentTabs value="tab3">
         <LisTreino
             exercicioAluno={treinoC}
             atualizarListaTreinos={atualizarListaTreinos}
+            deleteExercicioTreinoId={deleteExercicioTreinoId}
         />
         <ButtonCadastroTreino
           alunoUsuario={alunoUsuario}
@@ -122,6 +127,7 @@ export function TreinoTabs({alunoUsuario, setExercicioAluno, adicionarExercicio,
         <LisTreino
             exercicioAluno={treinoD}
             atualizarListaTreinos={atualizarListaTreinos}
+            deleteExercicioTreinoId={deleteExercicioTreinoId}
         />
         <ButtonCadastroTreino
           alunoUsuario={alunoUsuario}
@@ -133,6 +139,7 @@ export function TreinoTabs({alunoUsuario, setExercicioAluno, adicionarExercicio,
         <LisTreino
             exercicioAluno={treinoE}
             atualizarListaTreinos={atualizarListaTreinos}
+            deleteExercicioTreinoId={deleteExercicioTreinoId}
         />  
         <ButtonCadastroTreino
           alunoUsuario={alunoUsuario}

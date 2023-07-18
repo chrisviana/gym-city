@@ -13,7 +13,7 @@ import { useContext, useEffect, useState } from "react";
 
 import { TreinoContext } from "../../../contexts/TreinoContext";
 
-export function ModalAddTreino({ setExercicioAluno, adicionarExercicio }) {
+export function ModalAddTreino({ setExercicioAluno, adicionarExercicio, atualizarLista }) {
 
   const { saveExercicioTreino, getGrupoTreino, getExercicioPorGrupo } = useContext(TreinoContext)
   const [grupos, setGrupos] = useState();
@@ -50,6 +50,7 @@ export function ModalAddTreino({ setExercicioAluno, adicionarExercicio }) {
       ...prevExercicioAluno,
       [name]: value,
     }));
+    atualizarLista()
   };
 
   return (

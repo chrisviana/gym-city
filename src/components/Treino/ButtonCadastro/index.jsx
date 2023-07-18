@@ -4,7 +4,7 @@ import { ButtonExercicio } from "./style";
 import { toast } from "react-toastify";
 import { useEffect, useState } from "react";
 
-export function ButtonCadastroTreino({ alunoUsuario, setExercicioAluno, adicionarExercicio }) {
+export function ButtonCadastroTreino({ alunoUsuario, setExercicioAluno, adicionarExercicio , atualizarLista}) {
 
   const [existeAluno, setExisteAluno] = useState(false)
 
@@ -31,7 +31,7 @@ export function ButtonCadastroTreino({ alunoUsuario, setExercicioAluno, adiciona
         <Dialog.Trigger asChild>
           <ButtonExercicio onClick={() => validaAlunoSelecionado()}>Adicionar Exercício</ButtonExercicio>
         </Dialog.Trigger>
-        {existeAluno && <ModalAddTreino setExercicioAluno={setExercicioAluno} adicionarExercicio={adicionarExercicio}/> }
+        {existeAluno && <ModalAddTreino setExercicioAluno={setExercicioAluno} adicionarExercicio={adicionarExercicio} atualizarLista={atualizarLista}/> }
       </Dialog.Root>
     </div>
   );

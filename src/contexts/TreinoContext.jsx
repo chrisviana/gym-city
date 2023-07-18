@@ -93,7 +93,6 @@ const TreinoProvaider = ({ children }) => {
       await updateDoc(grupoRef, infoTreno);
       toast.success("Treino atualizado com sucesso!");
     } catch (error) {
-      console.log("Error:::: ", error);
       toast.error("Erro ao atualizar treino:", error);
     }
   };
@@ -149,6 +148,31 @@ const TreinoProvaider = ({ children }) => {
     }
   };
 
+
+  const getTreinoByUsuario = async (usuario) => {
+    const treinoQuery = query(collection(firestore, "treinos"), where("usuario", "==", usuario));
+    const treinoSnapshot = await getDocs(treinoQuery);
+  
+    if (!treinoSnapshot.empty) {
+      const treinoDocs = treinoSnapshot.docs.map((doc) => doc.data());
+      return treinoDocs;
+    } else {
+      return null;
+    }
+  };
+
+  const getExercioTreinoByUsuario = async (usuario) => {
+    const treinoQuery = query(collection(firestore, "exercicioTreino"), where("alunoUsuario", "==", usuario));
+    const treinoSnapshot = await getDocs(treinoQuery);
+  
+    if (!treinoSnapshot.empty) {
+      const treinoDocs = treinoSnapshot.docs.map((doc) => doc.data());
+      return treinoDocs;
+    } else {
+      return null;
+    }
+  };
+
   const getExercicioTreinoById = async (id) => {
     const treinoRef = doc(firestore, "exercicioTreino", id);
     const treinoDoc = await getDoc(treinoRef);
@@ -157,7 +181,6 @@ const TreinoProvaider = ({ children }) => {
       const treinoData = treinoDoc.data();;
       return treinoData;
     } else {
-      // O documento com o ID fornecido não existe
       return null;
     }
   };
@@ -168,8 +191,18 @@ const TreinoProvaider = ({ children }) => {
       await updateDoc(grupoRef, infoTreno);
       toast.success("Exercício atualizado com sucesso!");
     } catch (error) {
-      console.log("Error: ", error)
       toast.error("Erro ao atualizar exercício", error);
+    }
+  };
+
+  const deleteExercicioTreino = async (id) => {
+    const exercicioRef = doc(firestore, "exercicioTreino", id);
+    try {
+      await deleteDoc(exercicioRef);
+      toast.success("Treino excluído com sucesso!");
+      document.getElementById("closeModal").click();
+    } catch (error) {
+      toast.error("Erro ao excluir o treino:", error);
     }
   };
 
@@ -186,7 +219,10 @@ const TreinoProvaider = ({ children }) => {
     getTreinoById,
     saveExercicioTreino,
     getExercicioTreinoById,
-    editarExericioTreino
+    editarExericioTreino,
+    deleteExercicioTreino,
+    getTreinoByUsuario,
+    getExercioTreinoByUsuario
   };
 
   return (

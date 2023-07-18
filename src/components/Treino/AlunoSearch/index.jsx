@@ -2,13 +2,16 @@
 import React, { useContext, useState, useEffect } from "react";
 import { TreinoContext } from "../../../contexts/TreinoContext";
 import { Consulta, Resultado } from "./style";
+import { toast } from "react-toastify";
+
+
 
 export function AlunoSearch({ setAluno, alunoDigitado, setAlunoUsuario, setDataTreino, isEditing, alunoUsuario }) {
-  console.log("alunoDigitado: ", alunoDigitado)
-
   const { getAlunoTreino } = useContext(TreinoContext);
   const [searchResults, setSearchResults] = useState([]);
   const [alunos, setAlunos] = useState({});
+
+ 
 
   useEffect(() => {
     const fetchAlunos = async () => {

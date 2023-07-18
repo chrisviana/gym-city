@@ -3,9 +3,9 @@ import IconeEditar from "../../../assets/IconeEditar.svg";
 import IconeExcluir from "../../../assets/IconeExcluir.svg";
 import * as Dialog from "@radix-ui/react-dialog";
 import { ModalEditTreino } from "../ModalEditTreino";
+import { ModalDelete } from "../../ModalDelete";
 
-export function LisTreino({ exercicioAluno, atualizarListaTreinos  }) {
-
+export function LisTreino({ exercicioAluno, atualizarListaTreinos, deleteExercicioTreinoId }) {
   return (
     <Table>
       <Cabecalho>
@@ -20,7 +20,7 @@ export function LisTreino({ exercicioAluno, atualizarListaTreinos  }) {
         </tr>
       </Cabecalho>
       <ListExercicio>
-      {exercicioAluno &&
+        {exercicioAluno &&
           exercicioAluno.map((exercicio, index) => {
             return (
               <tr key={index}>
@@ -36,12 +36,25 @@ export function LisTreino({ exercicioAluno, atualizarListaTreinos  }) {
                         <img src={IconeEditar} alt="Ícone Editar" />
                       </button>
                     </Dialog.Trigger>
-                    <ModalEditTreino exercicio={exercicio} atualizarLista={atualizarListaTreinos} />
+                    <ModalEditTreino
+                      exercicio={exercicio}
+                      atualizarLista={atualizarListaTreinos}
+                    />
                   </Dialog.Root>
 
-                  <button>
-                    <img src={IconeExcluir} alt="Ícone Excluir" />
-                  </button>
+                  <Dialog.Root>
+                    <Dialog.Trigger asChild>
+                      <button>
+                        <img src={IconeExcluir} alt="Ícone Excluir" />
+                      </button>
+                    </Dialog.Trigger>
+                    <ModalDelete
+                      nome={exercicio.exercicio}
+                      id={exercicio.id}
+                      handleDelete={deleteExercicioTreinoId}
+                      title="exercício"
+                    />
+                  </Dialog.Root>
                 </td>
               </tr>
             );
