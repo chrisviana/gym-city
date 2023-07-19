@@ -66,6 +66,7 @@ export function AlunoSearch({ setAluno, alunoDigitado, setAlunoUsuario, setDataT
           onChange={handleSearch}
           value={alunoDigitado}
           autoComplete="off"
+          disabled={isEditing ? true : false}
         />
         <input
           type="date"

@@ -199,7 +199,7 @@ const TreinoProvaider = ({ children }) => {
     const exercicioRef = doc(firestore, "exercicioTreino", id);
     try {
       await deleteDoc(exercicioRef);
-      toast.success("Treino excluído com sucesso!");
+      toast.success("Exercício excluído com sucesso!");
       document.getElementById("closeModal").click();
     } catch (error) {
       toast.error("Erro ao excluir o treino:", error);

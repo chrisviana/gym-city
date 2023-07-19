@@ -3,6 +3,11 @@ import styled from "styled-components";
 export const Consulta = styled.div`
   display: flex;
   gap: 2rem;
+
+  input[disabled] {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
 `;
 
 export const Resultado = styled.div`
