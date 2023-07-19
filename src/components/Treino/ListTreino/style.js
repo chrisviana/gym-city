@@ -31,6 +31,23 @@ export const Cabecalho = styled.thead`
 
 export const ListExercicio = styled.tbody`
   min-width: 60rem;
+  display: grid;
+  overflow-y: scroll;
+  max-height: 22rem;
+
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  /* Estilo para a área de fundo do scroll */
+  ::-webkit-scrollbar-track {
+    background-color: #f1f1f1;
+  }
+
+  /* Estilo para o polegar do scroll */
+  ::-webkit-scrollbar-thumb {
+    background-color: #00875f;
+  }
 
   tr {
     display: flex;

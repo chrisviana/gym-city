@@ -2,6 +2,8 @@ import { useContext, useEffect, useState } from "react";
 import {
   ButtonCadastrar,
   ButtonImprimir,
+  ButtonVoltar,
+  Cabecalho,
   Container,
   Content,
   ContentButton,
@@ -14,7 +16,7 @@ import {
 import { AlunoSearch } from "../../components/Treino/AlunoSearch";
 import { TreinoTabs } from "../../components/Treino/TreinoTabs";
 import { TreinoContext } from "../../contexts/TreinoContext";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
@@ -101,7 +103,7 @@ export function CadastroTreino() {
   }, [treinoCadastrado]);
 
   const cadastrarTreino = () => {
-    
+
     if (alunoUsuario && dataTreino && exercicios.length > 0 && instrutor) {
       setTreino((prevTreinos) => ({
         ...prevTreinos,
@@ -115,17 +117,35 @@ export function CadastroTreino() {
 
       setTreinoCadastrado(false);
     } else {
+      
+      if (!alunoUsuario) {
+        toast.warning("Informe uma aluno.");
+        return false
+      }
+
+      if (!dataTreino) {
+        toast.warning("Informe uma data.");
+        return false
+      }
+
+
+      if (exercicios.length === 0) {
+        toast.warning("Adicione pelo menos um exercício.");
+        return false
+      }
+
       toast.warning("Preencha os campos obrigatórios");
+      return false
     }
   };
 
   const atualizarListaTreinos = () => {
     
     if (id) {
-      getTreinoById(id)
+      getExercioTreinoByUsuario(alunoUsuario)
         .then((response) => {
           setTreino(response);
-          setExercicios(response.exercicios);
+          setExercicios(response);
         })
         .catch((error) => {
           console.error("Erro ao obter treino:", error);
@@ -166,7 +186,14 @@ export function CadastroTreino() {
   return (
     <Container>
       <Content>
-        <Title>Cadastro de treino</Title>
+        <Cabecalho>
+          <Title></Title>
+          <Link to="/app/treino">
+            <ButtonVoltar>Voltar</ButtonVoltar>
+          </Link>
+         
+        </Cabecalho>
+     
         <Head>
           <AlunoSearch
             setAluno={setAluno}

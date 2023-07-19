@@ -17,9 +17,37 @@ export const Content = styled.div`
   }
 `;
 
-export const Title = styled.p`
+export const Cabecalho = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`;
+
+export const ButtonVoltar = styled.button`
+  width: 10rem;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0.375rem;
+  background: #00875f;
+  border: none;
   color: #fff;
   font-size: 1rem;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 700;
+
+  cursor: pointer;
+  height: 2rem;
+
+  &:hover {
+    background: #015f43;
+    transition: background 0.5s;
+  }
+`;
+
+export const Title = styled.p`
+  color: #fff;
+  font-size: 2rem;
   font-family: Roboto;
   font-style: normal;
   font-weight: 700;

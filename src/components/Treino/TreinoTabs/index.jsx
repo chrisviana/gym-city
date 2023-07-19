@@ -110,6 +110,7 @@ export function TreinoTabs({alunoUsuario, setExercicioAluno, adicionarExercicio,
           alunoUsuario={alunoUsuario}
           setExercicioAluno={setExercicioAluno}
           adicionarExercicio={adicionarExercicio}
+          atualizarLista={atualizarListaTreinos}
           
         />
       </ContentTabs>
@@ -124,6 +125,7 @@ export function TreinoTabs({alunoUsuario, setExercicioAluno, adicionarExercicio,
           alunoUsuario={alunoUsuario}
           setExercicioAluno={setExercicioAluno}
           adicionarExercicio={adicionarExercicio}
+          atualizarLista={atualizarListaTreinos}
         />
       </ContentTabs>
       <ContentTabs value="tab4">
@@ -137,6 +139,7 @@ export function TreinoTabs({alunoUsuario, setExercicioAluno, adicionarExercicio,
           alunoUsuario={alunoUsuario}
           setExercicioAluno={setExercicioAluno}
           adicionarExercicio={adicionarExercicio}
+          atualizarLista={atualizarListaTreinos}
         />
       </ContentTabs>
       <ContentTabs value="tab5">
@@ -150,6 +153,7 @@ export function TreinoTabs({alunoUsuario, setExercicioAluno, adicionarExercicio,
           alunoUsuario={alunoUsuario}
           setExercicioAluno={setExercicioAluno}
           adicionarExercicio={adicionarExercicio}
+          atualizarLista={atualizarListaTreinos}
         />
       </ContentTabs>
     </RootTabs>
