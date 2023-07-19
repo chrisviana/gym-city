@@ -13,9 +13,9 @@ import { useContext, useEffect, useState } from "react";
 
 import { TreinoContext } from "../../../contexts/TreinoContext";
 
-export function ModalEditTreino({ exercicio, atualizarLista }) {
+export function ModalEditTreino({ exercicio, atualizarLista, setIsEditing }) {
 
-  const { getGrupoTreino, getExercicioPorGrupo, editarExericioTreino } = useContext(TreinoContext)
+  const { getGrupoTreino, getExercicioPorGrupo, editarExericioTreino  } = useContext(TreinoContext)
   const [grupos, setGrupos] = useState();
   const [exercicios, setExercicios] = useState();
  
@@ -24,6 +24,7 @@ export function ModalEditTreino({ exercicio, atualizarLista }) {
 
   useEffect(() => {
     setExercicioEditado(exercicio);
+    setIsEditing(true)
   }, [exercicio])
 
 
@@ -60,6 +61,7 @@ export function ModalEditTreino({ exercicio, atualizarLista }) {
   };
 
   const editarTreino = (event) => {
+    
     event.preventDefault();
     editarExericioTreino(exercicio.id, exercicioEditado)
     atualizarLista()

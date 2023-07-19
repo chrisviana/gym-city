@@ -120,6 +120,7 @@ export function CadastroTreino() {
   };
 
   const atualizarListaTreinos = () => {
+    
     if (id) {
       getTreinoById(id)
         .then((response) => {
@@ -130,13 +131,18 @@ export function CadastroTreino() {
           console.error("Erro ao obter treino:", error);
         });
     } else {
-      getExercioTreinoByUsuario(alunoUsuario).then((response) => {});
+      if (isEditing) {
+        getExercioTreinoByUsuario(alunoUsuario).then((response) => {
+            setExercicios(response)
+        });
+      }
+    
     }
   };
 
   const deleteExercicioTreinoId = async (idExericio) => {
     await deleteExercicioTreino(idExericio);
-    atualizarListaTreinos(id);
+    atualizarListaTreinos();
   };
 
   useEffect(() => {
@@ -179,6 +185,7 @@ export function CadastroTreino() {
           setSelectTab={setSelectTab}
           atualizarListaTreinos={atualizarListaTreinos}
           deleteExercicioTreinoId={deleteExercicioTreinoId}
+          setIsEditing={setIsEditing}
         />
         <ContentForm>
           <label>Instrutor*</label>

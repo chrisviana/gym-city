@@ -15,7 +15,7 @@ import { TreinoContext } from "../../../contexts/TreinoContext";
 
 export function ModalAddTreino({ setExercicioAluno, adicionarExercicio, atualizarLista }) {
 
-  const { saveExercicioTreino, getGrupoTreino, getExercicioPorGrupo } = useContext(TreinoContext)
+  const { getGrupoTreino, getExercicioPorGrupo } = useContext(TreinoContext)
   const [grupos, setGrupos] = useState();
   const [exercicios, setExercicios] = useState();
   const [grupoSelecionado, setGrupoSelecionado] = useState("");

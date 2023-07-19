@@ -5,7 +5,7 @@ import * as Dialog from "@radix-ui/react-dialog";
 import { ModalEditTreino } from "../ModalEditTreino";
 import { ModalDelete } from "../../ModalDelete";
 
-export function LisTreino({ exercicioAluno, atualizarListaTreinos, deleteExercicioTreinoId }) {
+export function LisTreino({ exercicioAluno, atualizarListaTreinos, deleteExercicioTreinoId, setIsEditing }) {
   return (
     <Table>
       <Cabecalho>
@@ -39,6 +39,7 @@ export function LisTreino({ exercicioAluno, atualizarListaTreinos, deleteExercic
                     <ModalEditTreino
                       exercicio={exercicio}
                       atualizarLista={atualizarListaTreinos}
+                      setIsEditing={setIsEditing}
                     />
                   </Dialog.Root>
 

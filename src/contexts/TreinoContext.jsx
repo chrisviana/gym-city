@@ -166,10 +166,10 @@ const TreinoProvaider = ({ children }) => {
     const treinoSnapshot = await getDocs(treinoQuery);
   
     if (!treinoSnapshot.empty) {
-      const treinoDocs = treinoSnapshot.docs.map((doc) => doc.data());
+      const treinoDocs = treinoSnapshot.docs.map((doc) => doc.id); // Retorna apenas o ID do documento
       return treinoDocs;
     } else {
-      return null;
+      return [];
     }
   };
 

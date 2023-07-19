@@ -4,7 +4,7 @@ import { LisTreino } from "../ListTreino";
 import { useContext, useEffect, useState } from "react";
 import { TreinoContext } from "../../../contexts/TreinoContext";
 
-export function TreinoTabs({alunoUsuario, setExercicioAluno, adicionarExercicio, exercicios, setSelectTab, atualizarListaTreinos, deleteExercicioTreinoId}) {
+export function TreinoTabs({alunoUsuario, setExercicioAluno, adicionarExercicio, exercicios, setSelectTab, atualizarListaTreinos, deleteExercicioTreinoId, setIsEditing}) {
 
   
   const { getExercicioTreinoById } = useContext(TreinoContext)
@@ -90,6 +90,7 @@ export function TreinoTabs({alunoUsuario, setExercicioAluno, adicionarExercicio,
           atualizarListaTreinos={atualizarListaTreinos}
           exercicioAluno={treinoA}
           deleteExercicioTreinoId={deleteExercicioTreinoId}
+          setIsEditing={setIsEditing}
         />
         <ButtonCadastroTreino
             alunoUsuario={alunoUsuario}
@@ -103,6 +104,7 @@ export function TreinoTabs({alunoUsuario, setExercicioAluno, adicionarExercicio,
           exercicioAluno={treinoB}
           atualizarListaTreinos={atualizarListaTreinos}
           deleteExercicioTreinoId={deleteExercicioTreinoId}
+          setIsEditing={setIsEditing}
         />
         <ButtonCadastroTreino
           alunoUsuario={alunoUsuario}
@@ -116,6 +118,7 @@ export function TreinoTabs({alunoUsuario, setExercicioAluno, adicionarExercicio,
             exercicioAluno={treinoC}
             atualizarListaTreinos={atualizarListaTreinos}
             deleteExercicioTreinoId={deleteExercicioTreinoId}
+            setIsEditing={setIsEditing}
         />
         <ButtonCadastroTreino
           alunoUsuario={alunoUsuario}
@@ -128,6 +131,7 @@ export function TreinoTabs({alunoUsuario, setExercicioAluno, adicionarExercicio,
             exercicioAluno={treinoD}
             atualizarListaTreinos={atualizarListaTreinos}
             deleteExercicioTreinoId={deleteExercicioTreinoId}
+            setIsEditing={setIsEditing}
         />
         <ButtonCadastroTreino
           alunoUsuario={alunoUsuario}
@@ -140,6 +144,7 @@ export function TreinoTabs({alunoUsuario, setExercicioAluno, adicionarExercicio,
             exercicioAluno={treinoE}
             atualizarListaTreinos={atualizarListaTreinos}
             deleteExercicioTreinoId={deleteExercicioTreinoId}
+            setIsEditing={setIsEditing}
         />  
         <ButtonCadastroTreino
           alunoUsuario={alunoUsuario}
