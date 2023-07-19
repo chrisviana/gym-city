@@ -78,10 +78,30 @@ const TreinoProvaider = ({ children }) => {
 
   const deleteTreino = async (id) => {
     const exercicioRef = doc(firestore, "treinos", id);
+    
     try {
-      await deleteDoc(exercicioRef);
-      toast.success("Treino excluído com sucesso!");
-      document.getElementById("closeModal").click();
+      // Obtenha o documento do treino para acessar os exercícios
+      const treinoSnapshot = await getDoc(exercicioRef);
+      
+      if (treinoSnapshot.exists()) {
+        // Obtenha a lista de exercícios do treino
+        const treinoData = treinoSnapshot.data();
+        const exercicios = treinoData.exercicios || [];
+        
+        // Exclua cada exercício individualmente
+        for (const exercicioId of exercicios) {
+          const exercicioRef = doc(firestore, "exercicioTreino", exercicioId);
+          await deleteDoc(exercicioRef);
+        }
+        
+        // Exclua o documento do treino após excluir todos os exercícios
+        await deleteDoc(exercicioRef);
+        
+        toast.success("Treino excluído com sucesso!");
+        document.getElementById("closeModal").click();
+      } else {
+        toast.error("Treino não encontrado.");
+      }
     } catch (error) {
       toast.error("Erro ao excluir o treino:", error);
     }
