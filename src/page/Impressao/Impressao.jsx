@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { TreinoContext } from "../../contexts/TreinoContext";
 import { TdTreino } from "./style";
 
-export function Impressao({ exercicios, aluno, instrutor }) {
+export function Impressao({ exercicios, aluno, instrutor, observacoes }) {
   const { getExercicioTreinoById } = useContext(TreinoContext);
 
   const [exerciciosCadastrados, setExerciciosCadastrados] = useState();
@@ -65,8 +65,8 @@ export function Impressao({ exercicios, aluno, instrutor }) {
     <>
       <p>ALUNO: {aluno}</p>
       <p>INSTRUTOR(A): {instrutor} </p>
-      <p>OBS: </p>
-
+      <p>OBS: {observacoes} </p>
+      <br/><br/>
       {treinoA && (
         <>
           <p>TREINO A:</p>
@@ -123,6 +123,8 @@ export function Impressao({ exercicios, aluno, instrutor }) {
           </table>
         </>
       )}
+      <br/>
+      <br/>
       {treinoB.length > 0 &&  (
         <>
           <p>TREINO B:</p>
@@ -179,6 +181,8 @@ export function Impressao({ exercicios, aluno, instrutor }) {
           </table>
         </>
       )}
+      <br/>
+      <br/>
       {treinoC.length > 0 &&  (
         <>
           <p>TREINO C:</p>
@@ -235,6 +239,8 @@ export function Impressao({ exercicios, aluno, instrutor }) {
           </table>
         </>
       )}
+      <br/>
+      <br/>
       {treinoD.length > 0 &&  (
         <>
           <p>TREINO D:</p>
@@ -291,6 +297,8 @@ export function Impressao({ exercicios, aluno, instrutor }) {
           </table>
         </>
       )}
+      <br/>
+      <br/>
       {treinoE.length > 0 &&  (
         <>
           <p>TREINO E:</p>

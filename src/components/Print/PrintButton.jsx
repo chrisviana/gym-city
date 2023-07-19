@@ -4,13 +4,13 @@ import { Impressao } from "../../page/Impressao/Impressao";
 import { ButtonImprimir } from "./style";
 
 // Usando React.forwardRef para envolver o componente Impressao
-const ImpressaoComRef = React.forwardRef(({ exercicios, aluno, instrutor }, ref) => (
+const ImpressaoComRef = React.forwardRef(({ exercicios, aluno, instrutor, observacoes }, ref) => (
   <div ref={ref}>
-    <Impressao exercicios={exercicios} aluno={aluno} instrutor={instrutor} />
+    <Impressao exercicios={exercicios} aluno={aluno} instrutor={instrutor} observacoes={observacoes}/>
   </div>
 ));
 
-export const PrintButton = ({ exercicios, aluno, instrutor, treinoCadastrado }) => {
+export const PrintButton = ({ exercicios, aluno, instrutor, treinoCadastrado, observacoes }) => {
   const componentRef = useRef();
 
   const handlePrint = () => {
@@ -25,7 +25,7 @@ export const PrintButton = ({ exercicios, aluno, instrutor, treinoCadastrado }) 
       />
       {/* Usando o componente ImpressaoComRef em vez de Impressao */}
       <div style={{ display: "none" }}>
-        <ImpressaoComRef exercicios={exercicios} aluno={aluno} instrutor={instrutor} ref={componentRef} />
+        <ImpressaoComRef exercicios={exercicios} aluno={aluno} instrutor={instrutor} ref={componentRef} observacoes={observacoes}/>
       </div>
     </div>
   );

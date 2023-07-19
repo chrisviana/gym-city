@@ -242,7 +242,7 @@ export function CadastroTreino() {
           <ButtonCadastrar onClick={cadastrarTreino}>
             {isEditing ? "Salvar" : "Cadastrar"}
           </ButtonCadastrar>
-          <PrintButton exercicios={exercicios} aluno={aluno} instrutor={instrutor} treinoCadastrado={treinoCadastrado} />
+          <PrintButton exercicios={exercicios} aluno={aluno} instrutor={instrutor} treinoCadastrado={treinoCadastrado} observacoes={obvervacao}/>
         </ContentButton>
       </Content>
     </Container>
