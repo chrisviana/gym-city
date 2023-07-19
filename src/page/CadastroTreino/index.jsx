@@ -1,7 +1,6 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import {
   ButtonCadastrar,
-  ButtonImprimir,
   ButtonVoltar,
   Cabecalho,
   Container,
@@ -19,6 +18,9 @@ import { TreinoContext } from "../../contexts/TreinoContext";
 import { Link, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import { Impressao } from "../Impressao/Impressao";
+import PrintComponent from "../../components/PrintComponent ";
+import { PrintButton } from "../../components/Print/PrintButton";
 
 export function CadastroTreino() {
   const {
@@ -42,6 +44,9 @@ export function CadastroTreino() {
   const [obvervacao, setObervacao] = useState([]);
   const [treinoCadastrado, setTreinoCadastrado] = useState(true);
   const [isEditing, setIsEditing] = useState(false);
+  const [treinoA, setTreinoA] = useState([])
+
+  const printRef = useRef();
 
   const { id } = useParams();
   const navigate = useNavigate();
@@ -213,6 +218,8 @@ export function CadastroTreino() {
           atualizarListaTreinos={atualizarListaTreinos}
           deleteExercicioTreinoId={deleteExercicioTreinoId}
           setIsEditing={setIsEditing}
+          setTreinoA={setTreinoA}
+          treinoA={treinoA}
         />
         <ContentForm>
           <label>Instrutor*</label>
@@ -235,7 +242,7 @@ export function CadastroTreino() {
           <ButtonCadastrar onClick={cadastrarTreino}>
             {isEditing ? "Salvar" : "Cadastrar"}
           </ButtonCadastrar>
-          <ButtonImprimir disabled={treinoCadastrado}>Imprimir</ButtonImprimir>
+          <PrintButton exercicios={exercicios} aluno={aluno} instrutor={instrutor} treinoCadastrado={treinoCadastrado} />
         </ContentButton>
       </Content>
     </Container>
