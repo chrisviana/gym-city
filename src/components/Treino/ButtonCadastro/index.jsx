@@ -4,7 +4,7 @@ import { ButtonExercicio } from "./style";
 import { toast } from "react-toastify";
 import { useEffect, useState } from "react";
 
-export function ButtonCadastroTreino({ alunoUsuario, setExercicioAluno, adicionarExercicio , atualizarLista}) {
+export function ButtonCadastroTreino({ alunoUsuario, setExercicioAluno, adicionarExercicio , atualizarLista,treino }) {
 
   const [existeAluno, setExisteAluno] = useState(false)
 
@@ -17,11 +17,10 @@ export function ButtonCadastroTreino({ alunoUsuario, setExercicioAluno, adiciona
   }, [alunoUsuario]);
 
   function validaAlunoSelecionado() {
-    if (alunoUsuario === undefined || alunoUsuario === "") {
-      toast.warning("Selecione um aluno primeiro.");
-    } else {
-      setExisteAluno(true);
-    }
+    if (!treino || treino === "") {
+      toast.warning("É necessario salvar primeiro o treino.");
+      return false;
+    } 
   }
  
 
@@ -31,7 +30,7 @@ export function ButtonCadastroTreino({ alunoUsuario, setExercicioAluno, adiciona
         <Dialog.Trigger asChild>
           <ButtonExercicio onClick={() => validaAlunoSelecionado()}>Adicionar Exercício</ButtonExercicio>
         </Dialog.Trigger>
-        {existeAluno && <ModalAddTreino setExercicioAluno={setExercicioAluno} adicionarExercicio={adicionarExercicio} atualizarLista={atualizarLista}/> }
+        {existeAluno && treino &&  <ModalAddTreino setExercicioAluno={setExercicioAluno} adicionarExercicio={adicionarExercicio} atualizarLista={atualizarLista}/> }
       </Dialog.Root>
     </div>
   );

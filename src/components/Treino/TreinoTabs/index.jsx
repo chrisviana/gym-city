@@ -4,19 +4,26 @@ import { LisTreino } from "../ListTreino";
 import { useContext, useEffect, useState } from "react";
 import { TreinoContext } from "../../../contexts/TreinoContext";
 
-export function TreinoTabs({alunoUsuario, setExercicioAluno, adicionarExercicio, exercicios, setSelectTab, atualizarListaTreinos, deleteExercicioTreinoId, setIsEditing}) {
+export function TreinoTabs({
+  alunoUsuario,
+  setExercicioAluno,
+  adicionarExercicio,
+  exercicios,
+  setSelectTab,
+  atualizarListaTreinos,
+  deleteExercicioTreinoId,
+  setIsEditing,
+  treino
+}) {
+  const { getExercicioTreinoById } = useContext(TreinoContext);
 
-  
-  const { getExercicioTreinoById } = useContext(TreinoContext)
-  
+  const [exerciciosCadastrados, setExerciciosCadastrados] = useState();
+  const [treinoA, setTreinoA] = useState([]);
+  const [treinoB, setTreinoB] = useState([]);
+  const [treinoC, setTreinoC] = useState([]);
+  const [treinoD, setTreinoD] = useState([]);
+  const [treinoE, setTreinoE] = useState([]);
 
-  const [exerciciosCadastrados, setExerciciosCadastrados] = useState()
-  const [treinoA, setTreinoA] = useState([])
-  const [treinoB, setTreinoB] = useState([])
-  const [treinoC, setTreinoC] = useState([])
-  const [treinoD, setTreinoD] = useState([])
-  const [treinoE, setTreinoE] = useState([])
-    
   useEffect(() => {
     if (exercicios) {
       const fetchData = async () => {
@@ -28,60 +35,78 @@ export function TreinoTabs({alunoUsuario, setExercicioAluno, adicionarExercicio,
         );
         setExerciciosCadastrados(responseArray);
       };
-  
+
       fetchData();
     }
   }, [exercicios]);
 
- 
   useEffect(() => {
     if (exerciciosCadastrados) {
-      setTreinoA([]); 
+      setTreinoA([]);
       setTreinoB([]);
       setTreinoC([]);
       setTreinoD([]);
       setTreinoE([]);
       exerciciosCadastrados.map((exercicio) => {
-        if (exercicio?.selectTab === 'treinoA'){
+        if (exercicio?.selectTab === "treinoA") {
           setTreinoA((prevTreinoA) => [...prevTreinoA, exercicio]);
         }
 
-        if (exercicio?.selectTab === 'treinoB'){
+        if (exercicio?.selectTab === "treinoB") {
           setTreinoB((prevTreinoB) => [...prevTreinoB, exercicio]);
         }
 
-        if (exercicio?.selectTab === 'treinoC'){
+        if (exercicio?.selectTab === "treinoC") {
           setTreinoC((prevTreinoC) => [...prevTreinoC, exercicio]);
         }
 
-        if (exercicio?.selectTab === 'treinoD'){
+        if (exercicio?.selectTab === "treinoD") {
           setTreinoD((prevTreinoD) => [...prevTreinoD, exercicio]);
         }
 
-        if (exercicio?.selectTab === 'treinoE'){
+        if (exercicio?.selectTab === "treinoE") {
           setTreinoE((prevTreinoE) => [...prevTreinoE, exercicio]);
         }
-      })
+      });
     }
-
-  }, [exerciciosCadastrados])
+  }, [exerciciosCadastrados]);
 
   return (
     <RootTabs className="TabsRoot" defaultValue="tab1">
       <ListTabs className="TabsList" aria-label="Manage your account">
-        <ButtonTabs className="TabsTrigger" value="tab1" onClick={() => setSelectTab('treinoA')}>
+        <ButtonTabs
+          className="TabsTrigger"
+          value="tab1"
+          onClick={() => setSelectTab("treinoA")}
+        >
           Treino A
         </ButtonTabs>
-        <ButtonTabs className="TabsTrigger" value="tab2" onClick={() => setSelectTab('treinoB')}>
+        <ButtonTabs
+          className="TabsTrigger"
+          value="tab2"
+          onClick={() => setSelectTab("treinoB")}
+        >
           Treino B
         </ButtonTabs>
-        <ButtonTabs className="TabsTrigger" value="tab3" onClick={() => setSelectTab('treinoC')}>
+        <ButtonTabs
+          className="TabsTrigger"
+          value="tab3"
+          onClick={() => setSelectTab("treinoC")}
+        >
           Treino C
         </ButtonTabs>
-        <ButtonTabs className="TabsTrigger" value="tab4" onClick={() => setSelectTab('treinoD')}>
+        <ButtonTabs
+          className="TabsTrigger"
+          value="tab4"
+          onClick={() => setSelectTab("treinoD")}
+        >
           Treino D
         </ButtonTabs>
-        <ButtonTabs className="TabsTrigger" value="tab5" onClick={() => setSelectTab('treinoE')}>
+        <ButtonTabs
+          className="TabsTrigger"
+          value="tab5"
+          onClick={() => setSelectTab("treinoE")}
+        >
           Treino E
         </ButtonTabs>
       </ListTabs>
@@ -93,10 +118,11 @@ export function TreinoTabs({alunoUsuario, setExercicioAluno, adicionarExercicio,
           setIsEditing={setIsEditing}
         />
         <ButtonCadastroTreino
-            alunoUsuario={alunoUsuario}
-            setExercicioAluno={setExercicioAluno}
-            adicionarExercicio={adicionarExercicio}
-            atualizarLista={atualizarListaTreinos}
+          alunoUsuario={alunoUsuario}
+          setExercicioAluno={setExercicioAluno}
+          adicionarExercicio={adicionarExercicio}
+          atualizarLista={atualizarListaTreinos}
+          treino={treino}
         />
       </ContentTabs>
       <ContentTabs value="tab2">
@@ -111,15 +137,14 @@ export function TreinoTabs({alunoUsuario, setExercicioAluno, adicionarExercicio,
           setExercicioAluno={setExercicioAluno}
           adicionarExercicio={adicionarExercicio}
           atualizarLista={atualizarListaTreinos}
-          
         />
       </ContentTabs>
       <ContentTabs value="tab3">
         <LisTreino
-            exercicioAluno={treinoC}
-            atualizarListaTreinos={atualizarListaTreinos}
-            deleteExercicioTreinoId={deleteExercicioTreinoId}
-            setIsEditing={setIsEditing}
+          exercicioAluno={treinoC}
+          atualizarListaTreinos={atualizarListaTreinos}
+          deleteExercicioTreinoId={deleteExercicioTreinoId}
+          setIsEditing={setIsEditing}
         />
         <ButtonCadastroTreino
           alunoUsuario={alunoUsuario}
@@ -130,10 +155,10 @@ export function TreinoTabs({alunoUsuario, setExercicioAluno, adicionarExercicio,
       </ContentTabs>
       <ContentTabs value="tab4">
         <LisTreino
-            exercicioAluno={treinoD}
-            atualizarListaTreinos={atualizarListaTreinos}
-            deleteExercicioTreinoId={deleteExercicioTreinoId}
-            setIsEditing={setIsEditing}
+          exercicioAluno={treinoD}
+          atualizarListaTreinos={atualizarListaTreinos}
+          deleteExercicioTreinoId={deleteExercicioTreinoId}
+          setIsEditing={setIsEditing}
         />
         <ButtonCadastroTreino
           alunoUsuario={alunoUsuario}
@@ -144,11 +169,11 @@ export function TreinoTabs({alunoUsuario, setExercicioAluno, adicionarExercicio,
       </ContentTabs>
       <ContentTabs value="tab5">
         <LisTreino
-            exercicioAluno={treinoE}
-            atualizarListaTreinos={atualizarListaTreinos}
-            deleteExercicioTreinoId={deleteExercicioTreinoId}
-            setIsEditing={setIsEditing}
-        />  
+          exercicioAluno={treinoE}
+          atualizarListaTreinos={atualizarListaTreinos}
+          deleteExercicioTreinoId={deleteExercicioTreinoId}
+          setIsEditing={setIsEditing}
+        />
         <ButtonCadastroTreino
           alunoUsuario={alunoUsuario}
           setExercicioAluno={setExercicioAluno}

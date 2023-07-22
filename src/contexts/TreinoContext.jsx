@@ -214,7 +214,6 @@ const TreinoProvaider = ({ children }) => {
 
 
   const getTreinoByUsuario = async (usuario) => {
-    console.log("Usuario: ", usuario);
     const treinoQuery = query(collection(firestore, "treinos"), where("usuario", "==", usuario));
     const treinoSnapshot = await getDocs(treinoQuery);
   

@@ -25,8 +25,6 @@ export function ImpressaoTreino() {
     setSearchValue(event.target.value);
   };
   
-
-  console.log(treinos)
   const filteredDados = treinos.filter((treino) =>
 
     treino.aluno.toLowerCase().includes(searchValue.toLowerCase()) ||

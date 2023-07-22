@@ -79,7 +79,6 @@ export function CadastroTreino() {
       toast.warning("Preencha todos os campos obrigatórios.")
       return false
     }
-    cadastrarTreino()
   }
 
   useEffect(() => {
@@ -244,6 +243,7 @@ export function CadastroTreino() {
           setIsEditing={setIsEditing}
           setTreinoA={setTreinoA}
           treinoA={treinoA}
+          treino={treino}
         />
         <ContentButton>
           
