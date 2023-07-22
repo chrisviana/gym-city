@@ -44,8 +44,19 @@ const AlunoProvider = ({ children }) => {
     return alunosList;
   };
 
-  const deleteAluno = async (id) => {
+  const deleteAluno = async (id, usuario) => {
     const alunoRef = doc(firestore, "alunos", id);
+
+    const treinosSnapshot = await getDocs(collection(firestore, "treinos"));
+    const treinosDoUsuario = treinosSnapshot.docs.filter(
+      (doc) => doc.data().usuario === usuario
+    );
+
+    if (treinosDoUsuario.length > 0) {
+      toast.error("Não é possível excluir o aluno. Existem treinos associados a ele.");
+      document.getElementById("closeModal").click();
+      return;
+    }
     try {
       await deleteDoc(alunoRef);
       toast.success("Aluno excluído com sucesso!");
