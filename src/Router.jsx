@@ -10,6 +10,7 @@ import { GrupoProvaider } from "./contexts/GrupoContext";
 import { ExercicioProvaider } from "./contexts/ExercicioContext";
 import { TreinoProvaider } from "./contexts/TreinoContext";
 import { CadastroTreino } from "./page/CadastroTreino";
+import { ImpressaoTreino } from "./page/ImpressaoTreino";
 
 export function Router() {
   function PrivateRoute({ children }) {
@@ -19,6 +20,15 @@ export function Router() {
 
   return (
     <Routes>
+      <Route
+        path="/impressaotreino"
+        element={
+          <TreinoProvaider>
+            <ImpressaoTreino  />
+          </TreinoProvaider>
+        }
+      />
+
       <Route path="/" element={<Login />} />
       <Route
         path="/app"

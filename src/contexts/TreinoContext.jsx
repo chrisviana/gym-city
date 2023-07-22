@@ -56,7 +56,23 @@ const TreinoProvaider = ({ children }) => {
       };
   
       await setDoc(doc(firestore, "exercicioTreino", treinoId), treinoComId);
+      
+
+      const treinosQuery = query(
+        collection(firestore, "treinos"),
+        where("usuario", "==", infoExercicio.alunoUsuario)
+      );
+
+      const treinosSnapshot = await getDocs(treinosQuery);
+
+      if (!treinosSnapshot.empty) {
+        const treinoDocRef = treinosSnapshot.docs[0].ref;
+        const treinoDoc = treinosSnapshot.docs[0].data();
+        const updatedExercicios = [...treinoDoc.exercicios, treinoId];
   
+        await updateDoc(treinoDocRef, { exercicios: updatedExercicios });
+      }
+      
       toast.success("Exercício adicionado com sucesso!");
       getTreino();
   
@@ -108,14 +124,42 @@ const TreinoProvaider = ({ children }) => {
   };
 
   const editarTreino = async (id, infoTreno) => {
-    const grupoRef = doc(firestore, "treinos", id);
-    try {
-      await updateDoc(grupoRef, infoTreno);
-      toast.success("Treino atualizado com sucesso!");
-    } catch (error) {
-      toast.error("Erro ao atualizar treino:", error);
+  const grupoRef = doc(firestore, "treinos", id);
+
+  // Step 1: Read existing data before updating
+  let existingData;
+  try {
+    const docSnapshot = await getDoc(grupoRef);
+    if (docSnapshot.exists()) {
+      existingData = docSnapshot.data();
+    } else {
+      toast.error("Documento não encontrado!");
+      return;
     }
-  };
+  } catch (error) {
+    toast.error("Erro ao ler o documento:", error);
+    return;
+  }
+
+  // Step 2: Save existing data into another table (assuming you have a separate collection for previous data)
+  // Replace "previousDataCollection" with the name of your collection for storing previous data
+  const previousDataRef = collection(firestore, "previousDataCollection");
+  try {
+    await addDoc(previousDataRef, existingData);
+    toast.success("Dados anteriores salvos com sucesso!");
+  } catch (error) {
+    toast.error("Erro ao salvar dados anteriores:", error);
+    return;
+  }
+
+  // Step 3: Update the document with new data
+  try {
+    await updateDoc(grupoRef, infoTreno);
+    toast.success("Treino atualizado com sucesso!");
+  } catch (error) {
+    toast.error("Erro ao atualizar treino:", error);
+  }
+};
 
   const getAlunoTreino = async () => {
     const alunosRef = collection(firestore, 'alunos');
@@ -170,6 +214,7 @@ const TreinoProvaider = ({ children }) => {
 
 
   const getTreinoByUsuario = async (usuario) => {
+    console.log("Usuario: ", usuario);
     const treinoQuery = query(collection(firestore, "treinos"), where("usuario", "==", usuario));
     const treinoSnapshot = await getDocs(treinoQuery);
   

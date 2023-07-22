@@ -79,6 +79,7 @@ export function CadastroTreino() {
       toast.warning("Preencha todos os campos obrigatórios.")
       return false
     }
+    cadastrarTreino()
   }
 
   useEffect(() => {
@@ -108,8 +109,7 @@ export function CadastroTreino() {
   }, [treinoCadastrado]);
 
   const cadastrarTreino = () => {
-
-    if (alunoUsuario && dataTreino && exercicios.length > 0 && instrutor) {
+    if (alunoUsuario && dataTreino && instrutor) {
       setTreino((prevTreinos) => ({
         ...prevTreinos,
         instrutor: instrutor,
@@ -120,6 +120,7 @@ export function CadastroTreino() {
         exercicios,
       }));
 
+      setIsEditing(true)
       setTreinoCadastrado(false);
     } else {
       
@@ -209,18 +210,7 @@ export function CadastroTreino() {
             alunoUsuario={alunoUsuario}
           />
         </Head>
-        <TreinoTabs
-          alunoUsuario={alunoUsuario}
-          setExercicioAluno={setExercicioAluno}
-          adicionarExercicio={adicionarExercicio}
-          exercicios={exercicios}
-          setSelectTab={setSelectTab}
-          atualizarListaTreinos={atualizarListaTreinos}
-          deleteExercicioTreinoId={deleteExercicioTreinoId}
-          setIsEditing={setIsEditing}
-          setTreinoA={setTreinoA}
-          treinoA={treinoA}
-        />
+
         <ContentForm>
           <label>Instrutor*</label>
           <Input
@@ -242,6 +232,21 @@ export function CadastroTreino() {
           <ButtonCadastrar onClick={cadastrarTreino}>
             {isEditing ? "Salvar" : "Cadastrar"}
           </ButtonCadastrar>
+        </ContentButton>
+        <TreinoTabs
+          alunoUsuario={alunoUsuario}
+          setExercicioAluno={setExercicioAluno}
+          adicionarExercicio={adicionarExercicio}
+          exercicios={exercicios}
+          setSelectTab={setSelectTab}
+          atualizarListaTreinos={atualizarListaTreinos}
+          deleteExercicioTreinoId={deleteExercicioTreinoId}
+          setIsEditing={setIsEditing}
+          setTreinoA={setTreinoA}
+          treinoA={treinoA}
+        />
+        <ContentButton>
+          
           <PrintButton exercicios={exercicios} aluno={aluno} instrutor={instrutor} treinoCadastrado={treinoCadastrado} observacoes={obvervacao}/>
         </ContentButton>
       </Content>
