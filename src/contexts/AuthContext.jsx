@@ -1,5 +1,5 @@
-import React, { createContext, useState } from "react";
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import React, { createContext, useEffect, useState } from "react";
+import { getAuth, signInWithEmailAndPassword, onAuthStateChanged  } from "firebase/auth";
 import app from "../service/firabase";
 import { setCookie } from "nookies";
 import { useNavigate } from "react-router-dom";
@@ -9,10 +9,24 @@ import { destroyCookie } from "nookies/dist";
 const AuthContext = createContext({});
 
 const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState();
+  const [user, setUser] = useState(null);
   const navigate = useNavigate();
 
-  const isAuthenticated = false;
+  const isAuthenticated = !!user;
+
+  useEffect(() => {
+    const auth = getAuth(app);
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        const { uid, email } = user;
+        setUser({ uid, email });
+      } else {
+        setUser(null);
+      }
+    });
+
+    return () => unsubscribe();
+  }, []);
 
   const signOut = () => {
     try {
