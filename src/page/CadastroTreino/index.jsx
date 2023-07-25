@@ -114,11 +114,10 @@ export function CadastroTreino() {
 
   const cadastrarTreino = () => {
     if (alunoUsuario && dataTreino && instrutor) {
-
       setTreino((prevTreinos) => ({
         ...prevTreinos,
         instrutor: instrutor,
-        aluno: aluno !== alunoExiste ? alunoExiste : aluno,
+        aluno: aluno !== alunoExiste && alunoExiste ? alunoExiste : aluno,
         data: dataTreino,
         observacoes: obvervacao,
         usuario: alunoUsuario,

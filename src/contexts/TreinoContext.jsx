@@ -129,7 +129,6 @@ const TreinoProvaider = ({ children }) => {
   const editarTreino = async (id, infoTreno) => {
   const grupoRef = doc(firestore, "treinos", id);
 
-  // Step 1: Read existing data before updating
   let existingData;
   try {
     const docSnapshot = await getDoc(grupoRef);
@@ -144,8 +143,6 @@ const TreinoProvaider = ({ children }) => {
     return;
   }
 
-  // Step 2: Save existing data into another table (assuming you have a separate collection for previous data)
-  // Replace "previousDataCollection" with the name of your collection for storing previous data
   const previousDataRef = collection(firestore, "previousDataCollection");
   try {
     await addDoc(previousDataRef, existingData);
