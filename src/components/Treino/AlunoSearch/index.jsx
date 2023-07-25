@@ -35,7 +35,6 @@ export function AlunoSearch({ setAluno, alunoDigitado, setAlunoExiste, setAlunoU
   };
 
   const handleSelectSuggestion = (suggestion) => {
-    console.log(suggestion.nome)
     setAluno(suggestion.nome);
     setAlunoUsuario(suggestion.usuario);
     setAlunoExiste(suggestion.nome)

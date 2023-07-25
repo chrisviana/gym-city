@@ -49,8 +49,7 @@ export function CadastroTreino() {
   
   const { id } = useParams();
   const navigate = useNavigate();
-
-  function adicionarExercicio(event) {
+   function adicionarExercicio(event) {
     event.preventDefault();
     
     if (
@@ -247,6 +246,7 @@ export function CadastroTreino() {
           setTreinoA={setTreinoA}
           treinoA={treinoA}
           treino={treino}
+          selectTab={selectTab}
         />
         <ContentButton>
           

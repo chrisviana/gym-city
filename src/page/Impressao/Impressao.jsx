@@ -72,10 +72,12 @@ export function Impressao({ exercicios, aluno, instrutor, observacoes }) {
           <p>TREINO A:</p>
           <table>
             <thead>
-              <td style={{width: 100}}>EXERCÍCIO</td>
-              <td>S</td>
-              <td>REP/TEMP</td>
-              <td>DESC</td>
+              <tr>
+                <td style={{width: 100}}>EXERCÍCIO</td>
+                <td>S</td>
+                <td>REP/TEMP</td>
+                <td>DESC</td>
+              </tr>
             </thead>
 
             {treinoA.length > 0 &&
@@ -130,10 +132,12 @@ export function Impressao({ exercicios, aluno, instrutor, observacoes }) {
           <p>TREINO B:</p>
           <table>
             <thead>
-              <td  style={{width: 100}}>EXERCÍCIO</td>
-              <td>S</td>
-              <td>REP/TEMP</td>
-              <td>DESC</td>
+              <tr>
+                <td style={{width: 100}}>EXERCÍCIO</td>
+                <td>S</td>
+                <td>REP/TEMP</td>
+                <td>DESC</td>
+              </tr>
             </thead>
 
             {treinoB &&
@@ -188,10 +192,12 @@ export function Impressao({ exercicios, aluno, instrutor, observacoes }) {
           <p>TREINO C:</p>
           <table>
             <thead>
-              <td style={{width: 100}}>EXERCÍCIO</td>
-              <td>S</td>
-              <td>REP/TEMP</td>
-              <td>DESC</td>
+              <tr>
+                <td style={{width: 100}}>EXERCÍCIO</td>
+                <td>S</td>
+                <td>REP/TEMP</td>
+                <td>DESC</td>
+              </tr>
             </thead>
 
             {treinoC &&
@@ -246,10 +252,12 @@ export function Impressao({ exercicios, aluno, instrutor, observacoes }) {
           <p>TREINO D:</p>
           <table>
             <thead>
-              <td style={{width: 100}}>EXERCÍCIO</td>
-              <td>S</td>
-              <td>REP/TEMP</td>
-              <td>DESC</td>
+              <tr>
+                <td style={{width: 100}}>EXERCÍCIO</td>
+                <td>S</td>
+                <td>REP/TEMP</td>
+                <td>DESC</td>
+              </tr>
             </thead>
 
             {treinoD &&
@@ -304,10 +312,12 @@ export function Impressao({ exercicios, aluno, instrutor, observacoes }) {
           <p>TREINO E:</p>
           <table>
             <thead>
-              <td style={{width: 100}}>EXERCÍCIO</td>
-              <td>S</td>
-              <td>REP/TEMP</td>
-              <td>DESC</td>
+              <tr>
+                <td style={{width: 100}}>EXERCÍCIO</td>
+                <td>S</td>
+                <td>REP/TEMP</td>
+                <td>DESC</td>
+              </tr>
             </thead>
 
             {treinoE &&

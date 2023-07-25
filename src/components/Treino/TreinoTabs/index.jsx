@@ -13,7 +13,8 @@ export function TreinoTabs({
   atualizarListaTreinos,
   deleteExercicioTreinoId,
   setIsEditing,
-  treino
+  treino,
+  selectTab
 }) {
   const { getExercicioTreinoById } = useContext(TreinoContext);
 
@@ -72,45 +73,40 @@ export function TreinoTabs({
   }, [exerciciosCadastrados]);
 
   return (
-    <RootTabs className="TabsRoot" defaultValue="tab1">
+    <RootTabs className="TabsRoot" value={selectTab} onValueChange={setSelectTab}>
       <ListTabs className="TabsList" aria-label="Manage your account">
         <ButtonTabs
           className="TabsTrigger"
-          value="tab1"
-          onClick={() => setSelectTab("treinoA")}
+          value="treinoA"
         >
           Treino A
         </ButtonTabs>
         <ButtonTabs
           className="TabsTrigger"
-          value="tab2"
-          onClick={() => setSelectTab("treinoB")}
+          value="treinoB"
         >
           Treino B
         </ButtonTabs>
         <ButtonTabs
           className="TabsTrigger"
-          value="tab3"
-          onClick={() => setSelectTab("treinoC")}
+          value="treinoC"
         >
           Treino C
         </ButtonTabs>
         <ButtonTabs
           className="TabsTrigger"
-          value="tab4"
-          onClick={() => setSelectTab("treinoD")}
+          value="treinoD"
         >
           Treino D
         </ButtonTabs>
         <ButtonTabs
           className="TabsTrigger"
-          value="tab5"
-          onClick={() => setSelectTab("treinoE")}
+          value="treinoE"
         >
           Treino E
         </ButtonTabs>
       </ListTabs>
-      <ContentTabs value="tab1">
+      <ContentTabs value="treinoA">
         <LisTreino
           atualizarListaTreinos={atualizarListaTreinos}
           exercicioAluno={treinoA}
@@ -125,7 +121,7 @@ export function TreinoTabs({
           treino={treino}
         />
       </ContentTabs>
-      <ContentTabs value="tab2">
+      <ContentTabs value="treinoB">
         <LisTreino
           exercicioAluno={treinoB}
           atualizarListaTreinos={atualizarListaTreinos}
@@ -140,7 +136,7 @@ export function TreinoTabs({
           treino={treino}
         />
       </ContentTabs>
-      <ContentTabs value="tab3">
+      <ContentTabs value="treinoC">
         <LisTreino
           exercicioAluno={treinoC}
           atualizarListaTreinos={atualizarListaTreinos}
@@ -155,7 +151,7 @@ export function TreinoTabs({
           treino={treino}
         />
       </ContentTabs>
-      <ContentTabs value="tab4">
+      <ContentTabs value="treinoD">
         <LisTreino
           exercicioAluno={treinoD}
           atualizarListaTreinos={atualizarListaTreinos}
@@ -170,7 +166,7 @@ export function TreinoTabs({
           treino={treino}
         />
       </ContentTabs>
-      <ContentTabs value="tab5">
+      <ContentTabs value="treinoE">
         <LisTreino
           exercicioAluno={treinoE}
           atualizarListaTreinos={atualizarListaTreinos}
