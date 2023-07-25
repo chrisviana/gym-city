@@ -6,13 +6,11 @@ import { toast } from "react-toastify";
 
 
 
-export function AlunoSearch({ setAluno, alunoDigitado, setAlunoUsuario, setDataTreino, isEditing, alunoUsuario }) {
+export function AlunoSearch({ setAluno, alunoDigitado, setAlunoExiste, setAlunoUsuario, setDataTreino, isEditing, alunoUsuario }) {
   const { getAlunoTreino } = useContext(TreinoContext);
   const [searchResults, setSearchResults] = useState([]);
   const [alunos, setAlunos] = useState({});
-
- 
-
+  
   useEffect(() => {
     const fetchAlunos = async () => {
       try {
@@ -37,8 +35,10 @@ export function AlunoSearch({ setAluno, alunoDigitado, setAlunoUsuario, setDataT
   };
 
   const handleSelectSuggestion = (suggestion) => {
+    console.log(suggestion.nome)
     setAluno(suggestion.nome);
     setAlunoUsuario(suggestion.usuario);
+    setAlunoExiste(suggestion.nome)
     setSearchResults([]);
   };
 
@@ -46,6 +46,7 @@ export function AlunoSearch({ setAluno, alunoDigitado, setAlunoUsuario, setDataT
     if (alunoDigitado === "") {
       setSearchResults([])
     }
+
   },[alunoDigitado])
 
 

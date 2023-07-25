@@ -37,6 +37,9 @@ const TreinoProvaider = ({ children }) => {
 
       toast.success("Treino cadastrado com sucesso");
       getTreino();
+
+      return treinoId;
+
     } catch (error) {
       toast.error("Erro ao salvar o treino:", error);
     }
@@ -146,10 +149,8 @@ const TreinoProvaider = ({ children }) => {
   const previousDataRef = collection(firestore, "previousDataCollection");
   try {
     await addDoc(previousDataRef, existingData);
-    toast.success("Dados anteriores salvos com sucesso!");
   } catch (error) {
-    toast.error("Erro ao salvar dados anteriores:", error);
-    return;
+    return false;
   }
 
   // Step 3: Update the document with new data

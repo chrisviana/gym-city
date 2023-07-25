@@ -18,8 +18,6 @@ import { TreinoContext } from "../../contexts/TreinoContext";
 import { Link, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-import { Impressao } from "../Impressao/Impressao";
-import PrintComponent from "../../components/PrintComponent ";
 import { PrintButton } from "../../components/Print/PrintButton";
 
 export function CadastroTreino() {
@@ -45,9 +43,10 @@ export function CadastroTreino() {
   const [treinoCadastrado, setTreinoCadastrado] = useState(true);
   const [isEditing, setIsEditing] = useState(false);
   const [treinoA, setTreinoA] = useState([])
-
-  const printRef = useRef();
-
+  const [idDeCadastro, setIdDeCadastro] = useState()
+  const [editarTreinoClick, setEditarTreinoClick] = useState(false)
+  const [alunoExiste, setAlunoExiste] = useState();
+  
   const { id } = useParams();
   const navigate = useNavigate();
 
@@ -98,21 +97,29 @@ export function CadastroTreino() {
   }, [id]);
 
   useEffect(() => {
-    if (!treinoCadastrado && !id) {
-      saveTreino(treino);
+    if (!treinoCadastrado && !id && !idDeCadastro) {
+      saveTreino(treino).then((treinoId) => {
+        setIdDeCadastro(treinoId);
+      })
+
     }
 
-    if (id && isEditing) {
+    if (idDeCadastro && !treinoCadastrado) {
+      editarTreino(idDeCadastro, treino)
+    }
+
+    if (id && isEditing && editarTreinoClick) {
       editarTreino(id, treino);
     }
-  }, [treinoCadastrado]);
+  }, [treinoCadastrado, treino]);
 
   const cadastrarTreino = () => {
     if (alunoUsuario && dataTreino && instrutor) {
+
       setTreino((prevTreinos) => ({
         ...prevTreinos,
         instrutor: instrutor,
-        aluno: aluno,
+        aluno: aluno !== alunoExiste ? alunoExiste : aluno,
         data: dataTreino,
         observacoes: obvervacao,
         usuario: alunoUsuario,
@@ -121,6 +128,7 @@ export function CadastroTreino() {
 
       setIsEditing(true)
       setTreinoCadastrado(false);
+      setEditarTreinoClick(true)
     } else {
       
       if (!alunoUsuario) {
@@ -130,12 +138,6 @@ export function CadastroTreino() {
 
       if (!dataTreino) {
         toast.warning("Informe uma data.");
-        return false
-      }
-
-
-      if (exercicios.length === 0) {
-        toast.warning("Adicione pelo menos um exercício.");
         return false
       }
 
@@ -207,6 +209,7 @@ export function CadastroTreino() {
             setDataTreino={setDataTreino}
             isEditing={isEditing}
             alunoUsuario={alunoUsuario}
+            setAlunoExiste={setAlunoExiste}
           />
         </Head>
 

@@ -38,7 +38,7 @@ export const ContentTabs = styled(Tabs.Content)`
   display: flex;
   flex-direction: column;
   align-items: center;
-  min-width: 70rem;
+  min-width: 60rem;
   width: 100%;
 `;
 
