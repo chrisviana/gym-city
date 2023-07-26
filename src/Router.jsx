@@ -8,6 +8,9 @@ import { Treino } from "./page/Treino";
 import { AlunoProvider } from "./contexts/AlunoContext";
 import { GrupoProvaider } from "./contexts/GrupoContext";
 import { ExercicioProvaider } from "./contexts/ExercicioContext";
+import { TreinoProvaider } from "./contexts/TreinoContext";
+import { CadastroTreino } from "./page/CadastroTreino";
+import { ImpressaoTreino } from "./page/ImpressaoTreino";
 
 export function Router() {
   function PrivateRoute({ children }) {
@@ -17,6 +20,15 @@ export function Router() {
 
   return (
     <Routes>
+      <Route
+        path="/impressaotreino"
+        element={
+          <TreinoProvaider>
+            <ImpressaoTreino  />
+          </TreinoProvaider>
+        }
+      />
+
       <Route path="/" element={<Login />} />
       <Route
         path="/app"
@@ -50,7 +62,32 @@ export function Router() {
             </ExercicioProvaider>
           }
         />
-        <Route path="/app/treino" element={<Treino />} />
+        <Route
+          path="/app/treino"
+          element={
+            <TreinoProvaider>
+              <Treino />
+            </TreinoProvaider>
+          }
+        />
+
+        <Route
+          path="/app/treino/cadastro"
+          element={
+            <TreinoProvaider>
+              <CadastroTreino />
+            </TreinoProvaider>
+          }
+        />
+
+        <Route
+          path="/app/treino/cadastro/:id"
+          element={
+            <TreinoProvaider>
+              <CadastroTreino />
+            </TreinoProvaider>
+          }
+        />
       </Route>
     </Routes>
   );

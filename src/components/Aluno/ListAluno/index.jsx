@@ -77,6 +77,7 @@ export function ListInfos({
                       <ModalDelete
                         nome={info.nome}
                         id={info.id}
+                        usuario={info.usuario}
                         handleDelete={handleDelete}
                         title="aluno"
                       />
