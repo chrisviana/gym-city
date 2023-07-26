@@ -21,8 +21,8 @@ export function Aluno() {
     setAlunos(alunosList);
   };
 
-  const handleDeleteAluno = async (id) => {
-    await deleteAluno(id);
+  const handleDeleteAluno = async (id, usuario) => {
+    await deleteAluno(id, usuario);
     const alunosList = await getAluno();
     setAlunos(alunosList);
   };

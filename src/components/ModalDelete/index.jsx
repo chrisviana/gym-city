@@ -1,7 +1,7 @@
 import * as Dialog from "@radix-ui/react-dialog";
 import { Content, Overlay, Close, Title, ButtonYes, Options } from "./style";
 
-export function ModalDelete({ nome, id, handleDelete, title }) {
+export function ModalDelete({ nome, id, handleDelete, title, usuario }) {
   const closeModal = () => {
     document.getElementById("closeModal").click();
   };
@@ -15,7 +15,7 @@ export function ModalDelete({ nome, id, handleDelete, title }) {
           Deseja realmente excluir o {title} {nome} ?
         </Title>
         <Options>
-          <ButtonYes yes onClick={() => handleDelete(id)}>
+          <ButtonYes yes onClick={() => handleDelete(id, usuario)}>
             Sim
           </ButtonYes>
           <ButtonYes onClick={closeModal}>Não</ButtonYes>
