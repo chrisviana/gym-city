@@ -250,6 +250,20 @@ const TreinoProvaider = ({ children }) => {
   const editarExericioTreino = async (id, infoTreno) => {
     const grupoRef = doc(firestore, "exercicioTreino", id);
     try {
+      // Passo 1: Recuperar os dados atuais do documento
+      const docSnapshot = await getDoc(grupoRef);
+      const dadosAnteriores = docSnapshot.data();
+  
+      // Passo 2: Salvar o log em outra coleção ou documento com timestamp
+      const logRef = doc(firestore, "logs", id); // Substitua "logs" pelo nome da coleção de logs, se preferir
+      const logData = {
+        timestamp: new Date(),
+        dadosAnteriores,
+        dadosAtualizados: infoTreno,
+      };
+      await setDoc(logRef, logData);
+  
+      // Passo 3: Atualizar o documento original
       await updateDoc(grupoRef, infoTreno);
       toast.success("Exercício atualizado com sucesso!");
     } catch (error) {
