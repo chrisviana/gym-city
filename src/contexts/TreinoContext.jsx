@@ -127,6 +127,11 @@ const TreinoProvaider = ({ children }) => {
   };
 
   const editarTreino = async (id, infoTreno) => {
+  
+    if (infoTreno.length === 0) {
+      return false;
+    }
+
   const grupoRef = doc(firestore, "treinos", id);
 
   let existingData;
@@ -260,13 +265,33 @@ const TreinoProvaider = ({ children }) => {
   const deleteExercicioTreino = async (id) => {
     const exercicioRef = doc(firestore, "exercicioTreino", id);
     try {
+      // Step 1: Delete the exercicioTreino document
       await deleteDoc(exercicioRef);
+  
+      // Step 2: Load the corresponding treino document using the exercise ID
+      const treinoQuery = query(
+        collection(firestore, "treinos"),
+        where("exercicios", "array-contains", id)
+      );
+      const treinoSnapshot = await getDocs(treinoQuery);
+      const treinoDocs = treinoSnapshot.docs;
+  
+      // Step 3 and 4: Remove the id from exercicios array and update the treino document
+      for (const treinoDoc of treinoDocs) {
+        const exercicios = treinoDoc.data().exercicios;
+        const updatedExercicios = exercicios.filter((exercicioId) => exercicioId !== id);
+        const treinoRef = doc(firestore, "treinos", treinoDoc.id);
+        
+        await updateDoc(treinoRef, { exercicios: updatedExercicios });
+      }
+  
       toast.success("Exercício excluído com sucesso!");
       document.getElementById("closeModal").click();
     } catch (error) {
       toast.error("Erro ao excluir o treino:", error);
     }
   };
+  
 
 
 
