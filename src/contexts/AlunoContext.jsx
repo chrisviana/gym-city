@@ -10,6 +10,8 @@ import {
   getDocs,
   deleteDoc,
   updateDoc,
+  query,
+  where,
 } from "firebase/firestore";
 
 const AlunoContext = createContext({});
@@ -19,16 +21,27 @@ const AlunoProvider = ({ children }) => {
 
   const saveAluno = async (infoAluno) => {
     try {
+      // Check if a user with the provided 'usuario' property already exists
+      const querySnapshot = await getDocs(
+        query(collection(firestore, "alunos"), where("usuario", "==", infoAluno.usuario))
+      );
+  
+      if (!querySnapshot.empty) {
+        // User with the same 'usuario' property already exists
+        toast.error("Já existe um aluno com esse título.");
+        return;
+      }
+  
       const docRef = await addDoc(collection(firestore, "alunos"), infoAluno);
       const alunoId = docRef.id;
-
+  
       const alunoComId = {
         ...infoAluno,
         id: alunoId,
       };
-
+  
       await setDoc(doc(firestore, "alunos", alunoId), alunoComId);
-
+  
       toast.success("Aluno cadastrado com sucesso");
       document.getElementById("closeModal").click();
       getAluno();
@@ -36,7 +49,7 @@ const AlunoProvider = ({ children }) => {
       toast.error("Erro ao salvar o aluno:", error);
     }
   };
-
+  
   const getAluno = async () => {
     const alunosCollection = collection(firestore, "alunos");
     const alunosSnapshot = await getDocs(alunosCollection);
