@@ -127,8 +127,7 @@ const TreinoProvaider = ({ children }) => {
   };
 
   const editarTreino = async (id, infoTreno) => {
-  
-    if (infoTreno.length === 0) {
+    if (infoTreno.length === 0 || Array.isArray(infoTreno)) {
       return false;
     }
 
