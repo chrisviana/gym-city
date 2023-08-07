@@ -47,27 +47,33 @@ const TreinoProvaider = ({ children }) => {
 
   const saveExercicioTreino = async (infoExercicio) => {
     try {
+      const currentDate = new Date(); // Get the current date and time
+      
+      const infoExercicioComData = {
+        ...infoExercicio,
+        dataHora: currentDate, // Add the current date and time to the exercise info
+      };
+  
       const docRef = await addDoc(
         collection(firestore, "exercicioTreino"),
-        infoExercicio
+        infoExercicioComData
       );
       const treinoId = docRef.id;
   
       const treinoComId = {
-        ...infoExercicio,
+        ...infoExercicioComData,
         id: treinoId,
       };
   
       await setDoc(doc(firestore, "exercicioTreino", treinoId), treinoComId);
-      
-
+  
       const treinosQuery = query(
         collection(firestore, "treinos"),
         where("usuario", "==", infoExercicio.alunoUsuario)
       );
-
+  
       const treinosSnapshot = await getDocs(treinosQuery);
-
+  
       if (!treinosSnapshot.empty) {
         const treinoDocRef = treinosSnapshot.docs[0].ref;
         const treinoDoc = treinosSnapshot.docs[0].data();
@@ -75,7 +81,7 @@ const TreinoProvaider = ({ children }) => {
   
         await updateDoc(treinoDocRef, { exercicios: updatedExercicios });
       }
-      
+  
       toast.success("Exercício adicionado com sucesso!");
       getTreino();
   
@@ -86,6 +92,7 @@ const TreinoProvaider = ({ children }) => {
       return null; // Retorna null em caso de erro
     }
   };
+  
   
 
   const getTreino = async () => {
