@@ -30,35 +30,41 @@ export function Impressao({ exercicios, aluno, instrutor, observacoes }) {
 
   useEffect(() => {
     if (exerciciosCadastrados) {
+      const sortedExercicios = [...exerciciosCadastrados].sort((a, b) => {
+        const aSeconds = a.dataHora?.seconds || 0;
+        const bSeconds = b.dataHora?.seconds || 0;
+        return aSeconds - bSeconds; // Sort in ascending order
+      });
+  
       setTreinoA([]);
       setTreinoB([]);
       setTreinoC([]);
       setTreinoD([]);
       setTreinoE([]);
-      exerciciosCadastrados.map((exercicio) => {
+  
+      sortedExercicios.forEach((exercicio) => {
         if (exercicio?.selectTab === "treinoA") {
           setTreinoA((prevTreinoA) => [...prevTreinoA, exercicio]);
         }
-
+  
         if (exercicio?.selectTab === "treinoB") {
           setTreinoB((prevTreinoB) => [...prevTreinoB, exercicio]);
         }
-
+  
         if (exercicio?.selectTab === "treinoC") {
           setTreinoC((prevTreinoC) => [...prevTreinoC, exercicio]);
         }
-
+  
         if (exercicio?.selectTab === "treinoD") {
           setTreinoD((prevTreinoD) => [...prevTreinoD, exercicio]);
         }
-
+  
         if (exercicio?.selectTab === "treinoE") {
           setTreinoE((prevTreinoE) => [...prevTreinoE, exercicio]);
         }
       });
     }
   }, [exerciciosCadastrados]);
-
 
 
   return (
