@@ -45,3 +45,21 @@ export const Content = styled.div`
     padding: 1rem;
   }
 `;
+
+export const Button = styled.button`
+  background: #00875f;
+  border-radius: 6px;
+  height: 58px;
+  width: 439px;
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  margin-top: 32px;
+
+  &:hover {
+    background-color: #00b37e;
+    transition: background-color 0.5s;
+  }
+`;

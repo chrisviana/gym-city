@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { LogContext } from "../../contexts/LogContext";
-import { Container, Content } from "./style";
+import { Container, Content, Button } from "./style";
 
 export function RelatorioLog() {
   const { getLogs } = useContext(LogContext);
@@ -8,7 +8,7 @@ export function RelatorioLog() {
   const [logs, setLogs] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [showMore, setShowMore] = useState(false); // Estado para controlar o botão "Ver mais"
-  const initialLimit = 10; // Número de registros a serem exibidos inicialmente
+  const initialLimit = 5; // Número de registros a serem exibidos inicialmente
   const loadMoreStep = 10; // Quantidade a ser carregada a cada clique no botão "Ver mais"
 
   useEffect(() => {
@@ -72,10 +72,11 @@ export function RelatorioLog() {
           </tbody>
         </table>
         {/* Botão "Ver mais" que aparece apenas quando há registros filtrados não exibidos */}
-        {!showMore && filteredLogs.length > initialLimit && (
-          <button onClick={() => setShowMore(true)}>Ver mais</button>
-        )}
+        
       </Content>
+        {!showMore && filteredLogs.length > initialLimit && (
+          <Button onClick={() => setShowMore(true)}>Ver mais</Button>
+        )}
     </Container>
   );
 }

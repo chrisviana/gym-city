@@ -7,6 +7,7 @@ import picture from "../../assets/picture.png";
 export function Header() {
   const { signOut } = useContext(AuthContext);
   const location = useLocation();
+  const emailLogado = localStorage.getItem('@emailLogado');
 
   const isActive = (path) => {
     return location.pathname === path ? "active" : "";
@@ -95,24 +96,29 @@ export function Header() {
               Treino
             </Link>
           </li>
-          <li>
-            <Link
-              to="relatoriolog"
-              end="true"
-              className={isActive("/app/relatoriolog")}
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="20"
-                height="20"
-                fill="#f7f7f7"
-                viewBox="0 0 256 256"
-              >
-                <path d="M213.66,82.34l-56-56A8,8,0,0,0,152,24H56A16,16,0,0,0,40,40V216a16,16,0,0,0,16,16H200a16,16,0,0,0,16-16V88A8,8,0,0,0,213.66,82.34ZM160,51.31,188.69,80H160ZM200,216H56V40h88V88a8,8,0,0,0,8,8h48V216Z"></path>
-              </svg>
-              Relatório de Log
-            </Link>
-          </li>
+          {
+            
+            emailLogado === 'recepcaocityclub@gmail.com' && (
+              <li>
+                <Link
+                  to="relatoriolog"
+                  end="true"
+                  className={isActive("/app/relatoriolog")}
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="20"
+                    fill="#f7f7f7"
+                    viewBox="0 0 256 256"
+                  >
+                    <path d="M213.66,82.34l-56-56A8,8,0,0,0,152,24H56A16,16,0,0,0,40,40V216a16,16,0,0,0,16,16H200a16,16,0,0,0,16-16V88A8,8,0,0,0,213.66,82.34ZM160,51.31,188.69,80H160ZM200,216H56V40h88V88a8,8,0,0,0,8,8h48V216Z"></path>
+                  </svg>
+                  Relatório de Log
+                </Link>
+              </li>
+            )
+          }
         </ul>
       </Nav>
       <InfoUsuario>
