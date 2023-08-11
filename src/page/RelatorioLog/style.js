@@ -7,7 +7,8 @@ export const Container = styled.div`
   flex-direction: column;
   margin-top: 2rem;
 
-  h1 {
+  h1,
+  h3 {
     color: #fff;
   }
 
