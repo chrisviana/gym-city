@@ -63,6 +63,7 @@ export function RelatorioLog() {
                     <p>Repetição: {log.dadosAnteriores.reptemp}</p>
                     <p>Series: {log.dadosAnteriores.series}</p>
                     <p>Descanso: {log.dadosAnteriores.descanso}</p>
+                    <p>Carga: {log.dadosAnteriores.carga}</p>
                   </td>
                   <td style={{ textAlign: "left" }}>
                     <p>Aluno: {log.dadosAtualizados.alunoUsuario}</p>
@@ -70,6 +71,7 @@ export function RelatorioLog() {
                     <p>Repetição: {log.dadosAtualizados.reptemp}</p>
                     <p>Series: {log.dadosAtualizados.series}</p>
                     <p>Descanso: {log.dadosAtualizados.descanso}</p>
+                    <p>Carga: {log.dadosAtualizados.carga}</p>
                   </td>
                 </tr>
               ))}
