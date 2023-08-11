@@ -12,6 +12,7 @@ import {
 import { useContext, useEffect, useState } from "react";
 
 import { TreinoContext } from "../../../contexts/TreinoContext";
+import { toast } from "react-toastify";
 
 export function ModalEditTreino({ exercicio, atualizarLista, setIsEditing }) {
 
@@ -53,6 +54,10 @@ export function ModalEditTreino({ exercicio, atualizarLista, setIsEditing }) {
   const handleGrupoChange = (event) => {
     const selectedGrupo = event.target.value;
     setGrupoSelecionado(selectedGrupo);
+    setExercicioEditado((prevState) => ({
+      ...prevState,
+      exercicio: "",
+    }));
   };
 
   const handleSelectChange = (event) => {
@@ -61,7 +66,13 @@ export function ModalEditTreino({ exercicio, atualizarLista, setIsEditing }) {
   };
 
   const editarTreino = (event) => {
-    
+
+   if(exercicioEditado.exercicio === "") {
+    event.preventDefault();
+    toast.warning("Informe um exercício!")
+    return false
+   }
+
     event.preventDefault();
     editarExericioTreino(exercicio.id, exercicioEditado)
     atualizarLista()
