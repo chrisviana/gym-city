@@ -124,7 +124,7 @@ export const NumeroTitulo = styled.span`
 `;
 
 export const InfoAluno = styled.span`
-  max-width: 300px;
+  max-width: 500px;
   width: 100%;
   display: flex;
   gap: 16px;
