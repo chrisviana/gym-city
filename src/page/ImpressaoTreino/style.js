@@ -129,3 +129,12 @@ export const InfoAluno = styled.span`
   display: flex;
   gap: 16px;
 `;
+
+export const Select = styled.select`
+  background: #121214;
+  height: 54px;
+  border-radius: 6px;
+  border: none;
+  padding: 16px;
+  color: #fff;
+`;
