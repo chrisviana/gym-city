@@ -11,6 +11,8 @@ import { ExercicioProvaider } from "./contexts/ExercicioContext";
 import { TreinoProvaider } from "./contexts/TreinoContext";
 import { CadastroTreino } from "./page/CadastroTreino";
 import { ImpressaoTreino } from "./page/ImpressaoTreino";
+import { RelatorioLog } from "./page/RelatorioLog";
+import { LogProvider } from "./contexts/LogContext";
 
 export function Router() {
   function PrivateRoute({ children }) {
@@ -86,6 +88,15 @@ export function Router() {
             <TreinoProvaider>
               <CadastroTreino />
             </TreinoProvaider>
+          }
+        />
+
+        <Route
+          path="/app/relatoriolog"
+          element={
+            <LogProvider>
+              <RelatorioLog />
+            </LogProvider>
           }
         />
       </Route>

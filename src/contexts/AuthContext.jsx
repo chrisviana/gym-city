@@ -54,6 +54,7 @@ const AuthProvider = ({ children }) => {
           return error;
         });
 
+        
       const { accessToken, uid } = response;
 
       if (accessToken) {
@@ -63,6 +64,7 @@ const AuthProvider = ({ children }) => {
         });
 
         localStorage.setItem("@gymcityauth.token", accessToken);
+        localStorage.setItem("@emailLogado", email)
 
         setUser({
           uid,
@@ -75,6 +77,7 @@ const AuthProvider = ({ children }) => {
         toast.error("E-mail ou Senha inválidos");
       }
     } catch (err) {
+      console.log(err);
       toast.error("Erro ao acessar", err);
     }
   };
