@@ -12,7 +12,7 @@ export const Container = styled.div`
 `;
 
 export const Nav = styled.nav`
-  max-width: 460px;
+  max-width: 600px;
   width: 100%;
 
   ul {
