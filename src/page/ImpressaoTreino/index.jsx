@@ -1,10 +1,8 @@
 import { Container, Content, Select, Head, InfoAluno, List, NumeroTitulo } from "./style";
 import { useContext } from "react";
 import { useState } from "react";
-import { Link } from "react-router-dom";
 import { TreinoContext } from "../../contexts/TreinoContext";
 import { useEffect } from "react";
-import ImgPrinter from '../../assets/printer.svg'
 import { PrintButton } from "../../components/Print/PrintButton";
 
 export function ImpressaoTreino() {
@@ -17,6 +15,7 @@ export function ImpressaoTreino() {
 
 
   useEffect(() => {
+    console.log('aqui')
     getTreino().then((exercicioList) => {
       setTreinos(exercicioList);
     });
