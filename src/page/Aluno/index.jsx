@@ -1,8 +1,7 @@
 import { ListInfos } from "../../components/Aluno/ListAluno";
 import { ModalAluno } from "../../components/Aluno/ModalCadastro";
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect, useMemo } from "react";
 import { AlunoContext } from "../../contexts/AlunoContext";
-import { useEffect } from "react";
 
 export function Aluno() {
   const { getAluno, deleteAluno, saveAluno, editarAluno } =
@@ -33,10 +32,13 @@ export function Aluno() {
     setAlunos(alunosList);
   };
 
+  // Utilize useMemo para memoizar a lista de alunos
+  const memoizedAlunos = useMemo(() => alunos, [alunos]);
+
   return (
     <ListInfos
       Modal={ModalAluno}
-      dados={alunos}
+      dados={memoizedAlunos}
       handleDelete={handleDeleteAluno}
       handleCadastroAluno={handleCadastroAluno}
       handleEditarAluno={handleEditarAluno}

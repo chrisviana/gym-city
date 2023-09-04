@@ -1,4 +1,4 @@
-import { useContext, useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useMemo, useRef, useState } from "react";
 import {
   ButtonCadastrar,
   ButtonVoltar,
@@ -46,6 +46,12 @@ export function CadastroTreino() {
   const [idDeCadastro, setIdDeCadastro] = useState()
   const [editarTreinoClick, setEditarTreinoClick] = useState(false)
   const [alunoExiste, setAlunoExiste] = useState();
+
+  const memoizedExercicios = useMemo(() => exercicios, [exercicios]);
+  const memoizedAlunoUsuario = useMemo(() => alunoUsuario, [alunoUsuario]);
+  const memoizedInstrutor = useMemo(() => instrutor, [instrutor]);
+  const memoizedObvervacao = useMemo(() => obvervacao, [obvervacao]);
+  const memoizedAluno = useMemo(() => aluno, [aluno]);
   
   const { id } = useParams();
   const navigate = useNavigate();
@@ -234,10 +240,10 @@ export function CadastroTreino() {
           </ButtonCadastrar>
         </ContentButton>
         <TreinoTabs
-          alunoUsuario={alunoUsuario}
+          alunoUsuario={memoizedAlunoUsuario}
           setExercicioAluno={setExercicioAluno}
           adicionarExercicio={adicionarExercicio}
-          exercicios={exercicios}
+          exercicios={memoizedExercicios}
           setSelectTab={setSelectTab}
           atualizarListaTreinos={atualizarListaTreinos}
           deleteExercicioTreinoId={deleteExercicioTreinoId}
@@ -249,7 +255,13 @@ export function CadastroTreino() {
         />
         <ContentButton>
           
-          <PrintButton exercicios={exercicios} aluno={aluno} instrutor={instrutor} treinoCadastrado={treinoCadastrado} observacoes={obvervacao}/>
+        <PrintButton
+            exercicios={memoizedExercicios}
+            aluno={memoizedAluno}
+            instrutor={memoizedInstrutor}
+            treinoCadastrado={treinoCadastrado}
+            observacoes={memoizedObvervacao}
+          />
         </ContentButton>
       </Content>
     </Container>
