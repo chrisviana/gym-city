@@ -36,7 +36,6 @@ const TreinoProvaider = ({ children }) => {
       await setDoc(doc(firestore, "treinos", treinoId), treinoComId);
 
       toast.success("Treino cadastrado com sucesso");
-      getTreino();
 
       return treinoId;
 
@@ -83,8 +82,6 @@ const TreinoProvaider = ({ children }) => {
       }
   
       toast.success("Exercício adicionado com sucesso!");
-      getTreino();
-  
       return treinoId; // Retorna o ID do treino
   
     } catch (error) {
@@ -312,9 +309,6 @@ const TreinoProvaider = ({ children }) => {
     }
   };
   
-
-
-
   const authContextData = {
     saveTreino,
     getTreino,

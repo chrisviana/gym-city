@@ -34,7 +34,6 @@ const ExercicioProvaider = ({ children }) => {
 
       toast.success("Exercício cadastrado com sucesso");
       document.getElementById("closeModal").click();
-      getExercicio();
     } catch (error) {
       toast.error("Erro ao salvar o exercício:", error);
     }

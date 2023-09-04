@@ -44,7 +44,6 @@ const AlunoProvider = ({ children }) => {
   
       toast.success("Aluno cadastrado com sucesso");
       document.getElementById("closeModal").click();
-      getAluno();
     } catch (error) {
       toast.error("Erro ao salvar o aluno:", error);
     }

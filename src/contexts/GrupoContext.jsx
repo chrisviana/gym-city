@@ -33,7 +33,6 @@ const GrupoProvaider = ({ children }) => {
 
       toast.success("Grupo cadastrado com sucesso");
       document.getElementById("closeModal").click();
-      getGrupo();
     } catch (error) {
       toast.error("Erro ao salvar o grupo:", error);
     }
