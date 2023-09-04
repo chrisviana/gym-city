@@ -255,13 +255,13 @@ export function CadastroTreino() {
         />
         <ContentButton>
           
-        <PrintButton
+        {/* <PrintButton
             exercicios={memoizedExercicios}
             aluno={memoizedAluno}
             instrutor={memoizedInstrutor}
             treinoCadastrado={treinoCadastrado}
             observacoes={memoizedObvervacao}
-          />
+          /> */}
         </ContentButton>
       </Content>
     </Container>
