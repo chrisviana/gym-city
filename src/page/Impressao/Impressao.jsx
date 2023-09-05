@@ -96,7 +96,7 @@ export function Impressao({
             {treinoA.length > 0 &&
               treinoA.map((treino) => {
                 return (
-                  <tbody>
+                  <tbody  key={treino.id}>
                     <tr>
                       <td
                         style={{
@@ -157,8 +157,8 @@ export function Impressao({
             {treinoB &&
               treinoB.map((treino) => {
                 return (
-                  <tbody>
-                    <tr>
+                  <tbody key={treino.id}>
+                    <tr >
                       <td
                         style={{
                           borderBottom: "2px dotted #000",
@@ -218,8 +218,8 @@ export function Impressao({
             {treinoC &&
               treinoC.map((treino) => {
                 return (
-                  <tbody>
-                    <tr>
+                  <tbody key={treino.id}>
+                    <tr >
                       <td
                         style={{
                           borderBottom: "2px dotted #000",
@@ -279,8 +279,8 @@ export function Impressao({
             {treinoD &&
               treinoD.map((treino) => {
                 return (
-                  <tbody>
-                    <tr>
+                  <tbody key={treino.id}> 
+                    <tr >
                       <td
                         style={{
                           borderBottom: "2px dotted #000",
@@ -340,7 +340,7 @@ export function Impressao({
             {treinoE &&
               treinoE.map((treino) => {
                 return (
-                  <tbody>
+                  <tbody key={treino.id}>
                     <tr>
                       <td
                         style={{
