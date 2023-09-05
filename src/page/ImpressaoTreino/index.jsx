@@ -4,6 +4,7 @@ import { useState } from "react";
 import { TreinoContext } from "../../contexts/TreinoContext";
 import { useEffect } from "react";
 import { PrintButton } from "../../components/Print/PrintButton";
+import { useMemo } from "react";
 
 export function ImpressaoTreino() {
 
@@ -11,18 +12,19 @@ export function ImpressaoTreino() {
 
   const [treinos, setTreinos] = useState([]);
   const [selectedTreino, setSelectedTreino] = useState(""); // State for selected treino
-
+  const [searchValue, setSearchValue] = useState("");
 
 
   useEffect(() => {
-    console.log('aqui')
     getTreino().then((exercicioList) => {
       setTreinos(exercicioList);
+      localStorage.removeItem('exericioCadastrado');
     });
+    
   }, [getTreino]);
 
 
-  const [searchValue, setSearchValue] = useState("");
+  
   const handleSearchInputChange = (event) => {
     setSearchValue(event.target.value);
   };
@@ -74,6 +76,7 @@ export function ImpressaoTreino() {
                       observacoes={treino.observacoes} 
                       isAluno={true}
                       selectedTreino={selectedTreino}
+                      searchValue={searchValue}
                       />
                   </div>
                 </li>
