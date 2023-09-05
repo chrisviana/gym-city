@@ -19,7 +19,7 @@ export function ImpressaoTreino() {
     getTreino().then((exercicioList) => {
       setTreinos(exercicioList);
     });
-  }, []);
+  }, [getTreino]);
 
 
   const [searchValue, setSearchValue] = useState("");
