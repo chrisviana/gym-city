@@ -18,20 +18,25 @@ export function Impressao({
   const [treinoD, setTreinoD] = useState([]);
   const [treinoE, setTreinoE] = useState([]);
 
+
+  const storedValue = localStorage.getItem('exericioCadastrado');
   useEffect(() => {
-    if (exercicios) {
+      if (storedValue === null || storedValue === "") {
       const fetchData = async () => {
         const responseArray = await Promise.all(
           exercicios.map(async (exercioId) => {
             const response = await getExercicioTreinoById(exercioId);
+            console.log("Response: ===>", response)
             return response;
           })
         );
+        localStorage.setItem('exericioCadastrado', JSON.stringify(responseArray))
         setExerciciosCadastrados(responseArray);
       };
-
       fetchData();
     }
+      
+    
   }, [exercicios]);
 
   useEffect(() => {
