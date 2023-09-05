@@ -29,8 +29,7 @@ export function ImpressaoTreino() {
     setSearchValue(event.target.value);
   };
   
-  const filteredDados = treinos.filter((treino) =>
-
+  const filnpteredDados = treinos.filter((treino) =>
     treino.aluno.toLowerCase().includes(searchValue.toLowerCase()) ||
     treino.usuario.toLowerCase().includes(searchValue.toLowerCase()) 
   );
@@ -49,8 +48,8 @@ export function ImpressaoTreino() {
         </Head>
         <List>
           <ul>
-            {filteredDados &&
-              filteredDados.map((treino) => (
+            {filnpteredDados &&
+              filnpteredDados.map((treino) => (
                 <li key={treino.id}>
                    <InfoAluno>
                     <NumeroTitulo>{`Nº título: ${treino.usuario}`}</NumeroTitulo>
