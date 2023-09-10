@@ -1,4 +1,4 @@
-import { useContext, useEffect, useMemo, useRef, useState } from "react";
+import { useContext, useEffect, useMemo, useState } from "react";
 import {
   ButtonCadastrar,
   ButtonVoltar,
@@ -18,7 +18,6 @@ import { TreinoContext } from "../../contexts/TreinoContext";
 import { Link, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-import { PrintButton } from "../../components/Print/PrintButton";
 
 export function CadastroTreino() {
   const {
@@ -254,14 +253,6 @@ export function CadastroTreino() {
           selectTab={selectTab}
         />
         <ContentButton>
-          
-        {/* <PrintButton
-            exercicios={memoizedExercicios}
-            aluno={memoizedAluno}
-            instrutor={memoizedInstrutor}
-            treinoCadastrado={treinoCadastrado}
-            observacoes={memoizedObvervacao}
-          /> */}
         </ContentButton>
       </Content>
     </Container>

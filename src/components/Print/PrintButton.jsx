@@ -6,14 +6,14 @@ import IMGPrinter from "../../assets/printer.svg";
 
 // Usando React.forwardRef para envolver o componente Impressao
 const ImpressaoComRef = React.forwardRef(
-  ({ exercicios, aluno, instrutor, observacoes, selectedTreino }, ref) => (
+  ({ exercicios, aluno, instrutor, observacoes, selectedTreino, exerciciosCadastrados }, ref) => (
     <div ref={ref}>
       <Impressao
-        exercicios={exercicios}
         aluno={aluno}
         instrutor={instrutor}
         observacoes={observacoes}
         selectedTreino={selectedTreino}
+        exerciciosCadastrados={exerciciosCadastrados}
       />
     </div>
   )
@@ -26,7 +26,8 @@ export const PrintButton = ({
   treinoCadastrado,
   observacoes,
   isAluno = false,
-  selectedTreino
+  selectedTreino,
+  exerciciosCadastrados
 }) => {
   const componentRef = useRef();
 
@@ -55,12 +56,12 @@ export const PrintButton = ({
       {/* Usando o componente ImpressaoComRef em vez de Impressao */}
       <div style={{ display: "none" }}>
         <ImpressaoComRef
-          exercicios={exercicios}
           aluno={aluno}
           instrutor={instrutor}
           ref={componentRef}
           observacoes={observacoes}
           selectedTreino={selectedTreino}
+          exerciciosCadastrados={exerciciosCadastrados}
         />
       </div>
     </div>
