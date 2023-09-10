@@ -213,7 +213,6 @@ const TreinoProvaider = ({ children }) => {
       const treinoData = treinoDoc.data();;
       return treinoData;
     } else {
-      // O documento com o ID fornecido não existe
       return null;
     }
   };

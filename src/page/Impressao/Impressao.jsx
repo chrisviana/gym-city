@@ -8,36 +8,16 @@ export function Impressao({
   instrutor,
   observacoes,
   selectedTreino,
+  exerciciosCadastrados
 }) {
   const { getExercicioTreinoById } = useContext(TreinoContext);
 
-  const [exerciciosCadastrados, setExerciciosCadastrados] = useState();
+  // const [exerciciosCadastrados, setExerciciosCadastrados] = useState();
   const [treinoA, setTreinoA] = useState([]);
   const [treinoB, setTreinoB] = useState([]);
   const [treinoC, setTreinoC] = useState([]);
   const [treinoD, setTreinoD] = useState([]);
   const [treinoE, setTreinoE] = useState([]);
-
-
-  const storedValue = localStorage.getItem('exericioCadastrado');
-  useEffect(() => {
-      if (storedValue === null || storedValue === "") {
-      const fetchData = async () => {
-        const responseArray = await Promise.all(
-          exercicios.map(async (exercioId) => {
-            const response = await getExercicioTreinoById(exercioId);
-            console.log("Response: ===>", response)
-            return response;
-          })
-        );
-        localStorage.setItem('exericioCadastrado', JSON.stringify(responseArray))
-        setExerciciosCadastrados(responseArray);
-      };
-      fetchData();
-    }
-      
-    
-  }, [exercicios]);
 
   useEffect(() => {
     if (exerciciosCadastrados) {
